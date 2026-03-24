@@ -63,7 +63,7 @@ export default async function CMSPage({ params }: Args) {
       {draft && <LivePreviewListener />}
       <PayloadRedirects disableNotFound url={url} />
       <RenderHero {...page.hero} />
-      <RenderBlocks blocks={page.layout} />
+      <RenderBlocks blocks={page.layout as any} />
     </article>
   );
 }

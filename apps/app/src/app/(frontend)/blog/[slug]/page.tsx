@@ -87,7 +87,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       </Container>
       {Array.isArray(post.layout) && post.layout.length > 0 && (
-        <RenderBlocks blocks={post.layout} />
+        <RenderBlocks blocks={post.layout as any} />
       )}
     </article>
   );
