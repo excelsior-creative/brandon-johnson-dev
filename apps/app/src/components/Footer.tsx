@@ -1,8 +1,8 @@
-import React from "react";
 import Link from "next/link";
-import { Logo } from "./Logo";
 import { getPayload } from "payload";
 import config from "@/payload.config";
+import { CosmicContainer } from "./cosmic/Container";
+import { socialLinks, cosmicNavItems } from "@/lib/content/navigation";
 
 type FooterNavItem = {
   id?: string;
@@ -20,100 +20,157 @@ type FooterNavItem = {
   };
 };
 
-const defaultFooterLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
-];
-type ResolvedFooterLink = { href: string; label: string; newTab?: boolean };
-
 const resolveHref = (item: FooterNavItem) => {
   const link = item.link;
-
   if (!link) return null;
-
-  if (link.type === "custom" && link.url) {
-    return link.url;
-  }
-
+  if (link.type === "custom" && link.url) return link.url;
   if (link.type === "reference" && link.reference && typeof link.reference === "object") {
-    const relationTo = link.reference.relationTo;
     const value = link.reference.value;
-
     if (typeof value === "object" && value?.slug) {
-      return relationTo === "posts" ? `/blog/${value.slug}` : `/${value.slug}`;
+      return link.reference.relationTo === "posts" ? `/blog/${value.slug}` : `/${value.slug}`;
     }
   }
-
   return null;
 };
 
 export const Footer = async () => {
   const payload = await getPayload({ config });
   const [siteSettings, footer] = await Promise.all([
-    payload.findGlobal({
-      slug: "site-settings",
-    }),
-    payload.findGlobal({
-      slug: "footer",
-    }),
+    payload.findGlobal({ slug: "site-settings" }),
+    payload.findGlobal({ slug: "footer" }),
   ]);
 
-  const siteTitle = siteSettings.siteTitle || "Your Company";
-  const links: ResolvedFooterLink[] = [];
+  const siteTitle = siteSettings.siteTitle || "Brandon Johnson";
+  const navLinks: { href: string; label: string; newTab?: boolean }[] = [];
   ((footer.navItems || []) as FooterNavItem[]).forEach((item) => {
     const href = resolveHref(item);
     const label = item.link?.label;
-    if (href && label) {
-      links.push({ href, label, newTab: item.link?.newTab });
-    }
+    if (href && label) navLinks.push({ href, label, newTab: item.link?.newTab });
   });
-  const navigationLinks: ResolvedFooterLink[] =
-    links.length > 0 ? links : defaultFooterLinks;
+  const navigationLinks = navLinks.length > 0 ? navLinks : cosmicNavItems;
 
   return (
-    <footer className="border-t bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 md:px-10 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 md:col-span-2">
-            <Logo className="mb-4 inline-block" />
-            <p className="text-muted-foreground text-sm max-w-xs">
-              Next.js + Payload CMS template for building modern, content-rich websites faster.
+    <footer className="relative border-t border-[--border-soft] bg-[--bg] overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 900px 400px at 10% 0%, rgba(56,189,248,0.08), transparent 60%), radial-gradient(ellipse 700px 300px at 90% 100%, rgba(124,92,255,0.08), transparent 60%)",
+        }}
+      />
+      <CosmicContainer className="relative z-10 pt-20 pb-10">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-3">
+              <span
+                aria-hidden
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[--border-mid] font-mono text-[15px] font-semibold text-[--cyan]"
+                style={{ background: "linear-gradient(135deg, #2a2f55, #0f1230)" }}
+              >
+                BJ
+              </span>
+              <span className="text-base font-semibold tracking-[-0.01em] text-[--ink]">
+                Brandon Johnson
+              </span>
+            </div>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-[--ink-dim]">
+              Software engineer, AI automation enthusiast, and full-stack builder. Turning
+              ideas into shipped systems since 2007.
             </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.href}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="rounded-full border border-[--border-mid] bg-white/[0.03] px-4 py-2 text-xs font-medium text-[--ink-dim] transition-colors hover:border-[rgba(56,189,248,0.4)] hover:text-[--cyan]"
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
           </div>
+
           <div>
-            <h2 className="text-base font-bold mb-4">Navigation</h2>
-            <ul className="space-y-2">
-              {navigationLinks.map((link) => (
-                <li key={link.href + link.label}>
+            <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[--ink-faint]">
+              Navigate
+            </h3>
+            <ul className="mt-4 space-y-2">
+              {navigationLinks.map((l) => (
+                <li key={l.href + l.label}>
                   <Link
-                    href={link.href}
-                    target={link.newTab ? "_blank" : undefined}
-                    rel={link.newTab ? "noreferrer noopener" : undefined}
-                    className="text-sm text-muted-foreground hover:text-brand transition-colors"
+                    href={l.href}
+                    target={l.newTab ? "_blank" : undefined}
+                    rel={l.newTab ? "noreferrer noopener" : undefined}
+                    className="text-sm text-[--ink-dim] transition-colors hover:text-[--ink]"
                   >
-                    {link.label}
+                    {l.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-        </div>
-        <div className="mt-12 pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground text-center md:text-left">
-            © {new Date().getFullYear()} {siteTitle}. All rights reserved.
-          </p>
-          <div className="flex gap-6 text-sm">
-            <Link href="/privacy" className="text-muted-foreground hover:text-brand transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="text-muted-foreground hover:text-brand transition-colors">
-              Terms of Service
-            </Link>
+
+          <div>
+            <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[--ink-faint]">
+              Elsewhere
+            </h3>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>
+                <a
+                  href="mailto:brandon@brandon-johnson.dev"
+                  className="text-[--ink-dim] hover:text-[--ink]"
+                >
+                  brandon@brandon-johnson.dev
+                </a>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-[--ink-dim] hover:text-[--ink]">
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-[--ink-dim] hover:text-[--ink]">
+                  Terms
+                </Link>
+              </li>
+              <li>
+                <Link href="/admin" className="text-[--ink-dim] hover:text-[--ink]">
+                  Admin
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
+
+        {/* Large gradient watermark */}
+        <div
+          aria-hidden
+          className="mt-16 font-display text-center leading-none tracking-[-0.05em] select-none"
+          style={{
+            fontSize: "clamp(64px, 20vw, 280px)",
+            fontWeight: 800,
+            background: "var(--gradient-text)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            opacity: 0.25,
+          }}
+        >
+          BRANDON
+        </div>
+
+        <div className="mt-8 flex flex-col gap-2 border-t border-[--border-soft] pt-6 text-xs text-[--ink-faint] md:flex-row md:items-center md:justify-between">
+          <span>
+            © {new Date().getFullYear()} {siteTitle}. All rights reserved.
+          </span>
+          <span className="font-mono">v.2 / cosmic</span>
+        </div>
+      </CosmicContainer>
     </footer>
   );
 };
+
+export default Footer;
