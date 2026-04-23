@@ -18,8 +18,8 @@ export function AiLabs() {
         <Reveal>
           <SectionHeading
             eyebrow="AI Labs"
-            title="Pioneering AI agent development with the Eliza framework"
-            description="Expert in building sophisticated AI agents that automate complex tasks, from data processing to full system automation."
+            title="Pioneering AI agent development with the Eliza & OpenClaw frameworks"
+            description="Active open-source contributor to the two frameworks shaping how production-grade agents get built — translating upstream work into sophisticated automation systems that handle complex, mission-critical workloads."
           />
         </Reveal>
 

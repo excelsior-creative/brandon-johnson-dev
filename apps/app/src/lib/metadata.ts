@@ -12,7 +12,7 @@ export const DEFAULT_DESCRIPTION =
 
 export const DEFAULT_OG_IMAGE = "/images/hero-image.png";
 export const AUTHOR_NAME = "J. Brandon Johnson";
-export const AUTHOR_EMAIL = "bjohnson@swizzmagik.com";
+export const AUTHOR_EMAIL = "b@exct.io";
 
 export const DEFAULT_KEYWORDS = [
   "J. Brandon Johnson",

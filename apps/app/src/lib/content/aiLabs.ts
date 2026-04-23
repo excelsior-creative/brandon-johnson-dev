@@ -6,27 +6,27 @@ export type AiLab = {
 
 export const aiLabs: AiLab[] = [
   {
-    title: "Leading Eliza Framework Contributor",
+    title: "Eliza Framework Core Contributor",
     description:
-      "Core contributor to the Eliza framework, pushing the boundaries of agent development and automation capabilities.",
+      "Authored contributions to the Eliza agent runtime — helping shape how thousands of developers build conversational and autonomous agents in production environments.",
     variant: "chat",
   },
   {
-    title: "Advanced Agent Architecture",
+    title: "OpenClaw Framework Contributor",
     description:
-      "Designed and implemented sophisticated agent systems capable of complex task automation and decision making.",
+      "Contributed to the OpenClaw framework, advancing the next generation of tool-use orchestration and multi-agent coordination patterns that power modern agentic systems.",
     variant: "stack",
   },
   {
-    title: "Multi-Model Integration Expert",
+    title: "Multi-Framework Agent Architecture",
     description:
-      "Deep expertise in integrating diverse LLM architectures and creating hybrid AI solutions for enterprise needs.",
+      "Battle-tested architectural patterns across both Eliza and OpenClaw — prompt routing, tool selection, memory layers, and resilient execution graphs.",
     variant: "grid",
   },
   {
-    title: "Production-Ready Solutions",
+    title: "From Open Source to Production",
     description:
-      "Track record of deploying robust, scalable agent systems that handle mission-critical automation tasks.",
+      "Translated upstream framework work into resilient, scalable agent systems running mission-critical automation for real businesses.",
     variant: "globe",
   },
 ];
