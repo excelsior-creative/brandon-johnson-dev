@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Play, Users, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
+import { ChevronDown, Pause, Play, Users, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
+import { m, useScroll, useTransform } from "framer-motion";
 import { CosmicBackground } from "@/components/cosmic/CosmicBackground";
 import { Starfield } from "@/components/cosmic/Starfield";
 import { Eyebrow } from "@/components/cosmic/Eyebrow";
@@ -15,6 +16,7 @@ import { CosmicContainer } from "@/components/cosmic/Container";
  * (brandon-hello-video.mp4); when it ends, we fade back to the loop.
  */
 export function Hero() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const loopVideoRef = useRef<HTMLVideoElement | null>(null);
   const helloVideoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -22,6 +24,18 @@ export function Hero() {
   const [isHelloPlaying, setIsHelloPlaying] = useState(false);
   const [isHelloMuted, setIsHelloMuted] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+
+  // Scroll-linked effects: as the hero scrolls away, its content floats up,
+  // fades, and the background video drifts down for a cinematic parallax.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.5, 0]);
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 180]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   // Detect reduced motion — falls back to a static poster only (no video).
   useEffect(() => {
@@ -79,6 +93,20 @@ export function Hero() {
     }
   };
 
+  const handleStopHello = () => {
+    const hello = helloVideoRef.current;
+    if (hello) {
+      hello.pause();
+      hello.currentTime = 0;
+    }
+    setIsHelloPlaying(false);
+
+    const loop = loopVideoRef.current;
+    if (loop && !reduceMotion) {
+      loop.play().catch(() => {});
+    }
+  };
+
   const toggleHelloMute = () => {
     const hello = helloVideoRef.current;
     if (!hello) return;
@@ -87,33 +115,40 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="relative min-h-screen w-full">
+    <section id="home" ref={sectionRef} className="relative min-h-screen w-full">
       <div className="relative h-screen min-h-[32rem] w-full overflow-hidden bg-[--bg]">
-        {/* Poster fallback (LCP target) — always rendered behind the video */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/hero-image.png"
-          alt=""
+        {/* Parallax-wrapped background layers (poster + loop video) */}
+        <m.div
           aria-hidden
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
-        />
-
-        {/* Looping background video */}
-        {!reduceMotion && (
-          <video
-            ref={loopVideoRef}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-              loopVideoReady && !isHelloPlaying ? "opacity-100" : "opacity-0"
-            }`}
-            src="/video/hero-video.mp4"
-            muted
-            loop
-            autoPlay
-            playsInline
-            preload="auto"
-            poster="/images/hero-image.png"
+          style={reduceMotion ? undefined : { y: bgY, scale: bgScale }}
+          className="absolute inset-0"
+        >
+          {/* Poster fallback (LCP target) — always rendered behind the video */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero-image.png"
+            alt=""
+            aria-hidden
+            className="absolute inset-0 h-full w-full object-cover opacity-70"
           />
-        )}
+
+          {/* Looping background video */}
+          {!reduceMotion && (
+            <video
+              ref={loopVideoRef}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                loopVideoReady && !isHelloPlaying ? "opacity-100" : "opacity-0"
+              }`}
+              src="/video/hero-video.mp4"
+              muted
+              loop
+              autoPlay
+              playsInline
+              preload="auto"
+              poster="/images/hero-image.png"
+            />
+          )}
+        </m.div>
 
         {/* Cross-fade intro video — plays with sound on click */}
         <video
@@ -164,19 +199,47 @@ export function Hero() {
 
         {/* Content overlay */}
         <CosmicContainer className="relative z-10 flex h-full flex-col justify-center pt-24 pb-16">
-          <div className="max-w-3xl">
-            <Eyebrow>AI Automation &amp; Software Engineering</Eyebrow>
-            <h1 className="font-display mt-6 text-[clamp(44px,6.2vw,84px)] font-bold leading-[1.02] tracking-[-0.035em]">
+          <m.div
+            style={
+              reduceMotion
+                ? undefined
+                : { y: contentY, opacity: contentOpacity, scale: contentScale }
+            }
+            className="max-w-3xl"
+          >
+            <m.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Eyebrow>AI Automation &amp; Software Engineering</Eyebrow>
+            </m.div>
+            <m.h1
+              initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="font-display mt-6 text-[clamp(44px,6.2vw,84px)] font-bold leading-[1.02] tracking-[-0.035em]"
+            >
               Building the Future.
               <br />
               Automating <span className="gradient-accent-text">Everything.</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-[clamp(16px,1.3vw,19px)] leading-[1.55] text-[--ink-dim]">
+            </m.h1>
+            <m.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              className="mt-5 max-w-xl text-[clamp(16px,1.3vw,19px)] leading-[1.55] text-[--ink-dim]"
+            >
               I build AI agents, automation systems, and scalable software that turn ideas
               into impact. 600+ agents, 10+ years shipping, one cinematic command center.
-            </p>
+            </m.p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <m.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
+              className="mt-8 flex flex-wrap gap-3"
+            >
               <GradientButton asChild variant="primary" size="lg">
                 <a href="#work">
                   Explore My Work
@@ -187,20 +250,33 @@ export function Hero() {
                 type="button"
                 variant="ghost"
                 size="lg"
-                onClick={handleSayHello}
-                disabled={isHelloPlaying}
+                onClick={isHelloPlaying ? handleStopHello : handleSayHello}
               >
-                <Play className="h-4 w-4" />
-                Say Hello
+                {isHelloPlaying ? (
+                  <>
+                    <Pause className="h-4 w-4" />
+                    Stop
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4" />
+                    Say Hello
+                  </>
+                )}
               </GradientButton>
-            </div>
+            </m.div>
 
-            <div className="mt-12 grid max-w-xl grid-cols-3 gap-5">
+            <m.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+              className="mt-12 grid max-w-xl grid-cols-3 gap-5"
+            >
               <Stat icon={Users} value="650K+" label="YouTube Subscribers" />
               <Stat icon={Code2} value="10+" label="Years Building" />
               <Stat icon={Rocket} value="AI-First" label="Automation Focused" />
-            </div>
-          </div>
+            </m.div>
+          </m.div>
         </CosmicContainer>
 
         <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex flex-col items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[--ink-faint]">

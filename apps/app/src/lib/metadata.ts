@@ -37,6 +37,10 @@ export const DEFAULT_KEYWORDS = [
  */
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: "/images/avatar.png",
+    apple: "/images/avatar.png",
+  },
   title: {
     default: `${SITE_NAME} — ${SITE_TAGLINE}`,
     template: `%s | ${SITE_NAME}`,
