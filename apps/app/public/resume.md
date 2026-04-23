@@ -3,7 +3,7 @@
 **AI Agent Orchestrator | AI Coding Evangelist | Full Stack Developer | Solutions Architect | Web3 Enthusiast**
 
 ## Contact
-- Email: bjohnson@swizzmagik.com
+- Email: b@exct.io
 - Website: https://brandonjohnson.dev
 - Phone: (949) 891-1494
 - Address: 29 Alienta Ln, RMV, CA 92694
