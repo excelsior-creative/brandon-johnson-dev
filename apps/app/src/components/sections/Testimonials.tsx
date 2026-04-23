@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CosmicContainer } from "@/components/cosmic/Container";
 import { SectionHeading } from "@/components/cosmic/SectionHeading";
+import { Reveal } from "@/components/SectionReveal";
 import { testimonials, type Testimonial } from "@/lib/content/testimonials";
 
 function splitColumns(items: Testimonial[], count: number) {
@@ -15,11 +16,13 @@ export function TestimonialsSection() {
   return (
     <section className="relative py-24 md:py-32">
       <CosmicContainer>
-        <SectionHeading
-          eyebrow="Testimonials"
-          title="Loved by people all over the universe"
-          description="With boundless enthusiasm and contagious optimism, I bring transformative energy to every project. Challenges become opportunities — success is inevitable."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Testimonials"
+            title="Loved by people all over the universe"
+            description="With boundless enthusiasm and contagious optimism, I bring transformative energy to every project. Challenges become opportunities — success is inevitable."
+          />
+        </Reveal>
       </CosmicContainer>
 
       <div className="relative mt-16 h-[49rem] max-h-[150vh] overflow-hidden">
