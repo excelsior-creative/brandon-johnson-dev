@@ -5,8 +5,17 @@ import { Container } from "@/components/Container";
 import { RichText } from "@/components/RichText";
 import { draftMode } from "next/headers";
 import { LivePreviewListener } from "@/components/LivePreviewListener";
+import { generatePageMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = generatePageMetadata({
+  title: "Privacy Policy",
+  description:
+    "Privacy policy for brandonjohnson.dev — how visitor data is collected, used, and protected.",
+  path: "/privacy",
+});
 
 export default async function PrivacyPage() {
   const { isEnabled: draft } = await draftMode();

@@ -5,8 +5,17 @@ import { Container } from "@/components/Container";
 import { RichText } from "@/components/RichText";
 import { draftMode } from "next/headers";
 import { LivePreviewListener } from "@/components/LivePreviewListener";
+import { generatePageMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = generatePageMetadata({
+  title: "Terms of Service",
+  description:
+    "Terms of service for brandonjohnson.dev — the terms that govern use of this website and its content.",
+  path: "/terms",
+});
 
 export default async function TermsPage() {
   const { isEnabled: draft } = await draftMode();

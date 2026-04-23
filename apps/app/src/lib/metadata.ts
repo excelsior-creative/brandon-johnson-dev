@@ -1,12 +1,36 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";
-export const SITE_NAME = "Template Site";
-export const SITE_TAGLINE = "Built with Next.js & Payload CMS";
-export const DEFAULT_DESCRIPTION =
-  "A high-performance project template with integrated SEO and AI features.";
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SERVER_URL ||
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://brandonjohnson.dev";
 
-export const DEFAULT_OG_IMAGE = "/og-image.jpg";
+export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || "J. Brandon Johnson";
+export const SITE_TAGLINE = "AI Agent Orchestrator & Full Stack Developer";
+export const DEFAULT_DESCRIPTION =
+  "J. Brandon Johnson is an AI Agent Orchestrator, Full Stack Developer, and Solutions Architect with 15+ years shipping AI, fintech, Web3, and enterprise software. Building autonomous agents, automation platforms, and scalable systems with Next.js, TypeScript, and the Eliza framework.";
+
+export const DEFAULT_OG_IMAGE = "/images/hero-image.png";
+export const AUTHOR_NAME = "J. Brandon Johnson";
+export const AUTHOR_EMAIL = "bjohnson@swizzmagik.com";
+
+export const DEFAULT_KEYWORDS = [
+  "J. Brandon Johnson",
+  "Brandon Johnson",
+  "AI agent developer",
+  "AI agent orchestration",
+  "Eliza framework",
+  "ElizaOS",
+  "Full stack developer",
+  "Solutions architect",
+  "Next.js developer",
+  "TypeScript engineer",
+  "AI automation",
+  "Agentic workflows",
+  "Web3 developer",
+  "AI consulting",
+  "Orange County software engineer",
+];
 
 /**
  * Default metadata for the entire site
@@ -14,20 +38,16 @@ export const DEFAULT_OG_IMAGE = "/og-image.jpg";
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    default: `${SITE_NAME} — ${SITE_TAGLINE}`,
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
-  keywords: [
-    "Next.js",
-    "Payload CMS",
-    "React",
-    "Tailwind CSS",
-    "SEO optimized",
-  ],
-  authors: [{ name: SITE_NAME, url: SITE_URL }],
-  creator: SITE_NAME,
-  publisher: SITE_NAME,
+  keywords: DEFAULT_KEYWORDS,
+  authors: [{ name: AUTHOR_NAME, url: SITE_URL }],
+  creator: AUTHOR_NAME,
+  publisher: AUTHOR_NAME,
+  applicationName: SITE_NAME,
+  category: "technology",
   formatDetection: {
     email: false,
     address: false,
@@ -38,22 +58,23 @@ export const defaultMetadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} - Project Template`,
+        alt: `${SITE_NAME} — ${SITE_TAGLINE}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} | ${SITE_TAGLINE}`,
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
     description: DEFAULT_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE],
+    creator: "@swizzmagik",
   },
   robots: {
     index: true,
@@ -68,6 +89,9 @@ export const defaultMetadata: Metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    types: {
+      "application/rss+xml": `${SITE_URL}/feed.xml`,
+    },
   },
 };
 
@@ -95,7 +119,7 @@ export function generatePageMetadata({
   return {
     title,
     description,
-    keywords: keywords || (defaultMetadata.keywords as string[]),
+    keywords: keywords || DEFAULT_KEYWORDS,
     openGraph: {
       title,
       description,
@@ -147,7 +171,7 @@ export function generateArticleMetadata({
   publishedTime?: string;
   modifiedTime?: string;
   author?: string;
-  keywords?: string;
+  keywords?: string[] | string;
   noIndex?: boolean;
 }): Metadata {
   const url = `${SITE_URL}/blog/${slug}`;
@@ -157,6 +181,7 @@ export function generateArticleMetadata({
     title,
     description,
     keywords: keywords || undefined,
+    authors: author ? [{ name: author }] : [{ name: AUTHOR_NAME }],
     openGraph: {
       title,
       description,
@@ -165,7 +190,7 @@ export function generateArticleMetadata({
       type: "article",
       publishedTime,
       modifiedTime,
-      authors: author ? [author] : [SITE_NAME],
+      authors: [author || AUTHOR_NAME],
       images: [
         {
           url: image,
@@ -189,4 +214,3 @@ export function generateArticleMetadata({
       : { index: true, follow: true },
   };
 }
-

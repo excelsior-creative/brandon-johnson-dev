@@ -129,8 +129,9 @@ export default buildConfig({
   }),
   email: resendAdapter({
     defaultFromAddress:
-      process.env.RESEND_DEFAULT_FROM_ADDRESS || "noreply@yourdomain.com",
-    defaultFromName: process.env.RESEND_DEFAULT_FROM_NAME || "Your App Name",
+      process.env.RESEND_DEFAULT_FROM_ADDRESS || "noreply@brandonjohnson.dev",
+    defaultFromName:
+      process.env.RESEND_DEFAULT_FROM_NAME || "J. Brandon Johnson",
     apiKey: process.env.RESEND_API_KEY || "",
   }),
   plugins: [
@@ -203,8 +204,9 @@ export default buildConfig({
       uploadsCollection: "media",
       generateTitle: (({ doc }) =>
         doc?.title
-          ? `${doc.title} | ${process.env.NEXT_PUBLIC_SITE_NAME || "Your Site"}`
-          : process.env.NEXT_PUBLIC_SITE_NAME || "Your Site") as GenerateTitle,
+          ? `${doc.title} | ${process.env.NEXT_PUBLIC_SITE_NAME || "J. Brandon Johnson"}`
+          : process.env.NEXT_PUBLIC_SITE_NAME ||
+            "J. Brandon Johnson") as GenerateTitle,
       generateDescription: (({ doc }) =>
         (doc as any)?.excerpt || "") as GenerateDescription,
       generateURL: (({ doc }) => {

@@ -3,26 +3,46 @@ import { Container } from "@/components/Container";
 import Header from "@/components/Header";
 import { ContactForm } from "@/components/ContactForm";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { generatePageMetadata, AUTHOR_EMAIL, SITE_URL } from "@/lib/metadata";
+import { generateBreadcrumbSchema } from "@/lib/structured-data";
+import type { Metadata } from "next";
 
 export const revalidate = 3600;
 
+export const metadata: Metadata = generatePageMetadata({
+  title: "Contact J. Brandon Johnson",
+  description:
+    "Get in touch with J. Brandon Johnson about AI agent development, full stack engineering, automation consulting, or collaboration opportunities. Fully remote. Based in Orange County, California.",
+  path: "/contact",
+});
+
 export default function ContactPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: SITE_URL },
+    { name: "Contact", url: `${SITE_URL}/contact` },
+  ]);
+
   return (
     <div className="py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Container>
         <Header
-          badge="Contact Us"
-          title="Get in Touch"
-          subtitle="Have a question or want to work together? We'd love to hear from you."
+          badge="Contact"
+          title="Let's Build Something"
+          subtitle="Have an AI automation, agent orchestration, or full-stack engineering project in mind? Send a note and I'll get back within a day or two."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
           <div>
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl font-bold mb-4">Contact Information</h3>
+                <h2 className="text-xl font-bold mb-4">Direct Contact</h2>
                 <p className="text-muted-foreground mb-6">
-                  Fill out the form and our team will get back to you within 24 hours.
+                  Prefer email or phone? Reach out directly — I read every
+                  message personally.
                 </p>
               </div>
 
@@ -33,7 +53,12 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium">Email</p>
-                    <p className="text-muted-foreground">hello@example.com</p>
+                    <a
+                      href={`mailto:${AUTHOR_EMAIL}`}
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {AUTHOR_EMAIL}
+                    </a>
                   </div>
                 </div>
 
@@ -43,7 +68,12 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium">Phone</p>
-                    <p className="text-muted-foreground">+1 (555) 000-0000</p>
+                    <a
+                      href="tel:+19498911494"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      +1 (949) 891-1494
+                    </a>
                   </div>
                 </div>
 
@@ -52,10 +82,11 @@ export default function ContactPage() {
                     <MapPin className="w-5 h-5 text-brand" />
                   </div>
                   <div>
-                    <p className="font-medium">Office</p>
+                    <p className="font-medium">Based In</p>
                     <p className="text-muted-foreground">
-                      123 Innovation Drive<br />
-                      Silicon Valley, CA 94025
+                      Orange County, California
+                      <br />
+                      Available for fully remote engagements
                     </p>
                   </div>
                 </div>
