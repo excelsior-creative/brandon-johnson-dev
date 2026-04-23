@@ -1,87 +1,317 @@
-import React from "react";
-import Link from "next/link";
-import { Button } from "./ui/button";
-import { ArrowRight } from "lucide-react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useScroll, useMotionValueEvent } from "framer-motion";
+import { ChevronDown, Play, Users, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
+import { CosmicBackground } from "@/components/cosmic/CosmicBackground";
+import { Starfield } from "@/components/cosmic/Starfield";
+import { Eyebrow } from "@/components/cosmic/Eyebrow";
+import { GradientButton } from "@/components/cosmic/GradientButton";
+import { CosmicContainer } from "@/components/cosmic/Container";
 
 /**
- * Hero component optimized for LCP performance.
+ * Cinematic hero with a scroll-scrubbed background video.
  *
- * Uses CSS animations instead of framer-motion for initial reveal to:
- * 1. Allow content to be visible in SSR HTML (improves LCP)
- * 2. Run animations on compositor thread (GPU-accelerated)
- * 3. Reduce JavaScript bundle size
+ * The outer <section> is 300vh tall to provide scroll distance. The inner
+ * wrapper is pinned with `position: sticky` so the video + overlay stay
+ * locked to the viewport while scroll progress drives `video.currentTime`.
  *
- * The CSS animations are defined inline to keep the component self-contained.
+ * A "Say Hello" button cross-fades to an unmuted intro video
+ * (brandon-hello-video.mp4); when it ends, we fade back to the scroll video.
  */
-export const Hero = () => {
+export function Hero() {
+  const scrollRef = useRef<HTMLElement | null>(null);
+  const scrubVideoRef = useRef<HTMLVideoElement | null>(null);
+  const helloVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  const [scrubReady, setScrubReady] = useState(false);
+  const [isHelloPlaying, setIsHelloPlaying] = useState(false);
+  const [isHelloMuted, setIsHelloMuted] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  const targetTimeRef = useRef(0);
+  const rafRef = useRef(0);
+
+  const { scrollYProgress } = useScroll({
+    target: scrollRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Detect reduced motion once — falls back to a static poster.
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const listener = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mq.addEventListener("change", listener);
+    return () => mq.removeEventListener("change", listener);
+  }, []);
+
+  // Initialize scrub video — never autoplays; we move currentTime instead.
+  useEffect(() => {
+    const video = scrubVideoRef.current;
+    if (!video) return;
+
+    const onMeta = () => {
+      video.pause();
+      targetTimeRef.current = (scrollYProgress.get() || 0) * video.duration;
+      try {
+        video.currentTime = targetTimeRef.current;
+      } catch {
+        /* browsers sometimes throw before the buffer is ready */
+      }
+      setScrubReady(true);
+    };
+
+    if (video.readyState >= 1) {
+      onMeta();
+    } else {
+      video.addEventListener("loadedmetadata", onMeta, { once: true });
+    }
+    return () => video.removeEventListener("loadedmetadata", onMeta);
+  }, [scrollYProgress]);
+
+  // Drive the scrub video off scroll progress via rAF (prevents thrash).
+  useMotionValueEvent(scrollYProgress, "change", (p) => {
+    if (reduceMotion) return;
+    const video = scrubVideoRef.current;
+    if (!video || !video.duration || isHelloPlaying) return;
+    targetTimeRef.current = p * video.duration;
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = 0;
+      const v = scrubVideoRef.current;
+      if (!v) return;
+      const delta = Math.abs(v.currentTime - targetTimeRef.current);
+      if (delta > 0.02) {
+        try {
+          v.currentTime = targetTimeRef.current;
+        } catch {
+          /* ignore seeking errors */
+        }
+      }
+    });
+  });
+
+  useEffect(() => {
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  const handleSayHello = () => {
+    const hello = helloVideoRef.current;
+    if (!hello) return;
+    setIsHelloPlaying(true);
+    setIsHelloMuted(false);
+    hello.muted = false;
+    hello.currentTime = 0;
+    const playPromise = hello.play();
+    if (playPromise) {
+      playPromise.catch(() => {
+        // Autoplay-with-sound rejected → retry muted.
+        hello.muted = true;
+        setIsHelloMuted(true);
+        hello.play().catch(() => {
+          setIsHelloPlaying(false);
+        });
+      });
+    }
+  };
+
+  const handleHelloEnded = () => {
+    const hello = helloVideoRef.current;
+    if (hello) hello.currentTime = 0;
+    setIsHelloPlaying(false);
+    // Snap the scrub video back to the current scroll position after the
+    // hello clip fades out, so the transition doesn't reveal a stale frame.
+    const scrub = scrubVideoRef.current;
+    if (scrub?.duration) {
+      try {
+        scrub.currentTime = scrollYProgress.get() * scrub.duration;
+      } catch {
+        /* ignore */
+      }
+    }
+  };
+
+  const toggleHelloMute = () => {
+    const hello = helloVideoRef.current;
+    if (!hello) return;
+    hello.muted = !hello.muted;
+    setIsHelloMuted(hello.muted);
+  };
+
   return (
-    <section className="relative overflow-hidden py-20 md:py-32 bg-dot-pattern">
-      {/* CSS animations for fade-in-up effect - defined inline for portability */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-            @keyframes heroFadeInUp {
-              from {
-                opacity: 0;
-                transform: translateY(20px);
-              }
-              to {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            }
-            .hero-animate {
-              animation: heroFadeInUp 0.5s ease-out forwards;
-            }
-            .hero-animate-delay-1 {
-              animation: heroFadeInUp 0.5s ease-out 0.1s forwards;
-              opacity: 0;
-            }
-            .hero-animate-delay-2 {
-              animation: heroFadeInUp 0.5s ease-out 0.2s forwards;
-              opacity: 0;
-            }
-            /* Respect reduced motion preferences */
-            @media (prefers-reduced-motion: reduce) {
-              .hero-animate,
-              .hero-animate-delay-1,
-              .hero-animate-delay-2 {
-                animation: none;
-                opacity: 1;
-                transform: none;
-              }
-            }
-          `,
-        }}
-      />
-      <div className="container relative z-10 mx-auto px-4 text-center">
-        <div className="hero-animate">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-            Build Faster with <br />
-            <span className="bg-gradient-to-r from-brand to-brand-light bg-clip-text text-transparent">Next.js + Payload CMS</span>
-          </h1>
-        </div>
+    <section
+      id="home"
+      ref={scrollRef}
+      className="relative w-full"
+      style={{ height: "300vh" }}
+    >
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[--bg]">
+        {/* Poster fallback (LCP target) — always rendered behind the video */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/hero-image.png"
+          alt=""
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover opacity-70"
+        />
 
-        <p className="hero-animate-delay-1 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-          A modern boilerplate template featuring Payload CMS 3.0, Next.js 15,
-          and beautiful UI components. Perfect for your next SaaS or marketing site.
-        </p>
+        {/* Scroll-scrubbed background video */}
+        {!reduceMotion && (
+          <video
+            ref={scrubVideoRef}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+              scrubReady && !isHelloPlaying ? "opacity-100" : "opacity-0"
+            }`}
+            src="/video/hero-video.mp4"
+            muted
+            playsInline
+            preload="auto"
+            poster="/images/hero-image.png"
+            // `autoPlay` is deliberately off — we control currentTime only.
+          />
+        )}
 
-        <div className="hero-animate-delay-2 flex flex-col sm:flex-row justify-center gap-4">
-          <Button asChild size="lg" className="bg-brand hover:bg-brand-light text-white px-8 h-14 text-lg transition-colors border-none">
-            <Link href="/admin">
-              Start Building
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="lg" className="px-8 h-14 text-lg">
-            <Link href="/blog">View Demo Blog</Link>
-          </Button>
+        {/* Cross-fade intro video — plays with sound on click */}
+        <video
+          ref={helloVideoRef}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+            isHelloPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          src="/video/brandon-hello-video.mp4"
+          playsInline
+          preload="metadata"
+          onEnded={handleHelloEnded}
+        />
+
+        {/* Cosmic overlay layers */}
+        <CosmicBackground intensity={0.6} showGrid />
+        <Starfield density={140} />
+
+        {/* Bottom-to-top fade behind the text so it stays legible over video */}
+        <div className="absolute inset-0 hero-bottom-fade pointer-events-none" />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(5,6,15,0.45) 0%, rgba(5,6,15,0) 30%, rgba(5,6,15,0) 55%, rgba(5,6,15,0.85) 100%)",
+          }}
+        />
+
+        {isHelloPlaying && isHelloMuted && (
+          <button
+            type="button"
+            onClick={toggleHelloMute}
+            className="absolute right-6 top-24 z-30 inline-flex items-center gap-2 rounded-full border border-[--border-mid] bg-black/50 px-3 py-2 text-xs text-white backdrop-blur hover:bg-black/70"
+          >
+            <Volume2 className="h-3.5 w-3.5" />
+            Tap to unmute
+          </button>
+        )}
+        {isHelloPlaying && !isHelloMuted && (
+          <button
+            type="button"
+            onClick={toggleHelloMute}
+            className="absolute right-6 top-24 z-30 inline-flex items-center gap-2 rounded-full border border-[--border-mid] bg-black/40 p-2 text-white/80 backdrop-blur hover:bg-black/60"
+            aria-label="Mute"
+          >
+            <VolumeX className="h-4 w-4" />
+          </button>
+        )}
+
+        {/* Content overlay */}
+        <CosmicContainer className="relative z-10 flex h-full flex-col justify-center pt-24 pb-16">
+          <div className="max-w-3xl">
+            <Eyebrow>AI Automation &amp; Software Engineering</Eyebrow>
+            <h1 className="font-display mt-6 text-[clamp(44px,6.2vw,84px)] font-bold leading-[1.02] tracking-[-0.035em]">
+              Building the Future.
+              <br />
+              Automating <span className="gradient-accent-text">Everything.</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-[clamp(16px,1.3vw,19px)] leading-[1.55] text-[--ink-dim]">
+              I build AI agents, automation systems, and scalable software that turn ideas
+              into impact. 600+ agents, 10+ years shipping, one cinematic command center.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <GradientButton asChild variant="primary" size="lg">
+                <a href="#work">
+                  Explore My Work
+                  <ArrowRightIcon />
+                </a>
+              </GradientButton>
+              <GradientButton
+                type="button"
+                variant="ghost"
+                size="lg"
+                onClick={handleSayHello}
+                disabled={isHelloPlaying}
+              >
+                <Play className="h-4 w-4" />
+                Say Hello
+              </GradientButton>
+            </div>
+
+            <div className="mt-12 grid max-w-xl grid-cols-3 gap-5">
+              <Stat icon={Users} value="650K+" label="YouTube Subscribers" />
+              <Stat icon={Code2} value="10+" label="Years Building" />
+              <Stat icon={Rocket} value="AI-First" label="Automation Focused" />
+            </div>
+          </div>
+        </CosmicContainer>
+
+        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex flex-col items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[--ink-faint]">
+          <span className="animate-[bob_2.2s_ease-in-out_infinite]">
+            <ChevronDown className="h-4 w-4" />
+          </span>
+          Scroll to explore
         </div>
       </div>
-
-      {/* Decorative element */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand/10 rounded-full blur-[120px] -z-0 opacity-50" />
     </section>
   );
-};
+}
+
+function Stat({
+  icon: Icon,
+  value,
+  label,
+}: {
+  icon: typeof Users;
+  value: string;
+  label: string;
+}) {
+  return (
+    <div className="flex flex-col gap-1 border-l border-[--border-mid] pl-4">
+      <Icon className="h-5 w-5 text-[--cyan]" />
+      <div className="font-display text-2xl font-bold leading-none tracking-[-0.02em] text-[--ink]">
+        {value}
+      </div>
+      <div className="text-[11px] uppercase tracking-[0.08em] text-[--ink-faint]">
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  );
+}
+
+export default Hero;

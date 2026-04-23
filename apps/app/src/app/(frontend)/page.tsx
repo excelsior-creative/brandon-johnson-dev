@@ -1,24 +1,25 @@
-import React from "react";
 import { Hero } from "@/components/Hero";
-import { BlogSection } from "@/components/BlogSection";
-import { AboutSection } from "@/components/AboutSection";
-import { ServicesSection } from "@/components/ServicesSection";
-import nextDynamic from 'next/dynamic'
-
-const CTASection = nextDynamic(() =>
-  import('@/components/CTASection').then((mod) => mod.CTASection),
-)
+import { TechMarquee } from "@/components/sections/TechMarquee";
+import { Capabilities } from "@/components/sections/Capabilities";
+import { WorkExperience } from "@/components/sections/WorkExperience";
+import { AiLabs } from "@/components/sections/AiLabs";
+import { Projects } from "@/components/sections/Projects";
+import { TestimonialsSection } from "@/components/sections/Testimonials";
+import { HomeCta } from "@/components/sections/HomeCta";
 
 export const revalidate = 60;
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <>
       <Hero />
-      <AboutSection />
-      <ServicesSection />
-      <BlogSection title="Recent Posts" badge="Our Blog" />
-      <CTASection />
-    </div>
+      <TechMarquee />
+      <Capabilities />
+      <WorkExperience />
+      <AiLabs />
+      <Projects />
+      <TestimonialsSection />
+      <HomeCta />
+    </>
   );
 }
