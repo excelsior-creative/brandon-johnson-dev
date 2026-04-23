@@ -5,8 +5,23 @@ import { projects } from "@/lib/content/projects";
 
 export function Projects() {
   return (
-    <section id="projects" className="relative py-24 md:py-32">
-      <CosmicContainer>
+    <section id="projects" className="relative overflow-hidden py-24 md:py-32">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/unicycle.png"
+          alt=""
+          className="h-full w-full object-cover object-[center_40%] opacity-25 saturate-50"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, #05060f 0%, transparent 10%, transparent 90%, #05060f 100%)",
+          }}
+        />
+      </div>
+      <CosmicContainer className="relative z-10">
         <SectionHeading
           eyebrow="Featured Projects"
           title="Enterprise-scale applications, delivered"

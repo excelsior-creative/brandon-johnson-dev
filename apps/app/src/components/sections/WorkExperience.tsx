@@ -1,12 +1,28 @@
-import Image from "next/image";
 import { CosmicContainer } from "@/components/cosmic/Container";
 import { SectionHeading } from "@/components/cosmic/SectionHeading";
 import { workExperience } from "@/lib/content/workExperience";
+import Image from "next/image";
 
 export function WorkExperience() {
   return (
-    <section id="work" className="relative py-24 md:py-32">
-      <CosmicContainer>
+    <section id="work" className="relative overflow-hidden py-24 md:py-32">
+      {/* Decorative background — plain img avoids Next Image fill stacking issues */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/pushups.png"
+          alt=""
+          className="h-full w-full object-cover object-[center_35%] opacity-25 saturate-50"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, #05060f 0%, transparent 10%, transparent 90%, #05060f 100%)",
+          }}
+        />
+      </div>
+      <CosmicContainer className="relative z-10">
         <SectionHeading
           eyebrow="Work Experience"
           title="A decade plus of shipping"
@@ -44,7 +60,9 @@ export function WorkExperience() {
                 <h3 className="font-display text-lg font-semibold leading-tight tracking-[-0.01em] text-[--ink]">
                   {exp.role}
                 </h3>
-                <div className="text-sm font-medium text-[--ink-dim]">{exp.company}</div>
+                <div className="text-sm font-medium text-[--ink-dim]">
+                  {exp.company}
+                </div>
                 <p className="text-xs leading-relaxed text-[--ink-faint]">
                   {exp.description}
                 </p>

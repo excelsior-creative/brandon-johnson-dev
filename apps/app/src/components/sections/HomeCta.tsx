@@ -16,6 +16,22 @@ export function HomeCta() {
             boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
           }}
         >
+          {/* Family photo watermark */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/family.png"
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[center_30%] opacity-20 saturate-50"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, #090b1a 0%, transparent 15%, transparent 85%, #090b1a 100%)",
+            }}
+          />
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-grid-pattern opacity-40 mask-radial-fade"

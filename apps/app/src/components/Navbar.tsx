@@ -1,14 +1,15 @@
 "use client";
 
+import { cosmicNavItems } from "@/lib/content/navigation";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, m } from "framer-motion";
+import { ArrowUpRight, Menu, Search, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { m, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight, Search } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useSearch } from "./SearchProvider";
-import { cosmicNavItems } from "@/lib/content/navigation";
 import { CosmicContainer } from "./cosmic/Container";
+import { useSearch } from "./SearchProvider";
 
 // NavItem type kept loose so we keep compat with whatever Payload's header
 // global passes in. If it provides links we map them; otherwise we fall back
@@ -33,10 +34,16 @@ const resolveHref = (item: NavItem) => {
   const link = item.link;
   if (!link) return null;
   if (link.type === "custom" && link.url) return link.url;
-  if (link.type === "reference" && link.reference && typeof link.reference === "object") {
+  if (
+    link.type === "reference" &&
+    link.reference &&
+    typeof link.reference === "object"
+  ) {
     const value = link.reference.value;
     if (typeof value === "object" && value?.slug) {
-      return link.reference.relationTo === "posts" ? `/blog/${value.slug}` : `/${value.slug}`;
+      return link.reference.relationTo === "posts"
+        ? `/blog/${value.slug}`
+        : `/${value.slug}`;
     }
   }
   return null;
@@ -59,7 +66,8 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
   navItems.forEach((item) => {
     const href = resolveHref(item);
     const label = item.link?.label;
-    if (href && label) resolved.push({ href, label, newTab: item.link?.newTab });
+    if (href && label)
+      resolved.push({ href, label, newTab: item.link?.newTab });
   });
   const items = resolved.length > 0 ? resolved : cosmicNavItems;
 
@@ -69,23 +77,22 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
         "fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,border-color] duration-300",
         "border-b border-transparent",
         scrolled &&
-          "border-[--border-soft] bg-[rgba(5,6,15,0.72)] backdrop-blur-[16px] backdrop-saturate-[140%]"
+          "border-[--border-soft] bg-[rgba(5,6,15,0.72)] backdrop-blur-[16px] backdrop-saturate-[140%]",
       )}
     >
       <CosmicContainer>
         <nav className="flex items-center justify-between gap-6 py-4">
           <Link href="/" className="flex items-center gap-3">
-            <span
-              aria-hidden
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[--border-mid] font-mono text-[15px] font-semibold text-[--cyan]"
-              style={{
-                background: "linear-gradient(135deg, #2a2f55, #0f1230)",
-              }}
-            >
-              BJ
-            </span>
+            <Image
+              src="/images/avatar.png"
+              alt="Brandon Johnson"
+              width={40}
+              height={40}
+              className="rounded-full border border-[--border-mid]"
+              priority
+            />
             <span className="text-base font-semibold tracking-[-0.01em] text-[--ink]">
-              Brandon Johnson
+              BrandonJohnson.dev
             </span>
           </Link>
 
@@ -94,7 +101,8 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
               const active =
                 item.href === "/"
                   ? pathname === "/"
-                  : pathname === item.href || pathname.startsWith(item.href + "/");
+                  : pathname === item.href ||
+                    pathname.startsWith(item.href + "/");
               return (
                 <Link
                   key={item.href + item.label}
@@ -105,7 +113,7 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
                     "rounded-full px-4 py-2 text-sm transition-colors",
                     active
                       ? "text-[--ink]"
-                      : "text-[--ink-dim] hover:bg-white/[0.04] hover:text-[--ink]"
+                      : "text-[--ink-dim] hover:bg-white/[0.04] hover:text-[--ink]",
                   )}
                 >
                   {item.label}
@@ -147,7 +155,11 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
               className="rounded-full p-2 text-[--ink-dim]"
               aria-label={isOpen ? "Close menu" : "Open menu"}
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </button>
           </div>
         </nav>

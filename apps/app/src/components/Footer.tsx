@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import { CosmicContainer } from "./cosmic/Container";
@@ -63,13 +64,13 @@ export const Footer = async () => {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
-              <span
-                aria-hidden
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[--border-mid] font-mono text-[15px] font-semibold text-[--cyan]"
-                style={{ background: "linear-gradient(135deg, #2a2f55, #0f1230)" }}
-              >
-                BJ
-              </span>
+              <Image
+                src="/images/avatar.png"
+                alt="Brandon Johnson"
+                width={40}
+                height={40}
+                className="rounded-full border border-[--border-mid]"
+              />
               <span className="text-base font-semibold tracking-[-0.01em] text-[--ink]">
                 Brandon Johnson
               </span>

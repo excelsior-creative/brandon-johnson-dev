@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Play, Users, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
+import { ChevronDown, Pause, Play, Users, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
 import { CosmicBackground } from "@/components/cosmic/CosmicBackground";
 import { Starfield } from "@/components/cosmic/Starfield";
 import { Eyebrow } from "@/components/cosmic/Eyebrow";
@@ -71,6 +71,20 @@ export function Hero() {
   const handleHelloEnded = () => {
     const hello = helloVideoRef.current;
     if (hello) hello.currentTime = 0;
+    setIsHelloPlaying(false);
+
+    const loop = loopVideoRef.current;
+    if (loop && !reduceMotion) {
+      loop.play().catch(() => {});
+    }
+  };
+
+  const handleStopHello = () => {
+    const hello = helloVideoRef.current;
+    if (hello) {
+      hello.pause();
+      hello.currentTime = 0;
+    }
     setIsHelloPlaying(false);
 
     const loop = loopVideoRef.current;
@@ -187,11 +201,19 @@ export function Hero() {
                 type="button"
                 variant="ghost"
                 size="lg"
-                onClick={handleSayHello}
-                disabled={isHelloPlaying}
+                onClick={isHelloPlaying ? handleStopHello : handleSayHello}
               >
-                <Play className="h-4 w-4" />
-                Say Hello
+                {isHelloPlaying ? (
+                  <>
+                    <Pause className="h-4 w-4" />
+                    Stop
+                  </>
+                ) : (
+                  <>
+                    <Play className="h-4 w-4" />
+                    Say Hello
+                  </>
+                )}
               </GradientButton>
             </div>
 
