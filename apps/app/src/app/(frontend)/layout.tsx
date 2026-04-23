@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { Providers } from "@/components/Providers";
 import { SearchProvider } from "@/components/SearchProvider";
 import { AdminBar } from "@/components/AdminBar";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { draftMode } from "next/headers";
 import { getPayload } from "payload";
 import config from "@payload-config";
@@ -50,6 +51,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
         <div className="flex min-h-screen flex-col relative" data-theme="frontend">
           <Providers>
             <SearchProvider>
+              <ScrollProgress />
               <AdminBar
                 adminBarProps={{
                   preview: isEnabled,
