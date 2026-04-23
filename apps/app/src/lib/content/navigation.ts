@@ -13,8 +13,7 @@ export const cosmicNavItems: CosmicNavItem[] = [
 ];
 
 export const socialLinks = [
-  { label: "Twitter", href: "https://twitter.com/swizzmagik" },
-  { label: "GitHub", href: "https://github.com/swizzmagik" },
   { label: "LinkedIn", href: "https://linkedin.com/in/swizzmagik" },
-  { label: "YouTube", href: "https://youtube.com/@swizzmagik" },
+  { label: "GitHub", href: "https://github.com/swizzmagik" },
+  { label: "Twitter", href: "https://twitter.com/swizzmagik" },
 ];

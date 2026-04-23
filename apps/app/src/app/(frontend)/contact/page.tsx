@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Github, Linkedin, Mail, MapPin, Twitter, Youtube } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Twitter } from "lucide-react";
 import { CosmicContainer } from "@/components/cosmic/Container";
 import { SectionHeading } from "@/components/cosmic/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
@@ -24,10 +24,9 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ]);
 
 const socialIcons: Record<string, typeof Github> = {
-  Twitter,
-  GitHub: Github,
   LinkedIn: Linkedin,
-  YouTube: Youtube,
+  GitHub: Github,
+  Twitter,
 };
 
 export default function ContactPage() {
