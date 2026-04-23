@@ -156,7 +156,7 @@ function TimelineCard({ exp }: { exp: WorkExperienceItem }) {
       href={exp.link}
       target="_blank"
       rel="noreferrer noopener"
-      className="group relative flex h-[300px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.15)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[rgba(56,189,248,0.4)] hover:shadow-[0_16px_70px_-12px_rgba(124,92,255,0.35)]"
+      className="group relative flex h-[300px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.08] p-5 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.15)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[rgba(56,189,248,0.4)] hover:shadow-[0_16px_70px_-12px_rgba(124,92,255,0.35)]"
     >
       {/* Top gradient accent */}
       <span
