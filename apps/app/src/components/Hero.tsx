@@ -224,15 +224,16 @@ export function Hero() {
         {/* Content overlay */}
         <CosmicContainer className="relative z-10 flex h-full flex-col justify-center pt-24 pb-16">
           <div className="max-w-3xl">
-            <Eyebrow>AI Automation &amp; Software Engineering</Eyebrow>
+            <Eyebrow>AI Systems · Open Source · Automation</Eyebrow>
             <h1 className="font-display mt-6 text-[clamp(44px,6.2vw,84px)] font-bold leading-[1.02] tracking-[-0.035em]">
               Building the Future.
               <br />
               Automating <span className="gradient-accent-text">Everything.</span>
             </h1>
             <p className="mt-5 max-w-xl text-[clamp(16px,1.3vw,19px)] leading-[1.55] text-[--ink-dim]">
-              I build AI agents, automation systems, and scalable software that turn ideas
-              into impact. 600+ agents, 10+ years shipping, one cinematic command center.
+              Senior engineer operating a production fleet of 600+ AI agents. Contributor
+              to Eliza and OpenClaw. Teaching 650K+ on YouTube how the next generation of
+              software actually gets built.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -256,8 +257,8 @@ export function Hero() {
 
             <div className="mt-12 grid max-w-xl grid-cols-3 gap-5">
               <Stat icon={Users} value="650K+" label="YouTube Subscribers" />
-              <Stat icon={Code2} value="10+" label="Years Building" />
-              <Stat icon={Rocket} value="AI-First" label="Automation Focused" />
+              <Stat icon={Code2} value="600+" label="Agents in Production" />
+              <Stat icon={Rocket} value="15+" label="Years Shipping" />
             </div>
           </div>
         </CosmicContainer>

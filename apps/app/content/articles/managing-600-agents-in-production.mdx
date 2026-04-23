@@ -1,0 +1,70 @@
+---
+title: "Managing 600+ AI Agents in Production (and What Actually Breaks)"
+slug: "managing-600-agents-in-production"
+date: "2026-04-10"
+readingTime: "8 min read"
+tags: ["AI Agents", "Systems", "Production", "Automation"]
+summary: "Orchestrating an agent swarm at scale teaches you the same lesson every distributed systems engineer already knows: determinism is a feature, observability is a requirement, and the manager pattern wins."
+cover: "/images/hero-image.png"
+---
+
+Running a fleet of autonomous agents in production is not like shipping a chatbot. I run over 600 of them — supervising, summarizing, scraping, writing, deploying — and most of what I've learned is unglamorous. It's the same lesson every distributed systems engineer already knows, just handed to a new generation with cooler vocabulary.
+
+Here's the opinionated version.
+
+## Agents without budgets are a denial-of-service attack on your wallet
+
+The first production lesson is brutal and boring: an agent without a budget is a runaway loop waiting to happen. Token budget, wall-clock budget, tool-call budget, retries. If the supervisor doesn't enforce every one of those, you will wake up to a $3,400 OpenAI bill from a planning loop that decided "let me think about this step more carefully."
+
+I now treat budgets like I treat foreign keys: you don't ship without them, and you don't relax them because the one model you're testing with "usually behaves." Swapping models is the cheapest thing on your roadmap. Budgets are the seatbelt that survives that swap.
+
+## The manager agent pattern beats peer-to-peer swarms
+
+A lot of framework marketing pushes the idea of agents "collaborating." Peer-to-peer swarms look magical in demos and fall apart on contact with real workloads. The problem is state: when five agents are all allowed to talk to each other, nobody owns the plan, nobody owns the memory, and nobody owns the shutdown condition. You get drift, thrash, and the world's most expensive game of telephone.
+
+What actually works: one manager agent with a well-scoped plan, N stateless worker agents with narrow tools, and a hard stop condition. The manager holds the memory, the workers hold the capability. That's it. This maps to how real human teams run — one PM, N specialists, a clear "done" — and it scales.
+
+## Determinism is a feature you earn
+
+Non-determinism is the single largest source of pain in agent systems. Same input, different output, and now your tests are flaky for reasons that have nothing to do with your code.
+
+You do not fix this at the LLM layer. You fix it at the system layer:
+
+- Pin model versions. All of them. Pin the temperature. Pin the top_p. Log the prompt hash in every run.
+- Cache tool results. Agents retry. If your tools aren't idempotent, the agents will make them that way — badly.
+- Store the entire trace: prompts, tool calls, responses, evaluator scores. If you can't replay a run, you can't debug it.
+
+When I say "observability is a requirement," I don't mean a pretty dashboard. I mean: for any agent invocation in the last 90 days, I can reconstruct exactly what happened, byte for byte. That's the bar.
+
+## Not everything wants to be an agent
+
+This is the hot take that gets me in trouble with people who just discovered LangGraph. Most tasks you're trying to turn into agents are deterministic workflows wearing a costume.
+
+If the steps are fixed, if the tools are known, if the branching is a decision tree — you don't want an agent. You want a state machine with a small LLM node or two in the right places. You will ship it in a day, it will run a hundred times cheaper, and it will not hallucinate its way through a bank reconciliation.
+
+Agents are the right answer when the plan itself must be composed at runtime. When it doesn't, don't hammer screws.
+
+## Evals are the first-class artifact
+
+If I could go back and give 2023 me one piece of advice, it would be: the eval harness is the product. The code running the agents is scaffolding. The eval — your grounded expectations about what the system should output, across a representative distribution of inputs — is the thing that actually tells you whether your system is getting better or quietly regressing because a provider swapped a model behind your back.
+
+Most teams I've seen build this last, when the fires start. Build it first. Rebuild it every quarter. Treat eval drift as seriously as database migrations, because it is exactly as load-bearing.
+
+## What this looks like in practice
+
+The setup I run on my fleet of 600+ agents, boiled down:
+
+1. **Supervisor agent** with a plan, a budget, and a shutdown condition.
+2. **Stateless workers** with narrow tool surfaces. They don't remember anything between calls.
+3. **All tools are idempotent**, with a cache keyed by canonical inputs.
+4. **All traces are logged**, with provider, model version, prompt hash, and cost. Structured, queryable.
+5. **An eval harness** that runs nightly and alerts on regression of more than 2% on the core task distribution.
+6. **Budgets at every layer**: per call, per run, per day, per agent type. All of it.
+
+None of this is exciting. None of it is an AGI breakthrough. It's just what you do when you want to sleep through the night while 600 autonomous processes run your business.
+
+## The meta-lesson
+
+Agents are distributed systems. Distributed systems are hard. The "AI" in "AI agents" is doing a lot less work than people think — the "distributed systems" part is doing almost all of it. The teams I see succeed are the teams that already know how to run distributed systems and are learning LLMs on top of that foundation. The teams struggling are the ones who learned LLMs first and are re-discovering distributed systems one pager at a time.
+
+Start with the distributed systems fundamentals. The LLM parts are easy.

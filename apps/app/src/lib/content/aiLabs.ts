@@ -6,27 +6,27 @@ export type AiLab = {
 
 export const aiLabs: AiLab[] = [
   {
-    title: "Leading Eliza Framework Contributor",
+    title: "Orchestrating 600+ Agents in Production",
     description:
-      "Core contributor to the Eliza framework, pushing the boundaries of agent development and automation capabilities.",
+      "A live fleet of supervisor and worker agents running on budgets, idempotent tools, and replayable traces. Distributed systems first, LLMs second.",
     variant: "chat",
   },
   {
-    title: "Advanced Agent Architecture",
+    title: "Multi-Model Routing & Evaluation",
     description:
-      "Designed and implemented sophisticated agent systems capable of complex task automation and decision making.",
+      "Model-agnostic pipelines that route tasks to the right LLM, pinned by version and grounded by a nightly eval harness that flags regressions before users do.",
     variant: "stack",
   },
   {
-    title: "Multi-Model Integration Expert",
+    title: "Agent-Native System Design",
     description:
-      "Deep expertise in integrating diverse LLM architectures and creating hybrid AI solutions for enterprise needs.",
+      "Supervisor + worker topologies, cache-first tool layers, and eval-first development workflows — the patterns that turn experimental agents into reliable infrastructure.",
     variant: "grid",
   },
   {
-    title: "Production-Ready Solutions",
+    title: "Mission-Critical Automation",
     description:
-      "Track record of deploying robust, scalable agent systems that handle mission-critical automation tasks.",
+      "Production agent systems automating ops, research, content, and trading — deployed against budgets, SLAs, and the kind of audit trail enterprise customers actually ask about.",
     variant: "globe",
   },
 ];

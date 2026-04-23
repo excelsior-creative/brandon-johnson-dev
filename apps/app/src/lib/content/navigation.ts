@@ -5,11 +5,11 @@ export type CosmicNavItem = {
 };
 
 export const cosmicNavItems: CosmicNavItem[] = [
-  { label: "Home", href: "/#home" },
   { label: "Work", href: "/#work" },
+  { label: "Open Source", href: "/#open-source" },
   { label: "AI Labs", href: "/#ai-labs" },
-  { label: "Projects", href: "/#projects" },
-  { label: "Writing", href: "/blog" },
+  { label: "Writing", href: "/writing" },
+  { label: "Community", href: "/#community" },
   { label: "Contact", href: "/contact" },
 ];
 

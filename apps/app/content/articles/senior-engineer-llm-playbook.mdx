@@ -1,0 +1,80 @@
+---
+title: "The Senior Engineer + LLM Playbook"
+slug: "senior-engineer-llm-playbook"
+date: "2026-03-24"
+readingTime: "7 min read"
+tags: ["LLM", "Productivity", "Engineering Craft"]
+summary: "LLMs aren't a junior-developer replacement. They're a senior-developer amplifier — and the 5x multiplier comes from how you delegate, not what you delegate. A playbook for engineers who have already done the reps."
+cover: "/images/hero-image.png"
+---
+
+The most common take on LLMs in 2026 is that they replace junior engineers. I think this is backwards. They don't replace the juniors — they amplify the seniors, and the amplification ratio is enormous when you've already done the reps.
+
+I'm hitting roughly 5x output compared to my pre-LLM baseline. Not 5x lines of code. 5x shipped features of the kind I would have shipped anyway, at the quality bar I would have shipped them at. The multiplier comes almost entirely from how I delegate, not from what I delegate. Here's the playbook.
+
+## Never hand over taste
+
+This is the load-bearing rule, and every other rule is a corollary. You don't hand an LLM your architecture decisions. You don't hand it your naming choices. You don't hand it the taste that took you ten years to develop and that separates your work from everyone else's.
+
+If you ask an LLM to design your system, you get a mediocre system in fifteen seconds. If you design the system and ask the LLM to fill in the pieces you've spec'd out, you get your system, shipped in an hour instead of a day.
+
+The unit of delegation is implementation, not design. Always.
+
+## Delegate boilerplate, migrations, and spelunking
+
+The most obvious win and the one every tutorial covers. LLMs are spectacular at:
+
+- **Boilerplate**: controllers, DTOs, form scaffolding, test fixtures, config files. Code that follows patterns your codebase has already established.
+- **Migrations**: moving code from one framework version to another, renaming symbols across a repo, updating call sites when an API changes. If you've already decided what the new shape should be, an LLM will mechanically propagate that decision through 400 files in a minute.
+- **Spelunking**: reading unfamiliar codebases and reporting back. I use LLMs as a first-pass code archaeologist. "Read this 2018 Rails service and tell me how payment webhooks flow through it" is a task that used to take a whole afternoon and now takes ten minutes plus verification.
+
+These are the table-stakes wins. If you aren't doing at least these, you're leaving the 1x multiplier on the table.
+
+## Delegate test generation, with a catch
+
+Tests are a productivity double-edged sword with LLMs. Generated tests look great, run green, and catch almost nothing. The trap is that green tests feel like coverage.
+
+My rule: the LLM can generate the **skeleton** of tests — the fixtures, the test-file layout, the boilerplate of setup and teardown. I write the **assertions**. The assertions are where the actual bugs are caught, and they require a human understanding of what can go wrong. Delegating assertions to an LLM is like delegating what to worry about. Don't.
+
+## Never let it review its own work
+
+The second-biggest mistake I see senior engineers make is asking an LLM to review code the LLM just wrote. It will tell you the code is fine. It would tell you any code is fine.
+
+Reviews have to come from a different process, preferably a human, at minimum a separate LLM session with a different prompt and — ideally — a different model. The diversity matters. Two different models catching two different classes of issues is a real signal. One model reviewing itself is security theater.
+
+## The "sketch and fill" pattern beats everything
+
+The single highest-leverage workflow I've found is this:
+
+1. I sketch the function — signature, doc comment, a couple of key intermediate variables named, maybe pseudo-code for the tricky part.
+2. The LLM fills it in.
+3. I review the fill line by line.
+
+This is the inversion of "write me a function that does X." Instead of asking the LLM to compose from scratch (where it will make a dozen taste decisions I'd reverse), I compose the skeleton, and the LLM fills in the parts where any reasonable implementation would do.
+
+The review step is fast because I already know what the function should do. I'm not reading to understand; I'm reading to verify. That's a 10x difference in reviewer cognitive load.
+
+## Keep your mental model hot
+
+This is the most important practice and the one nobody writes about. If you stop reading your own codebase — if you just accept every diff an LLM generates — your mental model goes stale in about two weeks. You will reach a point where you can't debug your own system without the LLM, which means you can't debug your own system when the LLM is wrong. And the LLM is wrong more often than its confidence suggests.
+
+I force myself to read every diff, even the boring ones. Not as a blocker — the diff is already written — but as active maintenance of my own understanding. The engineers I see getting slower with LLMs are the ones who stopped reading. The engineers getting faster are the ones who treat LLM output as input to their own understanding, not as a substitute for it.
+
+## What not to delegate, ever
+
+Short list of things I never delegate, because the cost of getting them wrong compounds:
+
+- Architecture decisions.
+- API contracts (especially public ones).
+- Naming. Names are the summary of your design; if you outsource them, you outsource design.
+- Security-sensitive code. Not because the LLM is bad at it, but because you need to be the one who can defend it.
+- Performance-critical paths. The LLM will write correct code that allocates 40,000 strings; you need to be the one who notices.
+- Anything where "mostly right" is worse than "not shipped."
+
+## The compounding effect
+
+The reason this playbook produces a 5x multiplier and not a 20x one is that you remain the bottleneck. That's on purpose. If an LLM is doing more than implementation, you've ceded design authority to a model that doesn't know your users, your business, or your constraints.
+
+The 5x is not glamorous. It's the same senior engineer, making the same taste calls, shipping five times as much of the work they would have shipped anyway. Which, for most engineers I know, is exactly the outcome they actually wanted — not a replacement, an amplifier.
+
+Hold the wheel. Let the LLM do the typing.
