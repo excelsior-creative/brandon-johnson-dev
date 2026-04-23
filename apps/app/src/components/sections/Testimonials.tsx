@@ -75,21 +75,56 @@ function Column({
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <figure className="rounded-2xl border border-[--border-soft] bg-[--card-soft] p-6 transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-[rgba(124,92,255,0.35)]">
-      <div className="flex items-center gap-3">
-        <Image
-          src={testimonial.src}
-          alt={testimonial.name}
-          width={40}
-          height={40}
-          className="h-10 w-10 rounded-full border border-[--border-mid] object-cover"
-        />
+    <figure className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.15)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[rgba(124,92,255,0.4)] hover:shadow-[0_16px_70px_-12px_rgba(124,92,255,0.35)]">
+      {/* Gradient top stroke */}
+      <span
+        aria-hidden
+        className="absolute inset-x-6 top-0 h-px opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(56,189,248,0.9), rgba(124,92,255,0.9), transparent)",
+        }}
+      />
+      {/* Soft radial glow on hover */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(ellipse 300px 180px at 50% 0%, rgba(124,92,255,0.14), transparent 70%)",
+        }}
+      />
+      {/* Large cyan opening-quote glyph */}
+      <span
+        aria-hidden
+        className="absolute right-5 top-3 select-none font-display text-[56px] leading-none text-[rgba(56,189,248,0.18)]"
+      >
+        &ldquo;
+      </span>
+
+      <div className="relative flex items-center gap-3">
+        <span
+          aria-hidden
+          className="rounded-full bg-gradient-to-br from-[rgba(56,189,248,0.8)] to-[rgba(124,92,255,0.8)] p-[2px]"
+        >
+          <Image
+            src={testimonial.src}
+            alt={testimonial.name}
+            width={40}
+            height={40}
+            className="block h-10 w-10 rounded-full bg-[--bg] object-cover"
+          />
+        </span>
         <div>
-          <div className="text-sm font-medium text-[--ink]">{testimonial.name}</div>
-          <div className="text-xs text-[--ink-faint]">{testimonial.designation}</div>
+          <div className="text-sm font-medium text-[--ink]">
+            {testimonial.name}
+          </div>
+          <div className="text-xs text-[--ink-faint]">
+            {testimonial.designation}
+          </div>
         </div>
       </div>
-      <blockquote className="mt-4 text-sm leading-relaxed text-[--ink-dim]">
+      <blockquote className="relative mt-4 text-sm leading-relaxed text-[--ink-dim]">
         &ldquo;{testimonial.quote}&rdquo;
       </blockquote>
     </figure>

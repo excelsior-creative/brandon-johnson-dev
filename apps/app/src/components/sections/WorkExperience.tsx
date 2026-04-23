@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { CosmicContainer } from "@/components/cosmic/Container";
 import { SectionHeading } from "@/components/cosmic/SectionHeading";
-import { workExperience } from "@/lib/content/workExperience";
+import {
+  workExperience,
+  type WorkExperienceItem,
+} from "@/lib/content/workExperience";
 
 export function WorkExperience() {
   return (
@@ -13,46 +16,167 @@ export function WorkExperience() {
           description="Over 15 years of software development and technical leadership across aerospace, fintech, creative agencies, and public sector."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
-          {workExperience.map((exp) => (
-            <a
-              key={exp.company}
-              href={exp.link}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="group relative flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl border border-[--border-soft] bg-[#0a0d20] p-6 transition-[transform,border-color] duration-300 hover:-translate-y-1 hover:border-[rgba(56,189,248,0.35)]"
-            >
-              <Image
-                src={exp.src}
-                alt={exp.company}
-                fill
-                sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
-                className="absolute inset-0 h-full w-full object-cover opacity-40 transition-opacity duration-500 group-hover:opacity-60"
+        {/* Horizontal timeline (lg+) */}
+        <div className="relative mt-20 hidden lg:block">
+          {/* Center rail */}
+          <span
+            aria-hidden
+            className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent, rgba(56,189,248,0.5) 10%, rgba(124,92,255,0.5) 50%, rgba(56,189,248,0.5) 90%, transparent)",
+            }}
+          />
+
+          <div className="relative grid grid-cols-5 gap-4">
+            {workExperience.map((exp, idx) => (
+              <TimelineNode
+                key={exp.company}
+                exp={exp}
+                position={idx % 2 === 0 ? "above" : "below"}
               />
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(5,6,15,0.1) 0%, rgba(5,6,15,0.55) 50%, rgba(5,6,15,0.95) 100%)",
-                }}
-              />
-              <div className="relative z-10 flex flex-col gap-2">
-                <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[--cyan]">
-                  {exp.period}
-                </span>
-                <h3 className="font-display text-lg font-semibold leading-tight tracking-[-0.01em] text-[--ink]">
-                  {exp.role}
-                </h3>
-                <div className="text-sm font-medium text-[--ink-dim]">{exp.company}</div>
-                <p className="text-xs leading-relaxed text-[--ink-faint]">
-                  {exp.description}
-                </p>
-              </div>
-            </a>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Vertical timeline (<lg) */}
+        <div className="relative mt-16 lg:hidden">
+          {/* Left rail */}
+          <span
+            aria-hidden
+            className="absolute bottom-0 left-4 top-0 w-px"
+            style={{
+              background:
+                "linear-gradient(180deg, transparent, rgba(56,189,248,0.5) 10%, rgba(124,92,255,0.5) 50%, rgba(56,189,248,0.5) 90%, transparent)",
+            }}
+          />
+          <ol className="flex flex-col gap-10">
+            {workExperience.map((exp) => (
+              <li key={exp.company} className="relative pl-12">
+                <span
+                  aria-hidden
+                  className="absolute left-[9px] top-6 h-[14px] w-[14px] rounded-full border-2 border-[--bg] bg-[--cyan] shadow-[0_0_20px_rgba(56,189,248,0.7)]"
+                />
+                <TimelineCard exp={exp} />
+              </li>
+            ))}
+          </ol>
         </div>
       </CosmicContainer>
     </section>
+  );
+}
+
+function TimelineNode({
+  exp,
+  position,
+}: {
+  exp: WorkExperienceItem;
+  position: "above" | "below";
+}) {
+  const isAbove = position === "above";
+  return (
+    <div className="relative flex flex-col items-center">
+      {/* Top-half content (when above) or spacer */}
+      {isAbove ? (
+        <div className="mb-8 flex w-full flex-col items-stretch">
+          <TimelineCard exp={exp} />
+          <span
+            aria-hidden
+            className="mx-auto mt-2 h-6 w-px"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(56,189,248,0.5), rgba(56,189,248,0))",
+            }}
+          />
+        </div>
+      ) : (
+        <div className="mb-8 h-[324px]" />
+      )}
+
+      {/* Dot on the rail */}
+      <span
+        aria-hidden
+        className="relative z-10 h-[14px] w-[14px] rounded-full border-2 border-[--bg] bg-[--cyan] shadow-[0_0_24px_rgba(56,189,248,0.8)]"
+      />
+
+      {/* Year label pinned to the rail */}
+      <span className="absolute left-1/2 top-1/2 z-10 mt-4 -translate-x-1/2 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.2em] text-[--ink-faint]">
+        {exp.period}
+      </span>
+
+      {/* Bottom-half content (when below) or spacer */}
+      {!isAbove ? (
+        <div className="mt-10 flex w-full flex-col items-stretch">
+          <span
+            aria-hidden
+            className="mx-auto mb-2 h-6 w-px"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(56,189,248,0), rgba(56,189,248,0.5))",
+            }}
+          />
+          <TimelineCard exp={exp} />
+        </div>
+      ) : (
+        <div className="mt-10 h-[324px]" />
+      )}
+    </div>
+  );
+}
+
+function TimelineCard({ exp }: { exp: WorkExperienceItem }) {
+  return (
+    <a
+      href={exp.link}
+      target="_blank"
+      rel="noreferrer noopener"
+      className="group relative flex h-[300px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.15)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[rgba(56,189,248,0.4)] hover:shadow-[0_16px_70px_-12px_rgba(124,92,255,0.35)]"
+    >
+      {/* Top gradient accent */}
+      <span
+        aria-hidden
+        className="absolute inset-x-5 top-0 h-px opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(56,189,248,0.9), rgba(124,92,255,0.9), transparent)",
+        }}
+      />
+
+      {/* Circular avatar */}
+      <div className="relative mx-auto mb-4 h-16 w-16 shrink-0 overflow-hidden rounded-full border border-white/10">
+        <div
+          aria-hidden
+          className="absolute inset-0 rounded-full"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(56,189,248,0.2), rgba(124,92,255,0.2))",
+          }}
+        />
+        <Image
+          src={exp.src}
+          alt={exp.company}
+          fill
+          sizes="64px"
+          className="relative object-cover opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+          unoptimized
+        />
+      </div>
+
+      {/* Period (for vertical view / redundant for horizontal) */}
+      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[--cyan] lg:hidden">
+        {exp.period}
+      </span>
+
+      <h3 className="mt-1 font-display text-base font-semibold leading-tight tracking-[-0.01em] text-[--ink]">
+        {exp.role}
+      </h3>
+      <div className="mt-1 text-sm font-medium text-[--ink-dim]">
+        {exp.company}
+      </div>
+      <p className="mt-2 line-clamp-4 text-xs leading-relaxed text-[--ink-faint]">
+        {exp.description}
+      </p>
+    </a>
   );
 }

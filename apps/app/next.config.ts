@@ -28,6 +28,10 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "localhost",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
     // Optimize image quality for better performance
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

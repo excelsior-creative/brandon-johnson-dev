@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Play, Users, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
+import { ChevronDown, Play, Bot, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
 import { CosmicBackground } from "@/components/cosmic/CosmicBackground";
 import { Starfield } from "@/components/cosmic/Starfield";
 import { Eyebrow } from "@/components/cosmic/Eyebrow";
@@ -195,10 +195,10 @@ export function Hero() {
               </GradientButton>
             </div>
 
-            <div className="mt-12 grid max-w-xl grid-cols-3 gap-5">
-              <Stat icon={Users} value="650K+" label="YouTube Subscribers" />
-              <Stat icon={Code2} value="10+" label="Years Building" />
-              <Stat icon={Rocket} value="AI-First" label="Automation Focused" />
+            <div className="mt-12 grid max-w-2xl grid-cols-3 gap-4">
+              <GlassStatCard icon={Bot} value="600+" label="AI Agents Built" />
+              <GlassStatCard icon={Code2} value="10+" label="Years Building" />
+              <GlassStatCard icon={Rocket} value="AI-First" label="Automation Focused" />
             </div>
           </div>
         </CosmicContainer>
@@ -214,22 +214,52 @@ export function Hero() {
   );
 }
 
-function Stat({
+function GlassStatCard({
   icon: Icon,
   value,
   label,
 }: {
-  icon: typeof Users;
+  icon: typeof Bot;
   value: string;
   label: string;
 }) {
   return (
-    <div className="flex flex-col gap-1 border-l border-[--border-mid] pl-4">
-      <Icon className="h-5 w-5 text-[--cyan]" />
-      <div className="font-display text-2xl font-bold leading-none tracking-[-0.02em] text-[--ink]">
+    <div
+      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.15)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.35)] hover:shadow-[0_12px_60px_-12px_rgba(124,92,255,0.35)]"
+    >
+      {/* Top-edge gradient accent line */}
+      <span
+        aria-hidden
+        className="absolute inset-x-4 top-0 h-px opacity-60 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(56,189,248,0.8), rgba(124,92,255,0.8), transparent)",
+        }}
+      />
+      {/* Inner radial glow */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(ellipse 120px 80px at 50% 0%, rgba(56,189,248,0.18), transparent 70%)",
+        }}
+      />
+
+      <div
+        className="flex h-8 w-8 items-center justify-center rounded-lg border"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(56,189,248,0.18), rgba(124,92,255,0.18))",
+          borderColor: "rgba(56,189,248,0.25)",
+        }}
+      >
+        <Icon className="h-4 w-4 text-[--cyan]" />
+      </div>
+      <div className="mt-3 font-display text-2xl font-bold leading-none tracking-[-0.02em] text-[--ink]">
         {value}
       </div>
-      <div className="text-[11px] uppercase tracking-[0.08em] text-[--ink-faint]">
+      <div className="mt-1.5 text-[10px] uppercase tracking-[0.14em] text-[--ink-faint]">
         {label}
       </div>
     </div>

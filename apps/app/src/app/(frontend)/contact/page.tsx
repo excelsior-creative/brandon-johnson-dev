@@ -1,73 +1,129 @@
 import React from "react";
-import { Container } from "@/components/Container";
-import Header from "@/components/Header";
+import Link from "next/link";
+import { Github, Linkedin, Mail, MapPin, Twitter, Youtube } from "lucide-react";
+import { CosmicContainer } from "@/components/cosmic/Container";
+import { SectionHeading } from "@/components/cosmic/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { socialLinks } from "@/lib/content/navigation";
 
 export const revalidate = 3600;
 
+const socialIcons: Record<string, typeof Github> = {
+  Twitter,
+  GitHub: Github,
+  LinkedIn: Linkedin,
+  YouTube: Youtube,
+};
+
 export default function ContactPage() {
   return (
-    <div className="py-20">
-      <Container>
-        <Header
-          badge="Contact Us"
+    <section className="relative py-24 md:py-32">
+      {/* Ambient nebula */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            "radial-gradient(ellipse 900px 500px at 80% 20%, rgba(124,92,255,0.1), transparent 60%), radial-gradient(ellipse 700px 400px at 10% 90%, rgba(56,189,248,0.08), transparent 55%)",
+        }}
+      />
+
+      <CosmicContainer className="relative z-10">
+        <SectionHeading
+          eyebrow="Let's Connect"
           title="Get in Touch"
-          subtitle="Have a question or want to work together? We'd love to hear from you."
+          description="Have a question or want to build something together? Drop a note and I'll get back to you."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
-          <div>
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-xl font-bold mb-4">Contact Information</h3>
-                <p className="text-muted-foreground mb-6">
-                  Fill out the form and our team will get back to you within 24 hours.
-                </p>
-              </div>
+        <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-5">
+          <div className="lg:col-span-2">
+            <div className="flex flex-col gap-6">
+              <ContactInfo
+                icon={Mail}
+                label="Email"
+                href="mailto:b@exct.io"
+                value="b@exct.io"
+              />
+              <ContactInfo
+                icon={MapPin}
+                label="Location"
+                value="Orange County, CA"
+              />
 
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5 text-brand" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Email</p>
-                    <p className="text-muted-foreground">hello@example.com</p>
-                  </div>
+              <div className="mt-4">
+                <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[--ink-faint]">
+                  Follow
                 </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5 text-brand" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Phone</p>
-                    <p className="text-muted-foreground">+1 (555) 000-0000</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-brand/10 flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-brand" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Office</p>
-                    <p className="text-muted-foreground">
-                      123 Innovation Drive<br />
-                      Silicon Valley, CA 94025
-                    </p>
-                  </div>
+                <div className="flex flex-wrap gap-3">
+                  {socialLinks.map((s) => {
+                    const Icon = socialIcons[s.label] ?? Github;
+                    return (
+                      <Link
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        aria-label={s.label}
+                        className="group flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[--ink-dim] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,color,background] duration-300 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.4)] hover:bg-[rgba(56,189,248,0.1)] hover:text-[--cyan]"
+                      >
+                        <Icon className="h-4 w-4" />
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             </div>
           </div>
 
-          <div>
+          <div className="lg:col-span-3">
             <ContactForm />
           </div>
         </div>
-      </Container>
+      </CosmicContainer>
+    </section>
+  );
+}
+
+function ContactInfo({
+  icon: Icon,
+  label,
+  value,
+  href,
+}: {
+  icon: typeof Mail;
+  label: string;
+  value: string;
+  href?: string;
+}) {
+  const content = (
+    <div className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.12)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color] duration-300 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.35)]">
+      <div
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border text-[--cyan]"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(56,189,248,0.18), rgba(124,92,255,0.18))",
+          borderColor: "rgba(56,189,248,0.3)",
+        }}
+      >
+        <Icon className="h-5 w-5" />
+      </div>
+      <div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-[--ink-faint]">
+          {label}
+        </div>
+        <div className="mt-1 text-base font-medium text-[--ink] transition-colors group-hover:text-[--cyan]">
+          {value}
+        </div>
+      </div>
     </div>
   );
+
+  if (href) {
+    return (
+      <a href={href} className="block">
+        {content}
+      </a>
+    );
+  }
+  return content;
 }

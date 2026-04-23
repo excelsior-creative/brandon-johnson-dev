@@ -20,7 +20,7 @@ export const workExperience: WorkExperienceItem[] = [
     link: "https://sierralobo.com/",
     category: "Leadership",
     title: "Aerospace Software Engineering",
-    src: "/images/hero-image.png",
+    src: "https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=2070&auto=format&fit=crop",
     accent: "linear-gradient(135deg, #1a1d3a 0%, #0a0d20 100%)",
   },
   {
