@@ -6,7 +6,7 @@ import { CosmicContainer } from "@/components/cosmic/Container";
 import { SectionHeading } from "@/components/cosmic/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
 import { socialLinks } from "@/lib/content/navigation";
-import { SITE_URL, generatePageMetadata } from "@/lib/metadata";
+import { AUTHOR_EMAIL, SITE_URL, generatePageMetadata } from "@/lib/metadata";
 import { generateBreadcrumbSchema } from "@/lib/structured-data";
 
 export const revalidate = 3600;
@@ -59,8 +59,8 @@ export default function ContactPage() {
               <ContactInfo
                 icon={Mail}
                 label="Email"
-                href="mailto:b@exct.io"
-                value="b@exct.io"
+                href={`mailto:${AUTHOR_EMAIL}`}
+                value={AUTHOR_EMAIL}
               />
               <ContactInfo
                 icon={MapPin}

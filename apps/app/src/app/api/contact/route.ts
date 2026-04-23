@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { SITE_NAME } from "@/lib/metadata";
+import { AUTHOR_EMAIL, SITE_NAME } from "@/lib/metadata";
 
 type ContactRequest = {
   name: string;
@@ -131,16 +131,24 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send email via Payload
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Contact API: RESEND_API_KEY is not configured");
+      return NextResponse.json(
+        { error: "Email service is not configured. Please try again later." },
+        { status: 500 }
+      );
+    }
+
+    // Send email via Payload (uses the Resend adapter configured in payload.config.ts)
     const payload = await getPayload({ config });
 
-    const toRecipients = parseEmailList(process.env.CONTACT_EMAIL) ?? "admin@example.com";
+    const toRecipients = parseEmailList(process.env.CONTACT_EMAIL) ?? AUTHOR_EMAIL;
     const ccRecipients = parseEmailList(process.env.CONTACT_CC);
     const bccRecipients = parseEmailList(process.env.CONTACT_BCC);
 
     await payload.sendEmail({
       to: toRecipients,
-      from: process.env.FROM_EMAIL || "noreply@example.com",
+      ...(process.env.FROM_EMAIL && { from: process.env.FROM_EMAIL }),
       replyTo: email,
       subject: `New Contact: ${name}`,
       html: generateEmailHTML(name.trim(), email.trim(), message.trim()),
