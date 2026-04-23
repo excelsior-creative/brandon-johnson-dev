@@ -3,9 +3,10 @@ export type TechLogo = {
   src: string;
 };
 
-// Monochrome logos on dark: prefer the `-b` (brand-black / outlined) variants
-// where available so the marquee reads as a single graphic with a unified
-// white-on-dark tone after the CSS grayscale/brightness pass is applied.
+// The marquee applies a `brightness(0) invert(1)` CSS filter, which reduces
+// each logo to a pure white silhouette of its alpha mask. That means source
+// color (black, white, or full color) doesn't matter — any opaque pixel
+// becomes white — so all logos render at a unified brightness on dark bg.
 export const marqueeTechnologies: TechLogo[] = [
   { title: "Eliza", src: "/logos/eliza-b.png" },
   { title: "Next.js", src: "/logos/nextjs-b.png" },
