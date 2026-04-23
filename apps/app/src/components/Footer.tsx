@@ -36,12 +36,8 @@ const resolveHref = (item: FooterNavItem) => {
 
 export const Footer = async () => {
   const payload = await getPayload({ config });
-  const [siteSettings, footer] = await Promise.all([
-    payload.findGlobal({ slug: "site-settings" }),
-    payload.findGlobal({ slug: "footer" }),
-  ]);
+  const footer = await payload.findGlobal({ slug: "footer" });
 
-  const siteTitle = siteSettings.siteTitle || "Brandon Johnson";
   const navLinks: { href: string; label: string; newTab?: boolean }[] = [];
   ((footer.navItems || []) as FooterNavItem[]).forEach((item) => {
     const href = resolveHref(item);
@@ -138,40 +134,8 @@ export const Footer = async () => {
           </div>
         </div>
 
-        {/* Large gradient watermark — SVG scales perfectly to container width */}
-        <div aria-hidden className="mt-16 w-full select-none">
-          <svg
-            viewBox="0 0 1000 140"
-            preserveAspectRatio="xMidYMid meet"
-            role="presentation"
-            className="block w-full h-auto"
-          >
-            <defs>
-              <linearGradient id="footer-watermark-gradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#22d3ee" />
-                <stop offset="100%" stopColor="#7c5cff" />
-              </linearGradient>
-            </defs>
-            <text
-              x="500"
-              y="110"
-              textAnchor="middle"
-              fontFamily="var(--font-display), system-ui, sans-serif"
-              fontWeight="800"
-              fontSize="170"
-              letterSpacing="-6"
-              fill="url(#footer-watermark-gradient)"
-              opacity="0.25"
-            >
-              BRANDON JOHNSON
-            </text>
-          </svg>
-        </div>
-
-        <div className="mt-8 flex flex-col gap-2 border-t border-[--border-soft] pt-6 text-xs text-[--ink-faint] md:flex-row md:items-center md:justify-between">
-          <span>
-            © {new Date().getFullYear()} {siteTitle}. All rights reserved.
-          </span>
+        <div className="mt-16 flex flex-col gap-2 border-t border-[--border-soft] pt-6 text-xs text-[--ink-faint] md:flex-row md:items-center md:justify-between">
+          <span>© Brandon Johnson 2026. All rights reserved.</span>
           <span className="font-mono">v.2 / cosmic</span>
         </div>
       </CosmicContainer>
