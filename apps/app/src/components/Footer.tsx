@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getPayload } from "payload";
 import config from "@/payload.config";
 import { CosmicContainer } from "./cosmic/Container";
@@ -63,13 +64,13 @@ export const Footer = async () => {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3">
-              <span
-                aria-hidden
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-[--border-mid] font-mono text-[15px] font-semibold text-[--cyan]"
-                style={{ background: "linear-gradient(135deg, #2a2f55, #0f1230)" }}
-              >
-                BJ
-              </span>
+              <Image
+                src="/images/avatar.png"
+                alt="Brandon Johnson"
+                width={40}
+                height={40}
+                className="rounded-full border border-[--border-mid]"
+              />
               <span className="text-base font-semibold tracking-[-0.01em] text-[--ink]">
                 Brandon Johnson
               </span>
@@ -119,14 +120,6 @@ export const Footer = async () => {
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <a
-                  href="mailto:brandon@brandon-johnson.dev"
-                  className="text-[--ink-dim] hover:text-[--ink]"
-                >
-                  brandon@brandon-johnson.dev
-                </a>
-              </li>
-              <li>
                 <Link href="/privacy" className="text-[--ink-dim] hover:text-[--ink]">
                   Privacy
                 </Link>
@@ -145,21 +138,34 @@ export const Footer = async () => {
           </div>
         </div>
 
-        {/* Large gradient watermark */}
-        <div
-          aria-hidden
-          className="mt-16 font-display text-center leading-none tracking-[-0.05em] select-none"
-          style={{
-            fontSize: "clamp(64px, 20vw, 280px)",
-            fontWeight: 800,
-            background: "var(--gradient-text)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            opacity: 0.25,
-          }}
-        >
-          BRANDON
+        {/* Large gradient watermark — SVG scales perfectly to container width */}
+        <div aria-hidden className="mt-16 w-full select-none">
+          <svg
+            viewBox="0 0 1000 140"
+            preserveAspectRatio="xMidYMid meet"
+            role="presentation"
+            className="block w-full h-auto"
+          >
+            <defs>
+              <linearGradient id="footer-watermark-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#22d3ee" />
+                <stop offset="100%" stopColor="#7c5cff" />
+              </linearGradient>
+            </defs>
+            <text
+              x="500"
+              y="110"
+              textAnchor="middle"
+              fontFamily="var(--font-display), system-ui, sans-serif"
+              fontWeight="800"
+              fontSize="170"
+              letterSpacing="-6"
+              fill="url(#footer-watermark-gradient)"
+              opacity="0.25"
+            >
+              BRANDON JOHNSON
+            </text>
+          </svg>
         </div>
 
         <div className="mt-8 flex flex-col gap-2 border-t border-[--border-soft] pt-6 text-xs text-[--ink-faint] md:flex-row md:items-center md:justify-between">

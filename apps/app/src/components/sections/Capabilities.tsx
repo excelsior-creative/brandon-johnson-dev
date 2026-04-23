@@ -1,5 +1,6 @@
 import { CosmicContainer } from "@/components/cosmic/Container";
 import { SectionHeading } from "@/components/cosmic/SectionHeading";
+import { Reveal, Stagger, StaggerItem } from "@/components/SectionReveal";
 import { capabilities } from "@/lib/content/capabilities";
 
 export function Capabilities() {
@@ -28,15 +29,20 @@ export function Capabilities() {
       />
 
       <CosmicContainer className="relative z-10">
-        <SectionHeading
-          eyebrow="Capabilities"
-          title="Versatile Tech Professional"
-          description="From front-end engineering to full-stack development, data engineering, AI, and product management — a comprehensive technical perspective for every project."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Capabilities"
+            title="Versatile Tech Professional"
+            description="From front-end engineering to full-stack development, data engineering, AI, and product management — a comprehensive technical perspective for every project."
+          />
+        </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger
+          stagger={0.06}
+          className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {capabilities.map((cap, idx) => (
-            <article
+            <StaggerItem
               key={cap.title}
               className="group relative flex min-h-[220px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.1)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[rgba(56,189,248,0.35)] hover:shadow-[0_16px_70px_-12px_rgba(124,92,255,0.35)]"
             >
@@ -71,7 +77,7 @@ export function Capabilities() {
                   className="absolute inset-0 rotate-45 rounded-lg border border-[rgba(124,92,255,0.25)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 />
                 <div
-                  className="relative flex h-full w-full items-center justify-center rounded-xl border text-[--cyan]"
+                  className="relative flex h-full w-full items-center justify-center rounded-xl border text-[--cyan] transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[-6deg]"
                   style={{
                     background:
                       "linear-gradient(135deg, rgba(56,189,248,0.16), rgba(124,92,255,0.16))",
@@ -98,9 +104,9 @@ export function Capabilities() {
                     "linear-gradient(90deg, transparent, rgba(124,92,255,0.6), transparent)",
                 }}
               />
-            </article>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </CosmicContainer>
     </section>
   );
