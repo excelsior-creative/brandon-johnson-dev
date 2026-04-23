@@ -9,6 +9,18 @@ import { RichText } from "@/components/RichText";
 import { RenderBlocks } from "@/blocks/RenderBlocks";
 import { LivePreviewListener } from "@/components/LivePreviewListener";
 import { PayloadRedirects } from "@/components/PayloadRedirects";
+import {
+  AUTHOR_NAME,
+  DEFAULT_OG_IMAGE,
+  SITE_URL,
+  generateArticleMetadata,
+} from "@/lib/metadata";
+import {
+  combineSchemas,
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/structured-data";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config });
@@ -29,29 +41,80 @@ export async function generateStaticParams() {
     .map((slug) => ({ slug }));
 }
 
-export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const decodedSlug = decodeURIComponent(slug);
-  const url = `/blog/${decodedSlug}`;
-  const { isEnabled: draft } = await draftMode();
+async function fetchPost(slug: string, draft: boolean): Promise<Post | undefined> {
   const payload = await getPayload({ config });
-  let post: Post | undefined;
-
   try {
-    const { docs: posts } = await payload.find({
+    const { docs } = await payload.find({
       collection: "posts",
       draft,
       overrideAccess: draft,
       where: {
         slug: {
-          equals: decodedSlug,
+          equals: slug,
         },
       },
+      limit: 1,
     });
-    post = posts[0] as Post;
+    return docs[0] as Post | undefined;
   } catch (error) {
     console.error(`Failed to fetch blog post "${slug}" during page render.`, error);
+    return undefined;
   }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
+  const { isEnabled: draft } = await draftMode();
+  const post = await fetchPost(decodedSlug, draft);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const meta = (post as unknown as { meta?: { title?: string; description?: string; image?: Media | string | null } }).meta;
+  const featuredImage = post.featuredImage as Media | undefined;
+  const metaImage = meta?.image as Media | string | undefined;
+  const metaImageUrl =
+    typeof metaImage === "string"
+      ? metaImage
+      : metaImage?.url ||
+        featuredImage?.url ||
+        DEFAULT_OG_IMAGE;
+  const ogImage = metaImageUrl?.startsWith("http")
+    ? metaImageUrl
+    : `${SITE_URL}${metaImageUrl}`;
+
+  const title = meta?.title || post.title;
+  const description =
+    meta?.description ||
+    post.excerpt ||
+    `Read "${post.title}" by ${AUTHOR_NAME}.`;
+
+  return generateArticleMetadata({
+    title,
+    description,
+    slug: decodedSlug,
+    ogImage,
+    publishedTime: post.publishedDate || post.createdAt,
+    modifiedTime: post.updatedAt,
+    author: AUTHOR_NAME,
+  });
+}
+
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
+  const url = `/blog/${decodedSlug}`;
+  const { isEnabled: draft } = await draftMode();
+  const post = await fetchPost(decodedSlug, draft);
 
   if (!post) {
     return <PayloadRedirects url={url} />;
@@ -59,8 +122,21 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   const featuredImage = post.featuredImage as Media;
 
+  const schema = combineSchemas(
+    generateArticleSchema(post),
+    generateBreadcrumbSchema([
+      { name: "Home", url: SITE_URL },
+      { name: "Blog", url: `${SITE_URL}/blog` },
+      { name: post.title, url: `${SITE_URL}/blog/${decodedSlug}` },
+    ])
+  );
+
   return (
     <article className="py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       {draft && <LivePreviewListener />}
       <PayloadRedirects disableNotFound url={url} />
       <Container>
@@ -92,4 +168,3 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     </article>
   );
 }
-

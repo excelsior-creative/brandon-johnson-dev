@@ -1,12 +1,27 @@
 import React from "react";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Github, Linkedin, Mail, MapPin, Twitter, Youtube } from "lucide-react";
 import { CosmicContainer } from "@/components/cosmic/Container";
 import { SectionHeading } from "@/components/cosmic/SectionHeading";
 import { ContactForm } from "@/components/ContactForm";
 import { socialLinks } from "@/lib/content/navigation";
+import { SITE_URL, generatePageMetadata } from "@/lib/metadata";
+import { generateBreadcrumbSchema } from "@/lib/structured-data";
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = generatePageMetadata({
+  title: "Contact J. Brandon Johnson",
+  description:
+    "Get in touch with J. Brandon Johnson about AI agent development, full stack engineering, automation consulting, or collaboration opportunities. Based in Orange County, California.",
+  path: "/contact",
+});
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: "Home", url: SITE_URL },
+  { name: "Contact", url: `${SITE_URL}/contact` },
+]);
 
 const socialIcons: Record<string, typeof Github> = {
   Twitter,
@@ -18,6 +33,10 @@ const socialIcons: Record<string, typeof Github> = {
 export default function ContactPage() {
   return (
     <section className="relative py-24 md:py-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* Ambient nebula */}
       <div
         aria-hidden

@@ -1,23 +1,48 @@
 import type { Media, Post } from "@/payload-types";
-import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from "./metadata";
+import {
+  AUTHOR_EMAIL,
+  AUTHOR_NAME,
+  DEFAULT_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "./metadata";
 
 /**
- * Generate Organization schema
+ * Generate Person schema — primary entity for this personal portfolio.
  */
-export function generateOrganizationSchema() {
+export function generatePersonSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${SITE_URL}/#organization`,
-    name: SITE_NAME,
+    "@type": "Person",
+    "@id": `${SITE_URL}/#person`,
+    name: AUTHOR_NAME,
+    alternateName: "Brandon Johnson",
     url: SITE_URL,
-    logo: {
-      "@type": "ImageObject",
-      url: `${SITE_URL}/logo.svg`,
-      width: 512,
-      height: 512,
-    },
+    email: `mailto:${AUTHOR_EMAIL}`,
+    image: `${SITE_URL}/images/avatar.jpg`,
+    jobTitle: "AI Agent Orchestrator & Full Stack Developer",
     description: DEFAULT_DESCRIPTION,
+    knowsAbout: [
+      "Artificial Intelligence",
+      "AI Agent Orchestration",
+      "Eliza Framework",
+      "Full Stack Web Development",
+      "Next.js",
+      "TypeScript",
+      "Solutions Architecture",
+      "Web3",
+      "Cloud Architecture",
+    ],
+    alumniOf: [
+      {
+        "@type": "CollegeOrUniversity",
+        name: "MIT Sloan School of Management",
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        name: "The University of Toledo",
+      },
+    ],
   };
 }
 
@@ -33,7 +58,7 @@ export function generateWebSiteSchema() {
     url: SITE_URL,
     description: DEFAULT_DESCRIPTION,
     publisher: {
-      "@id": `${SITE_URL}/#organization`,
+      "@id": `${SITE_URL}/#person`,
     },
     potentialAction: {
       "@type": "SearchAction",
@@ -48,11 +73,50 @@ export function generateWebSiteSchema() {
 }
 
 /**
+ * Generate ProfilePage schema for the /about page.
+ */
+export function generateProfilePageSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/about#profile`,
+    url: `${SITE_URL}/about`,
+    name: `About ${AUTHOR_NAME}`,
+    description: DEFAULT_DESCRIPTION,
+    mainEntity: {
+      "@id": `${SITE_URL}/#person`,
+    },
+  };
+}
+
+/**
+ * Generate BreadcrumbList schema for a page.
+ */
+export function generateBreadcrumbSchema(
+  items: { name: string; url: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+/**
  * Generate Article schema
  */
 export function generateArticleSchema(article: Post) {
   const featuredImage = article.featuredImage as Media | undefined;
-  const imageUrl = featuredImage?.url ? `${SITE_URL}${featuredImage.url}` : "";
+  const imageUrl = featuredImage?.url
+    ? featuredImage.url.startsWith("http")
+      ? featuredImage.url
+      : `${SITE_URL}${featuredImage.url}`
+    : `${SITE_URL}/images/hero-image.png`;
 
   return {
     "@context": "https://schema.org",
@@ -60,12 +124,10 @@ export function generateArticleSchema(article: Post) {
     headline: article.title,
     description: article.excerpt,
     author: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
+      "@id": `${SITE_URL}/#person`,
     },
     publisher: {
-      "@id": `${SITE_URL}/#organization`,
+      "@id": `${SITE_URL}/#person`,
     },
     datePublished: article.publishedDate,
     dateModified: article.updatedAt,
@@ -74,6 +136,7 @@ export function generateArticleSchema(article: Post) {
       "@type": "WebPage",
       "@id": `${SITE_URL}/blog/${article.slug}`,
     },
+    url: `${SITE_URL}/blog/${article.slug}`,
   };
 }
 
@@ -81,7 +144,7 @@ export function generateArticleSchema(article: Post) {
  * Generate combined global schema for every page
  */
 export function generateGlobalSchema() {
-  return combineSchemas(generateOrganizationSchema(), generateWebSiteSchema());
+  return combineSchemas(generatePersonSchema(), generateWebSiteSchema());
 }
 
 /**
@@ -100,3 +163,9 @@ export function combineSchemas(...schemas: (object | null)[]) {
     }),
   };
 }
+
+/**
+ * Backwards-compat: some callers may still import the Organization schema name.
+ * Re-export the Person schema under that name so old imports keep working.
+ */
+export const generateOrganizationSchema = generatePersonSchema;

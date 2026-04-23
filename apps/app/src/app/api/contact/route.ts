@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPayload } from "payload";
 import config from "@payload-config";
+import { SITE_NAME } from "@/lib/metadata";
 
 type ContactRequest = {
   name: string;
@@ -87,7 +88,7 @@ ${message}
           <tr>
             <td style="background-color: #1a1a1a; padding: 25px 30px; text-align: center;">
               <p style="margin: 10px 0 0 0; color: #444; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;">
-                © ${new Date().getFullYear()} Template Site
+                © ${new Date().getFullYear()} ${SITE_NAME}
               </p>
             </td>
           </tr>

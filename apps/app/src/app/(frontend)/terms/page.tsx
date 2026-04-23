@@ -1,10 +1,14 @@
 import React from "react";
 import { Container } from "@/components/Container";
+import { generatePageMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: "Terms of Service",
-  description: "Terms of service for brandon-johnson.dev",
-};
+  description:
+    "Terms of service for brandonjohnson.dev — the terms that govern use of this website and its content.",
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

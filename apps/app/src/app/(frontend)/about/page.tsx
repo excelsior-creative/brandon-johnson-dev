@@ -22,14 +22,29 @@ import {
   Stagger,
   StaggerItem,
 } from "@/components/SectionReveal";
+import { SITE_URL, generatePageMetadata } from "@/lib/metadata";
+import {
+  combineSchemas,
+  generateBreadcrumbSchema,
+  generateProfilePageSchema,
+} from "@/lib/structured-data";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: "About — J. Brandon Johnson",
   description:
     "Full-stack developer, solutions architect, AI engineer, designer, husband, and father of two. 15+ years turning ambitious ideas into shipped systems.",
-};
+  path: "/about",
+});
+
+const profileSchema = combineSchemas(
+  generateProfilePageSchema(),
+  generateBreadcrumbSchema([
+    { name: "Home", url: SITE_URL },
+    { name: "About", url: `${SITE_URL}/about` },
+  ])
+);
 
 const stats = [
   { value: "15+", label: "Years shipping software" },
@@ -119,6 +134,10 @@ const timeline = [
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profileSchema) }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
         <div

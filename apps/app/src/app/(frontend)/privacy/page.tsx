@@ -1,10 +1,14 @@
 import React from "react";
 import { Container } from "@/components/Container";
+import { generatePageMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: "Privacy Policy",
-  description: "Privacy policy for brandon-johnson.dev",
-};
+  description:
+    "Privacy policy for brandonjohnson.dev — how visitor data is collected, used, and protected.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
