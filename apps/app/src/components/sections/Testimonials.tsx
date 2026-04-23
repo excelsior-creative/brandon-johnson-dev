@@ -25,10 +25,15 @@ export function TestimonialsSection() {
         </Reveal>
       </CosmicContainer>
 
-      <div className="relative mt-16 h-[49rem] max-h-[150vh] overflow-hidden">
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-32 bg-gradient-to-b from-[--bg] to-transparent" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-[--bg] to-transparent" />
-
+      <div
+        className="relative mt-16 h-[49rem] max-h-[150vh] overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)",
+        }}
+      >
         <CosmicContainer>
           <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Column testimonials={col1} speed={42} />
