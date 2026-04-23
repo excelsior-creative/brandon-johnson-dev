@@ -25,7 +25,7 @@ export function TechMarquee() {
                 alt={logo.title}
                 width={160}
                 height={40}
-                className="max-h-8 w-auto object-contain [filter:grayscale(1)_brightness(1.6)_contrast(0.85)]"
+                className="max-h-8 w-auto object-contain [filter:brightness(0)_invert(1)]"
                 unoptimized
               />
             </div>
