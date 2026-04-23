@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = defaultMetadata;
 
+// this is the root layout for the app
 export default function RootLayout({
   children,
 }: {

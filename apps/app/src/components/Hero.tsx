@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useScroll, useMotionValueEvent } from "framer-motion";
 import { ChevronDown, Play, Users, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
 import { CosmicBackground } from "@/components/cosmic/CosmicBackground";
 import { Starfield } from "@/components/cosmic/Starfield";
@@ -10,34 +9,21 @@ import { GradientButton } from "@/components/cosmic/GradientButton";
 import { CosmicContainer } from "@/components/cosmic/Container";
 
 /**
- * Cinematic hero with a scroll-scrubbed background video.
- *
- * The outer <section> is 300vh tall to provide scroll distance. The inner
- * wrapper is pinned with `position: sticky` so the video + overlay stay
- * locked to the viewport while scroll progress drives `video.currentTime`.
+ * Cinematic hero with a looping background video (hero-video.mp4).
  *
  * A "Say Hello" button cross-fades to an unmuted intro video
- * (brandon-hello-video.mp4); when it ends, we fade back to the scroll video.
+ * (brandon-hello-video.mp4); when it ends, we fade back to the loop.
  */
 export function Hero() {
-  const scrollRef = useRef<HTMLElement | null>(null);
-  const scrubVideoRef = useRef<HTMLVideoElement | null>(null);
+  const loopVideoRef = useRef<HTMLVideoElement | null>(null);
   const helloVideoRef = useRef<HTMLVideoElement | null>(null);
 
-  const [scrubReady, setScrubReady] = useState(false);
+  const [loopVideoReady, setLoopVideoReady] = useState(false);
   const [isHelloPlaying, setIsHelloPlaying] = useState(false);
   const [isHelloMuted, setIsHelloMuted] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
 
-  const targetTimeRef = useRef(0);
-  const rafRef = useRef(0);
-
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Detect reduced motion once — falls back to a static poster.
+  // Detect reduced motion — falls back to a static poster only (no video).
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     setReduceMotion(mq.matches);
@@ -46,59 +32,23 @@ export function Hero() {
     return () => mq.removeEventListener("change", listener);
   }, []);
 
-  // Initialize scrub video — never autoplays; we move currentTime instead.
   useEffect(() => {
-    const video = scrubVideoRef.current;
-    if (!video) return;
+    const video = loopVideoRef.current;
+    if (!video || reduceMotion) return;
 
-    const onMeta = () => {
-      video.pause();
-      targetTimeRef.current = (scrollYProgress.get() || 0) * video.duration;
-      try {
-        video.currentTime = targetTimeRef.current;
-      } catch {
-        /* browsers sometimes throw before the buffer is ready */
-      }
-      setScrubReady(true);
-    };
-
+    const onReady = () => setLoopVideoReady(true);
     if (video.readyState >= 1) {
-      onMeta();
+      onReady();
     } else {
-      video.addEventListener("loadedmetadata", onMeta, { once: true });
+      video.addEventListener("loadedmetadata", onReady, { once: true });
     }
-    return () => video.removeEventListener("loadedmetadata", onMeta);
-  }, [scrollYProgress]);
-
-  // Drive the scrub video off scroll progress via rAF (prevents thrash).
-  useMotionValueEvent(scrollYProgress, "change", (p) => {
-    if (reduceMotion) return;
-    const video = scrubVideoRef.current;
-    if (!video || !video.duration || isHelloPlaying) return;
-    targetTimeRef.current = p * video.duration;
-    if (rafRef.current) return;
-    rafRef.current = requestAnimationFrame(() => {
-      rafRef.current = 0;
-      const v = scrubVideoRef.current;
-      if (!v) return;
-      const delta = Math.abs(v.currentTime - targetTimeRef.current);
-      if (delta > 0.02) {
-        try {
-          v.currentTime = targetTimeRef.current;
-        } catch {
-          /* ignore seeking errors */
-        }
-      }
-    });
-  });
-
-  useEffect(() => {
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
+    return () => video.removeEventListener("loadedmetadata", onReady);
+  }, [reduceMotion]);
 
   const handleSayHello = () => {
+    const loop = loopVideoRef.current;
+    loop?.pause();
+
     const hello = helloVideoRef.current;
     if (!hello) return;
     setIsHelloPlaying(true);
@@ -108,11 +58,11 @@ export function Hero() {
     const playPromise = hello.play();
     if (playPromise) {
       playPromise.catch(() => {
-        // Autoplay-with-sound rejected → retry muted.
         hello.muted = true;
         setIsHelloMuted(true);
         hello.play().catch(() => {
           setIsHelloPlaying(false);
+          loop?.play().catch(() => {});
         });
       });
     }
@@ -122,15 +72,10 @@ export function Hero() {
     const hello = helloVideoRef.current;
     if (hello) hello.currentTime = 0;
     setIsHelloPlaying(false);
-    // Snap the scrub video back to the current scroll position after the
-    // hello clip fades out, so the transition doesn't reveal a stale frame.
-    const scrub = scrubVideoRef.current;
-    if (scrub?.duration) {
-      try {
-        scrub.currentTime = scrollYProgress.get() * scrub.duration;
-      } catch {
-        /* ignore */
-      }
+
+    const loop = loopVideoRef.current;
+    if (loop && !reduceMotion) {
+      loop.play().catch(() => {});
     }
   };
 
@@ -142,13 +87,8 @@ export function Hero() {
   };
 
   return (
-    <section
-      id="home"
-      ref={scrollRef}
-      className="relative w-full"
-      style={{ height: "300vh" }}
-    >
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[--bg]">
+    <section id="home" className="relative min-h-screen w-full">
+      <div className="relative h-screen min-h-[32rem] w-full overflow-hidden bg-[--bg]">
         {/* Poster fallback (LCP target) — always rendered behind the video */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -158,19 +98,20 @@ export function Hero() {
           className="absolute inset-0 h-full w-full object-cover opacity-70"
         />
 
-        {/* Scroll-scrubbed background video */}
+        {/* Looping background video */}
         {!reduceMotion && (
           <video
-            ref={scrubVideoRef}
+            ref={loopVideoRef}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-              scrubReady && !isHelloPlaying ? "opacity-100" : "opacity-0"
+              loopVideoReady && !isHelloPlaying ? "opacity-100" : "opacity-0"
             }`}
             src="/video/hero-video.mp4"
             muted
+            loop
+            autoPlay
             playsInline
             preload="auto"
             poster="/images/hero-image.png"
-            // `autoPlay` is deliberately off — we control currentTime only.
           />
         )}
 
