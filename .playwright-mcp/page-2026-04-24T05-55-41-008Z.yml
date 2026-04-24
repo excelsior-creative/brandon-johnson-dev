@@ -1,0 +1,368 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e5]:
+      - link "Brandon Johnson BrandonJohnson.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Brandon Johnson" [ref=e7]
+        - generic [ref=e8]: BrandonJohnson.dev
+      - generic [ref=e9]:
+        - button "Search" [ref=e10]:
+          - img [ref=e11]
+        - button "Open menu" [ref=e14]:
+          - img [ref=e15]
+    - main [ref=e16]:
+      - generic [ref=e18]:
+        - img [ref=e20]
+        - generic [ref=e23]:
+          - generic [ref=e25]: AI Automation & Software Engineering
+          - heading "Building the Future. Automating Everything." [level=1] [ref=e27]:
+            - text: Building the Future.
+            - text: Automating Everything.
+          - paragraph [ref=e28]: I build AI agents, automation systems, and scalable software that turn ideas into impact. 600+ agents, 10+ years shipping, one cinematic command center.
+          - generic [ref=e29]:
+            - link "Explore My Work" [ref=e30] [cursor=pointer]:
+              - /url: "#work"
+              - text: Explore My Work
+              - img [ref=e31]
+            - button "Say Hello" [ref=e33]:
+              - img [ref=e34]
+              - text: Say Hello
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - img [ref=e40]
+              - generic [ref=e43]: 600+
+              - generic [ref=e44]: AI Agents Built
+            - generic [ref=e45]:
+              - img [ref=e48]
+              - generic [ref=e52]: 10+
+              - generic [ref=e53]: Years Building
+            - generic [ref=e54]:
+              - img [ref=e57]
+              - generic [ref=e62]: AI-First
+              - generic [ref=e63]: Automation Focused
+      - generic [ref=e66]:
+        - img [ref=e68]
+        - img [ref=e70]
+        - img [ref=e72]
+        - img [ref=e74]
+        - img [ref=e76]
+        - img [ref=e83]
+        - img [ref=e85]
+        - img [ref=e87]
+        - img [ref=e89]
+        - img [ref=e91]
+      - generic [ref=e98]:
+        - generic [ref=e100]:
+          - generic [ref=e101]: Capabilities
+          - heading "Versatile Tech Professional" [level=2] [ref=e103]
+          - paragraph [ref=e104]: From front-end engineering to full-stack development, data engineering, AI, and product management — a comprehensive technical perspective for every project.
+        - generic [ref=e105]:
+          - generic [ref=e106]:
+            - generic [ref=e108]: "01"
+            - img [ref=e112]
+            - heading "Front-End Engineering" [level=3] [ref=e114]
+            - paragraph [ref=e115]: Crafting responsive, performant UIs with React, TypeScript, and modern web technologies.
+          - generic [ref=e117]:
+            - generic [ref=e119]: "02"
+            - img [ref=e123]
+            - heading "Full-Stack Development" [level=3] [ref=e127]
+            - paragraph [ref=e128]: Building end-to-end solutions from database design to API development and front-end implementation.
+          - generic [ref=e130]:
+            - generic [ref=e132]: "03"
+            - img [ref=e136]
+            - heading "Data Engineering" [level=3] [ref=e140]
+            - paragraph [ref=e141]: Designing and implementing data pipelines, ETL processes, and analytics infrastructure.
+          - generic [ref=e143]:
+            - generic [ref=e145]: "04"
+            - img [ref=e149]
+            - heading "AI Development" [level=3] [ref=e151]
+            - paragraph [ref=e152]: Implementing and deploying machine learning models and AI-powered solutions.
+          - generic [ref=e154]:
+            - generic [ref=e156]: "05"
+            - img [ref=e160]
+            - heading "Product Management" [level=3] [ref=e163]
+            - paragraph [ref=e164]: Driving product strategy, roadmap planning, and cross-functional team leadership.
+          - generic [ref=e166]:
+            - generic [ref=e168]: "06"
+            - img [ref=e172]
+            - heading "Technical Architecture" [level=3] [ref=e176]
+            - paragraph [ref=e177]: Designing scalable system architectures and making key technical decisions.
+          - generic [ref=e179]:
+            - generic [ref=e181]: "07"
+            - img [ref=e185]
+            - heading "Process Optimization" [level=3] [ref=e188]
+            - paragraph [ref=e189]: Optimizing application performance, from front-end rendering to backend efficiency.
+          - generic [ref=e191]:
+            - generic [ref=e193]: "08"
+            - img [ref=e197]
+            - heading "Technical Leadership" [level=3] [ref=e202]
+            - paragraph [ref=e203]: Mentoring teams and driving technical excellence across projects.
+      - generic [ref=e205]:
+        - generic:
+          - img
+        - generic [ref=e206]:
+          - generic [ref=e208]:
+            - generic [ref=e209]: Work Experience
+            - heading "A decade plus of shipping" [level=2] [ref=e211]
+            - paragraph [ref=e212]: Over 15 years of software development and technical leadership across aerospace, fintech, creative agencies, and public sector.
+          - list [ref=e216]:
+            - listitem [ref=e217]:
+              - link "Sierra Lobo 2007-2013 Software Engineering Lead Sierra Lobo Lead team of developers and network engineers through years of complex aerospace engineering projects." [ref=e219] [cursor=pointer]:
+                - /url: https://sierralobo.com/
+                - img "Sierra Lobo" [ref=e223]
+                - generic [ref=e224]: 2007-2013
+                - heading "Software Engineering Lead" [level=3] [ref=e225]
+                - generic [ref=e226]: Sierra Lobo
+                - paragraph [ref=e227]: Lead team of developers and network engineers through years of complex aerospace engineering projects.
+            - listitem [ref=e228]:
+              - link "SwizzMagik 2014-2017 Senior Full Stack Developer SwizzMagik Founded a software engineering organization with a focus on website development and integration solutions." [ref=e230] [cursor=pointer]:
+                - /url: https://swizzmagik.com/
+                - img "SwizzMagik" [ref=e234]
+                - generic [ref=e235]: 2014-2017
+                - heading "Senior Full Stack Developer" [level=3] [ref=e236]
+                - generic [ref=e237]: SwizzMagik
+                - paragraph [ref=e238]: Founded a software engineering organization with a focus on website development and integration solutions.
+            - listitem [ref=e239]:
+              - link "Excelsior Creative 2016-2021 Solutions Architect Excelsior Creative Co-founded a creative web development agency to build custom web solutions for small to mid-size businesses." [ref=e241] [cursor=pointer]:
+                - /url: https://excelsiorcreative.com/
+                - img "Excelsior Creative" [ref=e245]
+                - generic [ref=e246]: 2016-2021
+                - heading "Solutions Architect" [level=3] [ref=e247]
+                - generic [ref=e248]: Excelsior Creative
+                - paragraph [ref=e249]: Co-founded a creative web development agency to build custom web solutions for small to mid-size businesses.
+            - listitem [ref=e250]:
+              - link "OCERS 2018-2021 Software Engineering Lead OCERS Managed team of developers with a focus on business intelligence, analytics, and reporting solutions." [ref=e252] [cursor=pointer]:
+                - /url: https://ocers.org/
+                - img "OCERS" [ref=e256]
+                - generic [ref=e257]: 2018-2021
+                - heading "Software Engineering Lead" [level=3] [ref=e258]
+                - generic [ref=e259]: OCERS
+                - paragraph [ref=e260]: Managed team of developers with a focus on business intelligence, analytics, and reporting solutions.
+            - listitem [ref=e261]:
+              - link "Synctera 2022-2025 Senior Software Engineer Synctera Built and maintained fintech infrastructure enabling companies to quickly launch banking products and services." [ref=e263] [cursor=pointer]:
+                - /url: https://synctera.com/
+                - img "Synctera" [ref=e267]
+                - generic [ref=e268]: 2022-2025
+                - heading "Senior Software Engineer" [level=3] [ref=e269]
+                - generic [ref=e270]: Synctera
+                - paragraph [ref=e271]: Built and maintained fintech infrastructure enabling companies to quickly launch banking products and services.
+      - generic [ref=e273]:
+        - generic [ref=e275]:
+          - generic [ref=e276]: AI Labs
+          - heading "Pioneering AI agent development with the Eliza & OpenClaw frameworks" [level=2] [ref=e278]
+          - paragraph [ref=e279]: Active open-source contributor to the two frameworks shaping how production-grade agents get built — translating upstream work into sophisticated automation systems that handle complex, mission-critical workloads.
+        - generic [ref=e280]:
+          - article [ref=e282]:
+            - heading "Eliza Framework Core Contributor" [level=3] [ref=e283]
+            - paragraph [ref=e284]: Authored contributions to the Eliza agent runtime — helping shape how thousands of developers build conversational and autonomous agents in production environments.
+            - generic [ref=e286]:
+              - generic [ref=e287]: analyze the Q3 automation backlog
+              - generic [ref=e288]: on it — spinning up 12 agents…
+              - generic [ref=e289]: found 47 ticket candidates, 9 hot
+              - generic [ref=e290]: ship a summary
+          - article [ref=e292]:
+            - heading "OpenClaw Framework Contributor" [level=3] [ref=e293]
+            - paragraph [ref=e294]: Contributed to the OpenClaw framework, advancing the next generation of tool-use orchestration and multi-agent coordination patterns that power modern agentic systems.
+            - generic [ref=e296]:
+              - generic [ref=e297]: GPT-4o
+              - generic [ref=e299]: Claude 4.6
+              - generic [ref=e301]: Llama 3
+              - generic [ref=e303]: Gemini
+              - generic [ref=e305]: Mistral
+              - generic [ref=e307]: Eliza
+          - article [ref=e310]:
+            - heading "Multi-Framework Agent Architecture" [level=3] [ref=e311]
+            - paragraph [ref=e312]: Battle-tested architectural patterns across both Eliza and OpenClaw — prompt routing, tool selection, memory layers, and resilient execution graphs.
+          - article [ref=e348]:
+            - heading "From Open Source to Production" [level=3] [ref=e349]
+            - paragraph [ref=e350]: Translated upstream framework work into resilient, scalable agent systems running mission-critical automation for real businesses.
+      - generic [ref=e357]:
+        - generic [ref=e359]:
+          - generic [ref=e360]: Featured Projects
+          - heading "Enterprise-scale applications, delivered" [level=2] [ref=e362]
+          - paragraph [ref=e363]: A showcase of platforms and systems I've architected, shipped, and scaled — from fintech rails to trading bots to government cost tracking.
+        - generic [ref=e364]:
+          - article [ref=e366]:
+            - img "Banking-as-a-Service Platform" [ref=e368]
+            - generic [ref=e370]:
+              - heading "Banking-as-a-Service Platform" [level=3] [ref=e371]
+              - paragraph [ref=e372]: Enterprise-grade financial platform processing billions in transaction value daily. Bridges multiple banks to fintech startups with high-throughput transaction processing and real-time settlement.
+              - generic [ref=e373]:
+                - generic [ref=e374]: Node.js
+                - generic [ref=e375]: TypeScript
+                - generic [ref=e376]: PostgreSQL
+                - generic [ref=e377]: Redis
+                - generic [ref=e378]: AWS
+                - generic [ref=e379]: Kubernetes
+          - article [ref=e381]:
+            - img "Web3 DeFi Platform" [ref=e383]
+            - generic [ref=e385]:
+              - heading "Web3 DeFi Platform" [level=3] [ref=e386]
+              - paragraph [ref=e387]: Decentralized finance platform that scaled to $30M TVL within one year. Built with robust smart contracts, real-time price feeds, and advanced trading features.
+              - generic [ref=e388]:
+                - generic [ref=e389]: Solidity
+                - generic [ref=e390]: React
+                - generic [ref=e391]: Web3.js
+                - generic [ref=e392]: TheGraph
+                - generic [ref=e393]: Hardhat
+          - article [ref=e395]:
+            - img "Crypto Trading Bot Platform" [ref=e397]
+            - generic [ref=e399]:
+              - heading "Crypto Trading Bot Platform" [level=3] [ref=e400]
+              - paragraph [ref=e401]: High-frequency trading bot orchestration platform for cryptocurrency markets. Features automated strategy execution, risk management, and real-time portfolio tracking.
+              - generic [ref=e402]:
+                - generic [ref=e403]: Python
+                - generic [ref=e404]: FastAPI
+                - generic [ref=e405]: MongoDB
+                - generic [ref=e406]: WebSocket
+                - generic [ref=e407]: Docker
+          - article [ref=e409]:
+            - img "Shopify SaaS Platform" [ref=e411]
+            - generic [ref=e413]:
+              - heading "Shopify SaaS Platform" [level=3] [ref=e414]
+              - paragraph [ref=e415]: Shopify app serving 2500+ merchants with 600+ daily active users. Provides advanced analytics, automation tools, and inventory management features.
+              - generic [ref=e416]:
+                - generic [ref=e417]: Next.js
+                - generic [ref=e418]: GraphQL
+                - generic [ref=e419]: Node.js
+                - generic [ref=e420]: PostgreSQL
+                - generic [ref=e421]: Redis
+          - article [ref=e423]:
+            - img "Legal Review Portal" [ref=e425]
+            - generic [ref=e427]:
+              - heading "Legal Review Portal" [level=3] [ref=e428]
+              - paragraph [ref=e429]: Workflow management system for legal review processes, serving thousands of users including survivors and victims of national tragedies. Features document management and secure communication.
+              - generic [ref=e430]:
+                - generic [ref=e431]: React
+                - generic [ref=e432]: Node.js
+                - generic [ref=e433]: SQL Server
+                - generic [ref=e434]: Azure
+                - generic [ref=e435]: Redux
+          - article [ref=e437]:
+            - img "NASA Cost Tracking System" [ref=e439]
+            - generic [ref=e441]:
+              - heading "NASA Cost Tracking System" [level=3] [ref=e442]
+              - paragraph [ref=e443]: Web-based cost reporting application used by NASA & DoD, tracking over $200M in annualized funding. Features interactive dashboards and automated reconciliation.
+              - generic [ref=e444]:
+                - generic [ref=e445]: C#
+                - generic [ref=e446]: SQL Server
+                - generic [ref=e447]: SSRS
+                - generic [ref=e448]: PowerBI
+                - generic [ref=e449]: .NET
+      - generic [ref=e450]:
+        - generic [ref=e453]:
+          - generic [ref=e454]: Testimonials
+          - heading "Loved by people all over the universe" [level=2] [ref=e456]
+          - paragraph [ref=e457]: With boundless enthusiasm and contagious optimism, I bring transformative energy to every project. Challenges become opportunities — success is inevitable.
+        - generic [ref=e462]:
+          - figure [ref=e463]:
+            - generic [ref=e465]: “
+            - generic [ref=e466]:
+              - img [ref=e468]
+              - generic [ref=e469]:
+                - generic [ref=e470]: Allan Browning
+                - generic [ref=e471]: Software Engineer
+            - blockquote [ref=e472]: “Brandon is reliable, dedicated and has an in-depth understanding of a vast array of technologies. His knowledge and development experience is second to none.”
+          - figure [ref=e473]:
+            - generic [ref=e475]: “
+            - generic [ref=e476]:
+              - img [ref=e478]
+              - generic [ref=e479]:
+                - generic [ref=e480]: Daniel Zorub
+                - generic [ref=e481]: Non-profit Technology Advisor
+            - blockquote [ref=e482]: “I cannot recommend Brandon enough for any role, project, or team not only because of his expertise, but also because of the genuine person that he is.”
+          - figure [ref=e483]:
+            - generic [ref=e485]: “
+            - generic [ref=e486]:
+              - img [ref=e488]
+              - generic [ref=e489]:
+                - generic [ref=e490]: Nithin Jilla
+                - generic [ref=e491]: Educator, Entrepreneur, Philanthropist
+            - blockquote [ref=e492]: “Brandon is a quick learner and an excellent communicator. What Brandon sets his mind to, he accomplishes and he makes the people around him better along the way too.”
+          - figure [ref=e493]:
+            - generic [ref=e495]: “
+            - generic [ref=e496]:
+              - img [ref=e498]
+              - generic [ref=e499]:
+                - generic [ref=e500]: Allan Browning
+                - generic [ref=e501]: Software Engineer
+            - blockquote [ref=e502]: “Brandon is reliable, dedicated and has an in-depth understanding of a vast array of technologies. His knowledge and development experience is second to none.”
+          - figure [ref=e503]:
+            - generic [ref=e505]: “
+            - generic [ref=e506]:
+              - img [ref=e508]
+              - generic [ref=e509]:
+                - generic [ref=e510]: Daniel Zorub
+                - generic [ref=e511]: Non-profit Technology Advisor
+            - blockquote [ref=e512]: “I cannot recommend Brandon enough for any role, project, or team not only because of his expertise, but also because of the genuine person that he is.”
+          - figure [ref=e513]:
+            - generic [ref=e515]: “
+            - generic [ref=e516]:
+              - img [ref=e518]
+              - generic [ref=e519]:
+                - generic [ref=e520]: Nithin Jilla
+                - generic [ref=e521]: Educator, Entrepreneur, Philanthropist
+            - blockquote [ref=e522]: “Brandon is a quick learner and an excellent communicator. What Brandon sets his mind to, he accomplishes and he makes the people around him better along the way too.”
+      - generic [ref=e526]:
+        - img
+        - generic [ref=e527]:
+          - generic [ref=e529]: Ready to connect?
+          - heading "Let's build something cinematic together." [level=2] [ref=e532]
+          - paragraph [ref=e534]: Whether you need an AI automation strategy, a full-stack lift, or just want to swap notes on agents — drop a line.
+          - generic [ref=e536]:
+            - link "Start a conversation" [ref=e537] [cursor=pointer]:
+              - /url: /contact
+              - text: Start a conversation
+              - img [ref=e538]
+            - link "About Me" [ref=e541] [cursor=pointer]:
+              - /url: /about
+    - contentinfo [ref=e542]:
+      - generic [ref=e543]:
+        - generic [ref=e544]:
+          - generic [ref=e545]:
+            - generic [ref=e546]:
+              - img "Brandon Johnson" [ref=e547]
+              - generic [ref=e548]: Brandon Johnson
+            - paragraph [ref=e549]: Software engineer, AI automation enthusiast, and full-stack builder. Turning ideas into shipped systems since 2007.
+            - generic [ref=e550]:
+              - link "LinkedIn" [ref=e551] [cursor=pointer]:
+                - /url: https://linkedin.com/in/swizzmagik
+              - link "GitHub" [ref=e552] [cursor=pointer]:
+                - /url: https://github.com/swizzmagik
+              - link "Twitter" [ref=e553] [cursor=pointer]:
+                - /url: https://twitter.com/swizzmagik
+          - generic [ref=e554]:
+            - heading "Navigate" [level=3] [ref=e555]
+            - list [ref=e556]:
+              - listitem [ref=e557]:
+                - link "Work" [ref=e558] [cursor=pointer]:
+                  - /url: /#work
+              - listitem [ref=e559]:
+                - link "AI Labs" [ref=e560] [cursor=pointer]:
+                  - /url: /#ai-labs
+              - listitem [ref=e561]:
+                - link "Projects" [ref=e562] [cursor=pointer]:
+                  - /url: /#projects
+              - listitem [ref=e563]:
+                - link "Writing" [ref=e564] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e565]:
+                - link "Contact" [ref=e566] [cursor=pointer]:
+                  - /url: /contact
+          - generic [ref=e567]:
+            - heading "Elsewhere" [level=3] [ref=e568]
+            - list [ref=e569]:
+              - listitem [ref=e570]:
+                - link "Privacy" [ref=e571] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e572]:
+                - link "Terms" [ref=e573] [cursor=pointer]:
+                  - /url: /terms
+              - listitem [ref=e574]:
+                - link "Admin" [ref=e575] [cursor=pointer]:
+                  - /url: /admin
+        - generic [ref=e576]:
+          - generic [ref=e577]: © Brandon Johnson 2026. All rights reserved.
+          - generic [ref=e578]: v.2 / cosmic
+  - button "Open Next.js Dev Tools" [ref=e584] [cursor=pointer]:
+    - img [ref=e585]

@@ -1,13 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Pause, Play, Bot, Code2, Rocket, Volume2, VolumeX } from "lucide-react";
-import { m, useScroll, useTransform } from "framer-motion";
+import { CosmicContainer } from "@/components/cosmic/Container";
 import { CosmicBackground } from "@/components/cosmic/CosmicBackground";
-import { Starfield } from "@/components/cosmic/Starfield";
 import { Eyebrow } from "@/components/cosmic/Eyebrow";
 import { GradientButton } from "@/components/cosmic/GradientButton";
-import { CosmicContainer } from "@/components/cosmic/Container";
+import { Starfield } from "@/components/cosmic/Starfield";
+import { m, useScroll, useTransform } from "framer-motion";
+import {
+  Bot,
+  ChevronDown,
+  Code2,
+  Pause,
+  Play,
+  Rocket,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Cinematic hero with a looping background video (hero-video.mp4).
@@ -32,7 +41,11 @@ export function Hero() {
     offset: ["start start", "end start"],
   });
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -120]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.5, 0]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.6, 1],
+    [1, 0.5, 0],
+  );
   const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
@@ -115,7 +128,11 @@ export function Hero() {
   };
 
   return (
-    <section id="home" ref={sectionRef} className="relative min-h-screen w-full">
+    <section
+      id="home"
+      ref={sectionRef}
+      className="relative min-h-screen w-full"
+    >
       <div className="relative h-screen min-h-[32rem] w-full overflow-hidden bg-[--bg]">
         {/* Parallax-wrapped background layers (poster + loop video) */}
         <m.div
@@ -129,14 +146,14 @@ export function Hero() {
             src="/images/hero-image.png"
             alt=""
             aria-hidden
-            className="absolute inset-0 h-full w-full object-cover object-[-200px_center] opacity-70 md:object-center"
+            className="absolute inset-0 h-full w-full object-cover opacity-70 [object-position:calc(50%_-_200px)_50%] md:[object-position:50%_50%]"
           />
 
           {/* Looping background video */}
           {!reduceMotion && (
             <video
               ref={loopVideoRef}
-              className={`absolute inset-0 h-full w-full object-cover object-[-200px_center] transition-opacity duration-700 md:object-center ${
+              className={`absolute inset-0 h-full w-full object-cover [object-position:calc(50%_-_200px)_50%] md:[object-position:50%_50%] transition-opacity duration-700 ${
                 loopVideoReady && !isHelloPlaying ? "opacity-100" : "opacity-0"
               }`}
               src="/video/hero-video.mp4"
@@ -153,7 +170,7 @@ export function Hero() {
         {/* Cross-fade intro video — plays with sound on click */}
         <video
           ref={helloVideoRef}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+          className={`absolute inset-0 h-full w-full object-cover [object-position:calc(50%_-_200px)_50%] md:[object-position:50%_50%] transition-opacity duration-500 ${
             isHelloPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
           src="/video/brandon-hello-video.mp4"
@@ -222,22 +239,32 @@ export function Hero() {
             >
               Building the Future.
               <br />
-              Automating <span className="gradient-accent-text">Everything.</span>
+              Automating{" "}
+              <span className="gradient-accent-text">Everything.</span>
             </m.h1>
             <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              transition={{
+                duration: 0.9,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.3,
+              }}
               className="mt-5 max-w-xl text-[clamp(16px,1.3vw,19px)] leading-[1.55] text-[--ink-dim]"
             >
-              I build AI agents, automation systems, and scalable software that turn ideas
-              into impact. 600+ agents, 10+ years shipping, one cinematic command center.
+              I build AI agents, automation systems, and scalable software that
+              turn ideas into impact. 600+ agents, 10+ years shipping, one
+              cinematic command center.
             </m.p>
 
             <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
+              transition={{
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.45,
+              }}
               className="mt-8 flex flex-wrap gap-3"
             >
               <GradientButton asChild variant="primary" size="lg">
@@ -269,17 +296,25 @@ export function Hero() {
             <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+              transition={{
+                duration: 0.9,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.6,
+              }}
               className="mt-12 grid max-w-2xl grid-cols-3 gap-4"
             >
               <GlassStatCard icon={Bot} value="600+" label="AI Agents Built" />
               <GlassStatCard icon={Code2} value="10+" label="Years Building" />
-              <GlassStatCard icon={Rocket} value="AI-First" label="Automation Focused" />
+              <GlassStatCard
+                icon={Rocket}
+                value="AI-First"
+                label="Automation Focused"
+              />
             </m.div>
           </m.div>
         </CosmicContainer>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex flex-col items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[--ink-faint]">
+        <div className="hidden sm:flex pointer-events-none absolute inset-x-0 bottom-6 z-10 flex-col items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[--ink-faint]">
           <span className="animate-[bob_2.2s_ease-in-out_infinite]">
             <ChevronDown className="h-4 w-4" />
           </span>
@@ -300,9 +335,7 @@ function GlassStatCard({
   label: string;
 }) {
   return (
-    <div
-      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.15)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.35)] hover:shadow-[0_12px_60px_-12px_rgba(124,92,255,0.35)]"
-    >
+    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 shadow-[0_8px_40px_-12px_rgba(56,189,248,0.15)] backdrop-blur-xl backdrop-saturate-150 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.35)] hover:shadow-[0_12px_60px_-12px_rgba(124,92,255,0.35)]">
       {/* Top-edge gradient accent line */}
       <span
         aria-hidden

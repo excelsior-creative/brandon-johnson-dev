@@ -1,0 +1,180 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e5]:
+      - link "Brandon Johnson BrandonJohnson.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Brandon Johnson" [ref=e7]
+        - generic [ref=e8]: BrandonJohnson.dev
+      - generic [ref=e9]:
+        - button "Search" [ref=e10]:
+          - img [ref=e11]
+        - button "Open menu" [ref=e14]:
+          - img [ref=e15]
+    - main [ref=e16]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e22]: About me
+          - heading "Hi, I'm Brandon. I build things that think." [level=1] [ref=e25]:
+            - text: Hi, I'm Brandon.
+            - text: I build things that think.
+          - paragraph [ref=e27]: Full-stack developer and solutions architect with 15+ years of shipping ambitious software. These days I'm obsessed with the latest wave of AI software engineering — agents, frontier models, and the automation that rewires how we build.
+          - paragraph [ref=e29]: "Also: a designer who sweats the pixels, a loving husband, and father of two boys who are, without question, the best part of the whole thing."
+          - generic [ref=e31]:
+            - link "Start a conversation" [ref=e32] [cursor=pointer]:
+              - /url: /contact
+              - text: Start a conversation
+              - img [ref=e33]
+            - link "View resume" [ref=e36] [cursor=pointer]:
+              - /url: /john-brandon-johnson-resume.pdf
+              - img [ref=e37]
+              - text: View resume
+        - img "Brandon with his family" [ref=e43]
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]: 15+
+          - generic [ref=e49]: Years shipping software
+        - generic [ref=e50]:
+          - generic [ref=e51]: 650K+
+          - generic [ref=e52]: YouTube subscribers
+        - generic [ref=e53]:
+          - generic [ref=e54]: $30M+
+          - generic [ref=e55]: TVL on platforms I've led
+        - generic [ref=e56]:
+          - generic [ref=e57]: "2"
+          - generic [ref=e58]: Boys at home (a.k.a. CTOs)
+      - generic [ref=e60]:
+        - generic [ref=e62]:
+          - generic [ref=e63]: The short version
+          - heading "Six things that shape the work" [level=2] [ref=e65]
+          - paragraph [ref=e66]: I'm a builder first. Every role I've held — from director of IT to senior engineer — has been about turning ambiguous ideas into systems people can actually use.
+        - generic [ref=e67]:
+          - article [ref=e69]:
+            - img [ref=e71]
+            - heading "AI-forward engineer" [level=3] [ref=e73]
+            - paragraph [ref=e74]: I live at the frontier of AI software engineering — agentic workflows, frontier models, autonomous systems, and everything in between.
+          - article [ref=e76]:
+            - img [ref=e78]
+            - heading "Full-stack builder" [level=3] [ref=e82]
+            - paragraph [ref=e83]: Next.js, TypeScript, Node, Python, Go, Rust. Databases, infra, CI/CD. Comfortable from the keyboard to the cloud.
+          - article [ref=e85]:
+            - img [ref=e87]
+            - heading "Designer at heart" [level=3] [ref=e93]
+            - paragraph [ref=e94]: I care about craft. Typography, motion, spacing, product feel — pixels matter, and so do the invisible details.
+          - article [ref=e96]:
+            - img [ref=e98]
+            - heading "Solutions architect" [level=3] [ref=e101]
+            - paragraph [ref=e102]: I've led teams, written standards, and shipped enterprise platforms for banking, DeFi, government, and aerospace.
+          - article [ref=e104]:
+            - img [ref=e106]
+            - heading "Husband" [level=3] [ref=e108]
+            - paragraph [ref=e109]: Married to an incredible partner who makes the whole thing possible. Family is the first project; everything else comes after.
+          - article [ref=e111]:
+            - img [ref=e113]
+            - heading "Dad × 2" [level=3] [ref=e116]
+            - paragraph [ref=e117]: Father of two boys. Relentlessly curious, exhaustingly fun, and the reason I optimize for long-term, not just the next sprint.
+      - generic [ref=e120]:
+        - generic [ref=e122]:
+          - generic [ref=e123]: The long-ish version
+          - heading "I've always been the person who figures it out." [level=2] [ref=e125]
+        - generic [ref=e126]:
+          - paragraph [ref=e128]: I started shipping software professionally in 2006. Since then I've architected enterprise platforms in banking, DeFi, government, and aerospace — high-stakes systems where the margin for error is thin and the impact is real.
+          - paragraph [ref=e130]: Two years ago I went deep on AI. Like, all-in deep. I've tested and deployed across OpenAI, Anthropic, Google DeepMind, and every interesting open-source model I can get my hands on. I've built agentic workflows, orchestrated multi-agent systems, and contributed to frameworks that thousands of developers are building on top of.
+          - paragraph [ref=e132]: Outside the keyboard, I'm a husband and a dad of two boys. That second job is the hardest, the best, and the one that keeps everything else honest.
+      - generic [ref=e134]:
+        - generic [ref=e136]:
+          - generic [ref=e137]: Timeline
+          - heading "A quick walk through the years" [level=2] [ref=e139]
+          - paragraph [ref=e140]: Not a full résumé — just the chapters that shaped how I build.
+        - generic [ref=e142]:
+          - generic [ref=e144]:
+            - generic [ref=e147]: "2025"
+            - generic [ref=e148]:
+              - heading "Top contributor, ElizaOS" [level=3] [ref=e149]
+              - paragraph [ref=e150]: "Shipping into the #1 open-source AI agent framework (16k+ ★) — autonomous agents for real-world applications."
+          - generic [ref=e152]:
+            - generic [ref=e155]: 2023 — now
+            - generic [ref=e156]:
+              - heading "Senior Software Engineer, Synctera" [level=3] [ref=e157]
+              - paragraph [ref=e158]: Leading UI/UX and AI-enhanced components for a banking-as-a-service platform moving billions weekly.
+          - generic [ref=e160]:
+            - generic [ref=e163]: 2020 — 2023
+            - generic [ref=e164]:
+              - heading "Solutions Architect, Excelsior Creative" [level=3] [ref=e165]
+              - paragraph [ref=e166]: Led a DeFi platform from $0 → $30M+ TVL and an automated payments streaming system.
+          - generic [ref=e168]:
+            - generic [ref=e171]: 2013 — 2021
+            - generic [ref=e172]:
+              - heading "Senior Full Stack Engineer, OCERS" [level=3] [ref=e173]
+              - paragraph [ref=e174]: Single-handedly architected an organization-wide intranet and 30+ custom applications.
+          - generic [ref=e176]:
+            - generic [ref=e179]: 2006 — 2013
+            - generic [ref=e180]:
+              - heading "Director of IT, Sierra Lobo" [level=3] [ref=e181]
+              - paragraph [ref=e182]: Organization-wide IT strategy, private cloud for federal clients, network for 1,200+ users.
+          - generic [ref=e184]:
+            - generic [ref=e187]: "2019"
+            - generic [ref=e188]:
+              - heading "MIT Sloan — Blockchain & Business" [level=3] [ref=e189]
+              - paragraph [ref=e190]: Independent blockchain + AI smart contract work, automated crypto trading bots, flash-loan infra.
+      - generic [ref=e195]:
+        - generic [ref=e196]: Let's build
+        - heading "Got an ambitious idea? Let's ship it." [level=2] [ref=e198]
+        - paragraph [ref=e199]: AI strategy, full-stack engineering, or just a conversation about where this is all going — I'm always up for a good one.
+        - generic [ref=e200]:
+          - link "Get in touch" [ref=e201] [cursor=pointer]:
+            - /url: /contact
+            - text: Get in touch
+            - img [ref=e202]
+          - link "See the work" [ref=e205] [cursor=pointer]:
+            - /url: /#projects
+    - contentinfo [ref=e206]:
+      - generic [ref=e207]:
+        - generic [ref=e208]:
+          - generic [ref=e209]:
+            - generic [ref=e210]:
+              - img "Brandon Johnson" [ref=e211]
+              - generic [ref=e212]: Brandon Johnson
+            - paragraph [ref=e213]: Software engineer, AI automation enthusiast, and full-stack builder. Turning ideas into shipped systems since 2007.
+            - generic [ref=e214]:
+              - link "LinkedIn" [ref=e215] [cursor=pointer]:
+                - /url: https://linkedin.com/in/swizzmagik
+              - link "GitHub" [ref=e216] [cursor=pointer]:
+                - /url: https://github.com/swizzmagik
+              - link "Twitter" [ref=e217] [cursor=pointer]:
+                - /url: https://twitter.com/swizzmagik
+          - generic [ref=e218]:
+            - heading "Navigate" [level=3] [ref=e219]
+            - list [ref=e220]:
+              - listitem [ref=e221]:
+                - link "Work" [ref=e222] [cursor=pointer]:
+                  - /url: /#work
+              - listitem [ref=e223]:
+                - link "AI Labs" [ref=e224] [cursor=pointer]:
+                  - /url: /#ai-labs
+              - listitem [ref=e225]:
+                - link "Projects" [ref=e226] [cursor=pointer]:
+                  - /url: /#projects
+              - listitem [ref=e227]:
+                - link "Writing" [ref=e228] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e229]:
+                - link "Contact" [ref=e230] [cursor=pointer]:
+                  - /url: /contact
+          - generic [ref=e231]:
+            - heading "Elsewhere" [level=3] [ref=e232]
+            - list [ref=e233]:
+              - listitem [ref=e234]:
+                - link "Privacy" [ref=e235] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e236]:
+                - link "Terms" [ref=e237] [cursor=pointer]:
+                  - /url: /terms
+              - listitem [ref=e238]:
+                - link "Admin" [ref=e239] [cursor=pointer]:
+                  - /url: /admin
+        - generic [ref=e240]:
+          - generic [ref=e241]: © Brandon Johnson 2026. All rights reserved.
+          - generic [ref=e242]: v.2 / cosmic
+  - button "Open Next.js Dev Tools" [ref=e248] [cursor=pointer]:
+    - img [ref=e249]
+  - alert [ref=e252]

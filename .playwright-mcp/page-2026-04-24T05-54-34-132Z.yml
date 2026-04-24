@@ -1,0 +1,70 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e5]:
+      - link "Brandon Johnson BrandonJohnson.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Brandon Johnson" [ref=e7]
+        - generic [ref=e8]: BrandonJohnson.dev
+      - generic [ref=e9]:
+        - button "Search" [ref=e10]:
+          - img [ref=e11]
+        - button "Open menu" [ref=e14]:
+          - img [ref=e15]
+    - main [ref=e16]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]: Blog
+          - heading "All Articles" [level=2] [ref=e21]
+          - paragraph [ref=e22]: Essays and notes on AI agents, automation, full stack engineering, and the tools I use to ship.
+        - paragraph [ref=e24]: No posts found yet. Check back soon!
+    - contentinfo [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29]:
+              - img "Brandon Johnson" [ref=e30]
+              - generic [ref=e31]: Brandon Johnson
+            - paragraph [ref=e32]: Software engineer, AI automation enthusiast, and full-stack builder. Turning ideas into shipped systems since 2007.
+            - generic [ref=e33]:
+              - link "LinkedIn" [ref=e34] [cursor=pointer]:
+                - /url: https://linkedin.com/in/swizzmagik
+              - link "GitHub" [ref=e35] [cursor=pointer]:
+                - /url: https://github.com/swizzmagik
+              - link "Twitter" [ref=e36] [cursor=pointer]:
+                - /url: https://twitter.com/swizzmagik
+          - generic [ref=e37]:
+            - heading "Navigate" [level=3] [ref=e38]
+            - list [ref=e39]:
+              - listitem [ref=e40]:
+                - link "Work" [ref=e41] [cursor=pointer]:
+                  - /url: /#work
+              - listitem [ref=e42]:
+                - link "AI Labs" [ref=e43] [cursor=pointer]:
+                  - /url: /#ai-labs
+              - listitem [ref=e44]:
+                - link "Projects" [ref=e45] [cursor=pointer]:
+                  - /url: /#projects
+              - listitem [ref=e46]:
+                - link "Writing" [ref=e47] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e48]:
+                - link "Contact" [ref=e49] [cursor=pointer]:
+                  - /url: /contact
+          - generic [ref=e50]:
+            - heading "Elsewhere" [level=3] [ref=e51]
+            - list [ref=e52]:
+              - listitem [ref=e53]:
+                - link "Privacy" [ref=e54] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e55]:
+                - link "Terms" [ref=e56] [cursor=pointer]:
+                  - /url: /terms
+              - listitem [ref=e57]:
+                - link "Admin" [ref=e58] [cursor=pointer]:
+                  - /url: /admin
+        - generic [ref=e59]:
+          - generic [ref=e60]: © Brandon Johnson 2026. All rights reserved.
+          - generic [ref=e61]: v.2 / cosmic
+  - button "Open Next.js Dev Tools" [ref=e67] [cursor=pointer]:
+    - img [ref=e68]
+  - alert [ref=e71]

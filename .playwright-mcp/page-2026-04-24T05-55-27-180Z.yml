@@ -1,0 +1,91 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e5]:
+      - link "Brandon Johnson BrandonJohnson.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Brandon Johnson" [ref=e7]
+        - generic [ref=e8]: BrandonJohnson.dev
+      - generic [ref=e9]:
+        - button "Search" [ref=e10]:
+          - img [ref=e11]
+        - button "Open menu" [ref=e14]:
+          - img [ref=e15]
+    - main [ref=e16]:
+      - generic [ref=e19]:
+        - heading "Terms of Service" [level=1] [ref=e20]
+        - paragraph [ref=e21]: "Effective date: April 22, 2026"
+        - heading "Acceptance of Terms" [level=2] [ref=e22]
+        - paragraph [ref=e23]: By accessing or using brandon-johnson.dev ("the Site"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Site. These terms apply to all visitors and users.
+        - heading "Use of the Site" [level=2] [ref=e24]
+        - paragraph [ref=e25]: "This Site is a personal portfolio and informational resource. You may browse and reference the content for lawful, personal, and non-commercial purposes. You agree not to:"
+        - list [ref=e26]:
+          - listitem [ref=e27]: Use the Site for any unlawful purpose or in violation of any applicable regulations
+          - listitem [ref=e28]: Attempt to gain unauthorized access to any part of the Site or its infrastructure
+          - listitem [ref=e29]: Scrape, crawl, or systematically download content in a manner that disrupts site operation
+          - listitem [ref=e30]: Reproduce or distribute content from this Site without explicit permission
+        - heading "Intellectual Property" [level=2] [ref=e31]
+        - paragraph [ref=e32]: All content on this Site — including but not limited to text, code samples, images, and design — is the property of Brandon Johnson unless otherwise noted, and is protected by applicable intellectual property laws. You may not reproduce, redistribute, or create derivative works from this content without prior written permission.
+        - paragraph [ref=e33]: Open source code published in associated repositories is governed by the license specified in each repository. Nothing in these Terms grants you rights to that code beyond what is already granted by those licenses.
+        - heading "No Warranties" [level=2] [ref=e34]
+        - paragraph [ref=e35]: The Site and its content are provided "as is" without warranties of any kind, express or implied. I do not warrant that the Site will be uninterrupted, error-free, or free of viruses or other harmful components. Information on this Site is provided for general informational purposes only and may not reflect the most current developments.
+        - heading "Limitation of Liability" [level=2] [ref=e36]
+        - paragraph [ref=e37]: To the fullest extent permitted by law, Brandon Johnson shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of or inability to use the Site, even if advised of the possibility of such damages. My total liability to you for any claim arising from use of the Site shall not exceed zero dollars ($0).
+        - heading "Third-Party Links" [level=2] [ref=e38]
+        - paragraph [ref=e39]: The Site may contain links to third-party websites. These links are provided for convenience only. I have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party sites. Visiting linked sites is at your own risk.
+        - heading "Changes to These Terms" [level=2] [ref=e40]
+        - paragraph [ref=e41]: I reserve the right to update these Terms of Service at any time. Changes will be posted on this page with an updated effective date. Your continued use of the Site following any changes constitutes your acceptance of the revised terms.
+        - heading "Governing Law" [level=2] [ref=e42]
+        - paragraph [ref=e43]: These Terms are governed by and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.
+        - heading "Contact" [level=2] [ref=e44]
+        - paragraph [ref=e45]: If you have questions about these Terms of Service, please reach out through the contact form on this Site.
+    - contentinfo [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - img "Brandon Johnson" [ref=e51]
+              - generic [ref=e52]: Brandon Johnson
+            - paragraph [ref=e53]: Software engineer, AI automation enthusiast, and full-stack builder. Turning ideas into shipped systems since 2007.
+            - generic [ref=e54]:
+              - link "LinkedIn" [ref=e55] [cursor=pointer]:
+                - /url: https://linkedin.com/in/swizzmagik
+              - link "GitHub" [ref=e56] [cursor=pointer]:
+                - /url: https://github.com/swizzmagik
+              - link "Twitter" [ref=e57] [cursor=pointer]:
+                - /url: https://twitter.com/swizzmagik
+          - generic [ref=e58]:
+            - heading "Navigate" [level=3] [ref=e59]
+            - list [ref=e60]:
+              - listitem [ref=e61]:
+                - link "Work" [ref=e62] [cursor=pointer]:
+                  - /url: /#work
+              - listitem [ref=e63]:
+                - link "AI Labs" [ref=e64] [cursor=pointer]:
+                  - /url: /#ai-labs
+              - listitem [ref=e65]:
+                - link "Projects" [ref=e66] [cursor=pointer]:
+                  - /url: /#projects
+              - listitem [ref=e67]:
+                - link "Writing" [ref=e68] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e69]:
+                - link "Contact" [ref=e70] [cursor=pointer]:
+                  - /url: /contact
+          - generic [ref=e71]:
+            - heading "Elsewhere" [level=3] [ref=e72]
+            - list [ref=e73]:
+              - listitem [ref=e74]:
+                - link "Privacy" [ref=e75] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e76]:
+                - link "Terms" [ref=e77] [cursor=pointer]:
+                  - /url: /terms
+              - listitem [ref=e78]:
+                - link "Admin" [ref=e79] [cursor=pointer]:
+                  - /url: /admin
+        - generic [ref=e80]:
+          - generic [ref=e81]: © Brandon Johnson 2026. All rights reserved.
+          - generic [ref=e82]: v.2 / cosmic
+  - button "Open Next.js Dev Tools" [ref=e88] [cursor=pointer]:
+    - img [ref=e89]
+  - alert [ref=e92]

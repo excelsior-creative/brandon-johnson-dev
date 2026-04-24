@@ -1,0 +1,96 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e5]:
+      - link "Brandon Johnson BrandonJohnson.dev" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Brandon Johnson" [ref=e7]
+        - generic [ref=e8]: BrandonJohnson.dev
+      - generic [ref=e9]:
+        - button "Search" [ref=e10]:
+          - img [ref=e11]
+        - button "Open menu" [ref=e14]:
+          - img [ref=e15]
+    - main [ref=e16]:
+      - generic [ref=e19]:
+        - heading "Privacy Policy" [level=1] [ref=e20]
+        - paragraph [ref=e21]: "Effective date: April 22, 2026"
+        - heading "Overview" [level=2] [ref=e22]
+        - paragraph [ref=e23]: This privacy policy describes how brandon-johnson.dev ("the Site", "I", "me") collects, uses, and handles information when you visit or interact with this personal portfolio website. I respect your privacy and am committed to being transparent about my practices.
+        - heading "Information I Collect" [level=2] [ref=e24]
+        - heading "Information you provide directly" [level=3] [ref=e25]
+        - paragraph [ref=e26]: When you use the contact form on this site, I collect the information you submit, which may include your name, email address, and message content. This information is used solely to respond to your inquiry.
+        - heading "Information collected automatically" [level=3] [ref=e27]
+        - paragraph [ref=e28]: Like most websites, basic technical information may be logged automatically when you visit, such as your IP address, browser type, referring URL, and pages visited. This data is used in aggregate to understand how the site is being used and to maintain its performance.
+        - heading "How I Use Your Information" [level=2] [ref=e29]
+        - list [ref=e30]:
+          - listitem [ref=e31]: To respond to messages or inquiries submitted through the contact form
+          - listitem [ref=e32]: To understand general traffic patterns and improve the site
+          - listitem [ref=e33]: To maintain the security and operation of the site
+        - paragraph [ref=e34]: I do not sell, rent, or share your personal information with third parties for marketing purposes.
+        - heading "Cookies & Analytics" [level=2] [ref=e35]
+        - paragraph [ref=e36]: This site may use minimal cookies necessary for basic site functionality. I do not use third-party advertising cookies or cross-site tracking. If analytics tooling is in use, it is configured to minimize personal data collection and does not build individual user profiles.
+        - heading "Third-Party Services" [level=2] [ref=e37]
+        - paragraph [ref=e38]:
+          - text: This site is hosted on Vercel. When you visit, your request passes through Vercel's infrastructure and is subject to
+          - link "Vercel's Privacy Policy" [ref=e39] [cursor=pointer]:
+            - /url: https://vercel.com/legal/privacy-policy
+          - text: . Any embedded content or external links are subject to the privacy policies of their respective providers.
+        - heading "Data Retention" [level=2] [ref=e40]
+        - paragraph [ref=e41]: Contact form submissions are retained only as long as necessary to respond to your inquiry and are not kept indefinitely. Automatically collected log data is subject to the retention policies of the hosting provider.
+        - heading "Your Rights" [level=2] [ref=e42]
+        - paragraph [ref=e43]: You may request access to, correction of, or deletion of any personal information you have submitted to me via the contact form. To make such a request, please reach out using the contact information below.
+        - heading "Changes to This Policy" [level=2] [ref=e44]
+        - paragraph [ref=e45]: I may update this privacy policy from time to time. Any changes will be reflected on this page with an updated effective date. Your continued use of the site after changes are posted constitutes acceptance of the revised policy.
+        - heading "Contact" [level=2] [ref=e46]
+        - paragraph [ref=e47]: If you have questions or concerns about this privacy policy, please reach out through the contact form on this site or via email.
+    - contentinfo [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - img "Brandon Johnson" [ref=e53]
+              - generic [ref=e54]: Brandon Johnson
+            - paragraph [ref=e55]: Software engineer, AI automation enthusiast, and full-stack builder. Turning ideas into shipped systems since 2007.
+            - generic [ref=e56]:
+              - link "LinkedIn" [ref=e57] [cursor=pointer]:
+                - /url: https://linkedin.com/in/swizzmagik
+              - link "GitHub" [ref=e58] [cursor=pointer]:
+                - /url: https://github.com/swizzmagik
+              - link "Twitter" [ref=e59] [cursor=pointer]:
+                - /url: https://twitter.com/swizzmagik
+          - generic [ref=e60]:
+            - heading "Navigate" [level=3] [ref=e61]
+            - list [ref=e62]:
+              - listitem [ref=e63]:
+                - link "Work" [ref=e64] [cursor=pointer]:
+                  - /url: /#work
+              - listitem [ref=e65]:
+                - link "AI Labs" [ref=e66] [cursor=pointer]:
+                  - /url: /#ai-labs
+              - listitem [ref=e67]:
+                - link "Projects" [ref=e68] [cursor=pointer]:
+                  - /url: /#projects
+              - listitem [ref=e69]:
+                - link "Writing" [ref=e70] [cursor=pointer]:
+                  - /url: /blog
+              - listitem [ref=e71]:
+                - link "Contact" [ref=e72] [cursor=pointer]:
+                  - /url: /contact
+          - generic [ref=e73]:
+            - heading "Elsewhere" [level=3] [ref=e74]
+            - list [ref=e75]:
+              - listitem [ref=e76]:
+                - link "Privacy" [ref=e77] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e78]:
+                - link "Terms" [ref=e79] [cursor=pointer]:
+                  - /url: /terms
+              - listitem [ref=e80]:
+                - link "Admin" [ref=e81] [cursor=pointer]:
+                  - /url: /admin
+        - generic [ref=e82]:
+          - generic [ref=e83]: © Brandon Johnson 2026. All rights reserved.
+          - generic [ref=e84]: v.2 / cosmic
+  - button "Open Next.js Dev Tools" [ref=e90] [cursor=pointer]:
+    - img [ref=e91]
+  - alert [ref=e94]
