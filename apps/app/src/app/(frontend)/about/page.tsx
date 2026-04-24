@@ -386,7 +386,7 @@ export default function AboutPage() {
             <Stagger stagger={0.08} className="flex flex-col gap-4">
               {timeline.map((t) => (
                 <StaggerItem key={t.title}>
-                  <div className="group grid grid-cols-[auto_1fr] items-start gap-6 rounded-2xl border border-[--border-soft] bg-[--card-soft] p-6 transition-[border-color,background,transform] duration-500 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.3)] md:grid-cols-[140px_1fr] md:p-8">
+                  <div className="group grid grid-cols-1 items-start gap-3 rounded-2xl border border-[--border-soft] bg-[--card-soft] p-6 transition-[border-color,background,transform] duration-500 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.3)] md:grid-cols-[140px_1fr] md:gap-6 md:p-8">
                     <div className="flex shrink-0 items-center gap-3">
                       <span
                         className="h-2 w-2 rounded-full bg-[--cyan]"

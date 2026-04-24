@@ -189,7 +189,7 @@ function TimelineCard({ exp }: { exp: WorkExperienceItem }) {
       </div>
 
       {/* Period (for vertical view / redundant for horizontal) */}
-      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[--cyan] lg:hidden">
+      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[--cyan] lg:hidden lg:text-[10px]">
         {exp.period}
       </span>
 
@@ -199,7 +199,7 @@ function TimelineCard({ exp }: { exp: WorkExperienceItem }) {
       <div className="mt-1 text-sm font-medium text-[--ink-dim]">
         {exp.company}
       </div>
-      <p className="mt-2 line-clamp-4 text-xs leading-relaxed text-[--ink-faint]">
+      <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-[--ink-faint] lg:text-xs">
         {exp.description}
       </p>
     </a>
