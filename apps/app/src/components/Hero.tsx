@@ -129,14 +129,14 @@ export function Hero() {
             src="/images/hero-image.png"
             alt=""
             aria-hidden
-            className="absolute inset-0 h-full w-full object-cover object-[-200px_center] opacity-70 md:object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[200px_center] opacity-70 md:object-center"
           />
 
           {/* Looping background video */}
           {!reduceMotion && (
             <video
               ref={loopVideoRef}
-              className={`absolute inset-0 h-full w-full object-cover object-[-200px_center] transition-opacity duration-700 md:object-center ${
+              className={`absolute inset-0 h-full w-full object-cover object-[200px_center] transition-opacity duration-700 md:object-center ${
                 loopVideoReady && !isHelloPlaying ? "opacity-100" : "opacity-0"
               }`}
               src="/video/hero-video.mp4"
