@@ -62,6 +62,26 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  // Scroll-lock body while the mobile sheet is open, and close on Escape.
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [isOpen]);
+
   const resolved: { label: string; href: string; newTab?: boolean }[] = [];
   navItems.forEach((item) => {
     const href = resolveHref(item);
@@ -126,7 +146,7 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
             <button
               type="button"
               onClick={openSearch}
-              className="rounded-full p-2 text-[--ink-dim] transition-colors hover:bg-white/[0.04] hover:text-[--ink]"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[--ink-dim] transition-colors hover:bg-white/[0.04] hover:text-[--ink]"
               aria-label="Search"
             >
               <Search className="h-4 w-4" />
@@ -144,7 +164,7 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
             <button
               type="button"
               onClick={openSearch}
-              className="rounded-full p-2 text-[--ink-dim]"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[--ink-dim]"
               aria-label="Search"
             >
               <Search className="h-5 w-5" />
@@ -152,8 +172,9 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
             <button
               type="button"
               onClick={() => setIsOpen((v) => !v)}
-              className="rounded-full p-2 text-[--ink-dim]"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[--ink-dim]"
               aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
             >
               {isOpen ? (
                 <X className="h-5 w-5" />
@@ -168,34 +189,53 @@ export const Navbar = ({ navItems = [] as NavItem[] }) => {
       <AnimatePresence>
         {isOpen && (
           <m.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden border-t border-[--border-soft] bg-[rgba(5,6,15,0.92)] backdrop-blur-md md:hidden"
+            key="mobile-menu-sheet"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            id="mobile-nav-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setIsOpen(false);
+            }}
+            className="fixed inset-x-0 bottom-0 top-[var(--nav-h,64px)] z-40 overflow-y-auto bg-[rgba(5,6,15,0.96)] backdrop-blur-xl md:hidden"
           >
-            <CosmicContainer>
-              <div className="flex flex-col gap-1 py-4">
-                {items.map((item) => (
+            <nav className="flex min-h-full flex-col gap-2 px-6 pb-10 pt-6">
+              {items.map((item) => {
+                const active =
+                  item.href === "/"
+                    ? pathname === "/"
+                    : pathname === item.href ||
+                      pathname.startsWith(item.href + "/");
+                return (
                   <Link
                     key={item.href + item.label}
                     href={item.href}
                     target={item.newTab ? "_blank" : undefined}
                     rel={item.newTab ? "noreferrer noopener" : undefined}
                     onClick={() => setIsOpen(false)}
-                    className="rounded-lg px-3 py-3 text-base font-medium text-[--ink-dim] hover:bg-white/[0.04] hover:text-[--ink]"
+                    className={cn(
+                      "inline-flex min-h-11 items-center rounded-lg px-3 py-3 text-base font-medium transition-colors",
+                      active
+                        ? "bg-white/[0.06] text-[--ink]"
+                        : "text-[--ink-dim] hover:bg-white/[0.04] hover:text-[--ink]",
+                    )}
                   >
                     {item.label}
                   </Link>
-                ))}
-                <Link
-                  href="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="mt-2 inline-flex items-center justify-center gap-2 rounded-full border border-[--border-mid] bg-[rgba(56,189,248,0.1)] px-4 py-3 text-sm font-medium text-[--cyan]"
-                >
-                  Let&apos;s Connect <ArrowUpRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </CosmicContainer>
+                );
+              })}
+              <Link
+                href="/contact"
+                onClick={() => setIsOpen(false)}
+                className="mt-4 inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[--border-mid] bg-[rgba(56,189,248,0.1)] px-4 py-3 text-sm font-medium text-[--cyan]"
+              >
+                Let&apos;s Connect <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+            </nav>
           </m.div>
         )}
       </AnimatePresence>

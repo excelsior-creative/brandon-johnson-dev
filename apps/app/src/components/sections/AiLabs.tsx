@@ -88,8 +88,8 @@ function LabVisualization({ variant }: { variant: AiLab["variant"] }) {
             key={m}
             className="flex items-center justify-center rounded-lg border border-[--border-soft] bg-white/[0.03] px-3 py-2 text-center font-mono text-[11px] text-[--ink-dim] transition-transform duration-300 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.35)]"
           >
-            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-[--cyan] shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
-            {m}
+            <span className="mr-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[--cyan] shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+            <span className="whitespace-nowrap">{m}</span>
           </div>
         ))}
       </div>

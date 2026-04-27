@@ -82,7 +82,7 @@ export const Footer = async () => {
                   href={s.href}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="rounded-full border border-[--border-mid] bg-white/[0.03] px-4 py-2 text-xs font-medium text-[--ink-dim] transition-colors hover:border-[rgba(56,189,248,0.4)] hover:text-[--cyan]"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[--border-mid] bg-white/[0.03] px-4 py-3 text-xs font-medium text-[--ink-dim] transition-colors hover:border-[rgba(56,189,248,0.4)] hover:text-[--cyan]"
                 >
                   {s.label}
                 </a>
@@ -94,14 +94,14 @@ export const Footer = async () => {
             <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[--ink-faint]">
               Navigate
             </h3>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 flex flex-col">
               {navigationLinks.map((l) => (
                 <li key={l.href + l.label}>
                   <Link
                     href={l.href}
                     target={l.newTab ? "_blank" : undefined}
                     rel={l.newTab ? "noreferrer noopener" : undefined}
-                    className="text-sm text-[--ink-dim] transition-colors hover:text-[--ink]"
+                    className="inline-flex min-h-11 items-center py-3 text-sm text-[--ink-dim] transition-colors hover:text-[--ink]"
                   >
                     {l.label}
                   </Link>
@@ -114,19 +114,28 @@ export const Footer = async () => {
             <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[--ink-faint]">
               Elsewhere
             </h3>
-            <ul className="mt-4 space-y-2 text-sm">
+            <ul className="mt-4 flex flex-col text-sm">
               <li>
-                <Link href="/privacy" className="text-[--ink-dim] hover:text-[--ink]">
+                <Link
+                  href="/privacy"
+                  className="inline-flex min-h-11 items-center py-3 text-[--ink-dim] hover:text-[--ink]"
+                >
                   Privacy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-[--ink-dim] hover:text-[--ink]">
+                <Link
+                  href="/terms"
+                  className="inline-flex min-h-11 items-center py-3 text-[--ink-dim] hover:text-[--ink]"
+                >
                   Terms
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="text-[--ink-dim] hover:text-[--ink]">
+                <Link
+                  href="/admin"
+                  className="inline-flex min-h-11 items-center py-3 text-[--ink-dim] hover:text-[--ink]"
+                >
                   Admin
                 </Link>
               </li>
