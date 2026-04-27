@@ -12,9 +12,9 @@ import type { Metadata } from "next";
 export const revalidate = 60;
 
 export const metadata: Metadata = generatePageMetadata({
-  title: "J. Brandon Johnson — AI Agent Orchestrator & Full Stack Developer",
+  title: "Brandon Johnson — Agentic Engineering & AI Systems Consulting",
   description:
-    "Personal portfolio of J. Brandon Johnson: AI agent orchestrator, solutions architect, and full stack engineer building autonomous AI systems, automation platforms, and production software with Next.js, TypeScript, and the Eliza framework.",
+    "Brandon Johnson helps founders, agencies, and operators design practical AI systems, agentic workflows, automation infrastructure, and AI-native web platforms that turn operations into leverage.",
   path: "/",
 });
 

@@ -5,8 +5,8 @@ export type CosmicNavItem = {
 };
 
 export const cosmicNavItems: CosmicNavItem[] = [
-  { label: "Work", href: "/#work" },
-  { label: "AI Labs", href: "/#ai-labs" },
+  { label: "Services", href: "/#services" },
+  { label: "Systems", href: "/#work" },
   { label: "Projects", href: "/#projects" },
   { label: "Writing", href: "/blog" },
   { label: "Contact", href: "/contact" },

@@ -7,45 +7,45 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Banking-as-a-Service Platform",
+    title: "Agency Business Operating System",
     description:
-      "Enterprise-grade financial platform processing billions in transaction value daily. Bridges multiple banks to fintech startups with high-throughput transaction processing and real-time settlement.",
-    image: "/images/projects/banking-baas.svg",
-    tags: ["Node.js", "TypeScript", "PostgreSQL", "Redis", "AWS", "Kubernetes"],
+      "An AI-assisted operating layer for Excelsior Creative: agent roles, specs, journals, routing, reporting, memory, and escalation paths that make agency work more repeatable.",
+    image: "/images/projects/ai-operating-system.svg",
+    tags: ["Agentic Ops", "Knowledge Systems", "Slack", "GitHub", "Automation"],
   },
   {
-    title: "Web3 DeFi Platform",
+    title: "AI Agent Workforce",
     description:
-      "Decentralized finance platform that scaled to $30M TVL within one year. Built with robust smart contracts, real-time price feeds, and advanced trading features.",
-    image: "/images/projects/web3-defi.svg",
-    tags: ["Solidity", "React", "Web3.js", "TheGraph", "Hardhat"],
+      "A coordinated team of specialist AI agents for development, planning, QA, content, support, and operations — designed around roles, tools, context, and human review.",
+    image: "/images/projects/multi-agent-workforce.svg",
+    tags: ["Agents", "Tool Use", "Memory", "Evaluation", "Human-in-the-loop"],
   },
   {
-    title: "Crypto Trading Bot Platform",
+    title: "Client Automation Pipelines",
     description:
-      "High-frequency trading bot orchestration platform for cryptocurrency markets. Features automated strategy execution, risk management, and real-time portfolio tracking.",
-    image: "/images/projects/trading-bot.svg",
-    tags: ["Python", "FastAPI", "MongoDB", "WebSocket", "Docker"],
+      "Workflows that convert intake, support, content, reporting, and proposal tasks into reliable automations across helpdesk, docs, email, ClickUp, and web platforms.",
+    image: "/images/projects/client-automation.svg",
+    tags: ["CRM", "Helpdesk", "Docs", "ClickUp", "Reporting"],
   },
   {
-    title: "Shopify SaaS Platform",
+    title: "AI-Native Web Platforms",
     description:
-      "Shopify app serving 2500+ merchants with 600+ daily active users. Provides advanced analytics, automation tools, and inventory management features.",
-    image: "/images/projects/shopify-saas.svg",
-    tags: ["Next.js", "GraphQL", "Node.js", "PostgreSQL", "Redis"],
+      "Modern websites and internal tools built with Next.js, Payload CMS, and automation hooks so the website becomes a business system instead of a static brochure.",
+    image: "/images/projects/ai-web-platform.svg",
+    tags: ["Next.js", "Payload CMS", "TypeScript", "Vercel", "Integrations"],
   },
   {
-    title: "Legal Review Portal",
+    title: "AI Content & Thought Leadership Engine",
     description:
-      "Workflow management system for legal review processes, serving thousands of users including survivors and victims of national tragedies. Features document management and secure communication.",
-    image: "/images/projects/legal-portal.svg",
-    tags: ["React", "Node.js", "SQL Server", "Azure", "Redux"],
+      "Repeatable pipelines for research, drafting, editing, visuals, and publishing that help founders and agencies turn operational expertise into useful public content.",
+    image: "/images/projects/content-engine.svg",
+    tags: ["Research", "Editorial", "Social", "Video", "Review Loops"],
   },
   {
-    title: "NASA Cost Tracking System",
+    title: "Enterprise Software Foundation",
     description:
-      "Web-based cost reporting application used by NASA & DoD, tracking over $200M in annualized funding. Features interactive dashboards and automated reconciliation.",
-    image: "/images/projects/nasa-cost-tracking.svg",
-    tags: ["C#", "SQL Server", "SSRS", "PowerBI", ".NET"],
+      "Aerospace, public-sector analytics, and fintech infrastructure work that shaped the implementation discipline behind today's AI systems: reliability, auditability, and scale.",
+    image: "/images/projects/enterprise-foundation.svg",
+    tags: ["Fintech", "BI", "Public Sector", "Architecture", "Reliability"],
   },
 ];

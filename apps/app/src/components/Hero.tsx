@@ -229,7 +229,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Eyebrow>AI Automation &amp; Software Engineering</Eyebrow>
+              <Eyebrow>Agentic engineering for modern operators</Eyebrow>
             </m.div>
             <m.h1
               initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
@@ -237,10 +237,10 @@ export function Hero() {
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               className="font-display mt-6 text-[clamp(44px,6.2vw,84px)] font-bold leading-[1.02] tracking-[-0.035em]"
             >
-              Building the Future.
+              Practical AI systems.
               <br />
-              Automating{" "}
-              <span className="gradient-accent-text">Everything.</span>
+              Built for{" "}
+              <span className="gradient-accent-text">business leverage.</span>
             </m.h1>
             <m.p
               initial={{ opacity: 0, y: 20 }}
@@ -252,9 +252,9 @@ export function Hero() {
               }}
               className="mt-5 max-w-xl text-[clamp(16px,1.3vw,19px)] leading-[1.55] text-[--ink-dim]"
             >
-              I build AI agents, automation systems, and scalable software that
-              turn ideas into impact. 600+ agents, 10+ years shipping, one
-              cinematic command center.
+              I help founders, agencies, and operators turn AI from hype into
+              working systems: agentic workflows, automation infrastructure, and
+              AI-native web platforms that reduce manual work.
             </m.p>
 
             <m.div
@@ -268,8 +268,8 @@ export function Hero() {
               className="mt-8 flex flex-wrap gap-3"
             >
               <GradientButton asChild variant="primary" size="lg">
-                <a href="#work">
-                  Explore My Work
+                <a href="#services">
+                  Explore Consulting
                   <ArrowRightIcon />
                 </a>
               </GradientButton>
@@ -303,12 +303,16 @@ export function Hero() {
               }}
               className="mt-12 grid max-w-2xl grid-cols-3 gap-4"
             >
-              <GlassStatCard icon={Bot} value="600+" label="AI Agents Built" />
-              <GlassStatCard icon={Code2} value="10+" label="Years Building" />
+              <GlassStatCard
+                icon={Bot}
+                value="Agentic"
+                label="Workflow Design"
+              />
+              <GlassStatCard icon={Code2} value="15+" label="Years Shipping" />
               <GlassStatCard
                 icon={Rocket}
                 value="AI-First"
-                label="Automation Focused"
+                label="Systems Consulting"
               />
             </m.div>
           </m.div>

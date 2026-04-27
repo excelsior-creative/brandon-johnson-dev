@@ -33,9 +33,9 @@ export function Projects() {
       <CosmicContainer className="relative z-10">
         <Reveal>
           <SectionHeading
-            eyebrow="Featured Projects"
-            title="Enterprise-scale applications, delivered"
-            description="A showcase of platforms and systems I've architected, shipped, and scaled — from fintech rails to trading bots to government cost tracking."
+            eyebrow="Project experience"
+            title="AI systems, automation, and platforms in practice"
+            description="Selected work reframed around business problems, system design, and operational value — the proof behind the AI consulting positioning."
           />
         </Reveal>
 
@@ -76,7 +76,9 @@ export function Projects() {
                   <h3 className="font-display text-xl font-semibold leading-tight tracking-[-0.01em] text-[--ink] transition-colors group-hover:text-[--cyan]">
                     {p.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-[--ink-dim]">{p.description}</p>
+                  <p className="text-sm leading-relaxed text-[--ink-dim]">
+                    {p.description}
+                  </p>
                   <div className="mt-auto flex flex-wrap gap-2 pt-2">
                     {p.tags.map((tag) => (
                       <span

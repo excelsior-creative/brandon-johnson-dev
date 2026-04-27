@@ -5,7 +5,7 @@ import { capabilities } from "@/lib/content/capabilities";
 
 export function Capabilities() {
   return (
-    <section id="about" className="relative py-24 md:py-32">
+    <section id="services" className="relative py-24 md:py-32">
       {/* Blueprint grid ambient */}
       <div
         aria-hidden
@@ -31,9 +31,9 @@ export function Capabilities() {
       <CosmicContainer className="relative z-10">
         <Reveal>
           <SectionHeading
-            eyebrow="Capabilities"
-            title="Versatile Tech Professional"
-            description="From front-end engineering to full-stack development, data engineering, AI, and product management — a comprehensive technical perspective for every project."
+            eyebrow="AI consulting services"
+            title="Practical AI systems for real business operations"
+            description="Strategy, architecture, and hands-on implementation for companies ready to use agents, automation, and AI-native web platforms as operating leverage."
           />
         </Reveal>
 
