@@ -41,30 +41,34 @@ export function HomeCta() {
 
             <div className="relative z-10 flex flex-col items-center gap-6">
               <Reveal delay={120}>
-                <Eyebrow>Ready to connect?</Eyebrow>
+                <Eyebrow>Book an AI systems consult</Eyebrow>
               </Reveal>
               <Reveal delay={220}>
                 <h2 className="font-display text-[clamp(34px,4vw,52px)] font-bold leading-[1.1] tracking-[-0.03em] text-[--ink]">
-                  Let&apos;s build something{" "}
-                  <span className="gradient-accent-text">cinematic</span> together.
+                  Turn AI into{" "}
+                  <span className="gradient-accent-text">
+                    operating leverage
+                  </span>
+                  .
                 </h2>
               </Reveal>
               <Reveal delay={320}>
                 <p className="max-w-xl text-base text-[--ink-dim] md:text-lg">
-                  Whether you need an AI automation strategy, a full-stack lift, or just want
-                  to swap notes on agents — drop a line.
+                  Book a focused conversation to identify the highest-leverage
+                  workflows to automate, augment, or rebuild with practical AI
+                  systems.
                 </p>
               </Reveal>
               <Reveal delay={420}>
                 <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
                   <GradientButton asChild variant="primary" size="lg">
                     <Link href="/contact">
-                      Start a conversation
+                      Start an AI consult
                       <ArrowUpRight className="h-4 w-4" />
                     </Link>
                   </GradientButton>
                   <GradientButton asChild variant="ghost" size="lg">
-                    <Link href="/about">About Me</Link>
+                    <Link href="/blog">Read field notes</Link>
                   </GradientButton>
                 </div>
               </Reveal>

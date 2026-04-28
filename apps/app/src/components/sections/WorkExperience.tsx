@@ -33,9 +33,9 @@ export function WorkExperience() {
       <CosmicContainer className="relative z-10">
         <Reveal>
           <SectionHeading
-            eyebrow="Work Experience"
-            title="A decade plus of shipping"
-            description="Over 15 years of software development and technical leadership across aerospace, fintech, creative agencies, and public sector."
+            eyebrow="Selected systems, not career history"
+            title="Proof of expertise through systems built"
+            description="A shift from résumé chronology to project-backed credibility: agentic operations, automation pipelines, AI-native web platforms, and enterprise software foundations."
           />
         </Reveal>
 

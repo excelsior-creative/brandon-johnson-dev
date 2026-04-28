@@ -1,9 +1,9 @@
 import type { LucideIcon } from "lucide-react";
 import {
-  Terminal,
-  Layers,
-  Database,
-  Sparkles,
+  Bot,
+  BrainCircuit,
+  Workflow,
+  Network,
   Compass,
   Building2,
   Gauge,
@@ -18,51 +18,51 @@ export type Capability = {
 
 export const capabilities: Capability[] = [
   {
-    title: "Front-End Engineering",
+    title: "AI Systems Strategy",
     description:
-      "Crafting responsive, performant UIs with React, TypeScript, and modern web technologies.",
-    icon: Terminal,
-  },
-  {
-    title: "Full-Stack Development",
-    description:
-      "Building end-to-end solutions from database design to API development and front-end implementation.",
-    icon: Layers,
-  },
-  {
-    title: "Data Engineering",
-    description:
-      "Designing and implementing data pipelines, ETL processes, and analytics infrastructure.",
-    icon: Database,
-  },
-  {
-    title: "AI Development",
-    description:
-      "Implementing and deploying machine learning models and AI-powered solutions.",
-    icon: Sparkles,
-  },
-  {
-    title: "Product Management",
-    description:
-      "Driving product strategy, roadmap planning, and cross-functional team leadership.",
+      "Map high-leverage workflows, separate practical AI opportunities from hype, and turn them into an implementation roadmap.",
     icon: Compass,
   },
   {
-    title: "Technical Architecture",
+    title: "Agentic Workflow Design",
     description:
-      "Designing scalable system architectures and making key technical decisions.",
+      "Design agents with clear roles, tools, memory, escalation paths, and evaluation loops so they can operate inside real teams.",
+    icon: Bot,
+  },
+  {
+    title: "Business Automation",
+    description:
+      "Connect Slack, email, CRMs, helpdesks, docs, and dashboards into reliable workflows that remove repetitive operational drag.",
+    icon: Workflow,
+  },
+  {
+    title: "AI-Native Web Platforms",
+    description:
+      "Build modern Next.js and Payload CMS platforms that act as operational interfaces, not just brochure websites.",
     icon: Building2,
   },
   {
-    title: "Process Optimization",
+    title: "Knowledge & Memory Systems",
     description:
-      "Optimizing application performance, from front-end rendering to backend efficiency.",
+      "Structure company knowledge so humans and agents can retrieve context, preserve decisions, and act consistently over time.",
+    icon: BrainCircuit,
+  },
+  {
+    title: "Multi-Agent Operations",
+    description:
+      "Coordinate specialist agents, routing rules, reporting rhythms, and human-in-the-loop controls for production operations.",
+    icon: Network,
+  },
+  {
+    title: "Performance & Reliability",
+    description:
+      "Harden automations with observability, retries, validation, and clear failure modes before they touch client-facing work.",
     icon: Gauge,
   },
   {
-    title: "Technical Leadership",
+    title: "Operator Enablement",
     description:
-      "Mentoring teams and driving technical excellence across projects.",
+      "Translate systems into playbooks, training, and decision frameworks so teams can own the workflow after launch.",
     icon: Users,
   },
 ];

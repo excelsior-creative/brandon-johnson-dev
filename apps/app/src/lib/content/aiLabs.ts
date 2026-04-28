@@ -6,27 +6,27 @@ export type AiLab = {
 
 export const aiLabs: AiLab[] = [
   {
-    title: "Eliza Framework Core Contributor",
+    title: "What Is Agentic Engineering?",
     description:
-      "Authored contributions to the Eliza agent runtime — helping shape how thousands of developers build conversational and autonomous agents in production environments.",
+      "A practical definition of designing AI systems with roles, memory, tools, autonomy boundaries, and escalation paths — not just better prompts.",
     variant: "chat",
   },
   {
-    title: "OpenClaw Framework Contributor",
+    title: "Where Small Businesses Should Actually Use AI",
     description:
-      "Contributed to the OpenClaw framework, advancing the next generation of tool-use orchestration and multi-agent coordination patterns that power modern agentic systems.",
+      "A consulting lens for identifying high-leverage workflows in support, sales, content, reporting, and internal operations before buying another AI tool.",
     variant: "stack",
   },
   {
-    title: "Multi-Framework Agent Architecture",
+    title: "From Website to Operating System",
     description:
-      "Battle-tested architectural patterns across both Eliza and OpenClaw — prompt routing, tool selection, memory layers, and resilient execution graphs.",
+      "Why modern websites should increasingly connect to CRM, CMS, analytics, knowledge bases, automations, and agent interfaces.",
     variant: "grid",
   },
   {
-    title: "From Open Source to Production",
+    title: "Building an AI-Assisted Agency",
     description:
-      "Translated upstream framework work into resilient, scalable agent systems running mission-critical automation for real businesses.",
+      "Operator notes from turning Excelsior Creative into a hybrid human-plus-agent agency with playbooks, specs, journals, reporting, and accountable review loops.",
     variant: "globe",
   },
 ];

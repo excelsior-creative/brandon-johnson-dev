@@ -1,0 +1,28 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" fill="#05060f"/>
+  <defs>
+    <radialGradient id="g" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(820 170) rotate(130) scale(780 520)">
+      <stop stop-color="#f59e0b" stop-opacity="0.42"/>
+      <stop offset="0.52" stop-color="#7c5cff" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#05060f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="140" y1="120" x2="1060" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#g)"/>
+  <g opacity="0.16">
+    <path d="M0 90H1200" stroke="white"/><path d="M0 180H1200" stroke="white"/><path d="M0 270H1200" stroke="white"/><path d="M0 360H1200" stroke="white"/><path d="M0 450H1200" stroke="white"/><path d="M0 540H1200" stroke="white"/><path d="M0 630H1200" stroke="white"/><path d="M0 720H1200" stroke="white"/>
+    <path d="M120 0V750" stroke="white"/><path d="M240 0V750" stroke="white"/><path d="M360 0V750" stroke="white"/><path d="M480 0V750" stroke="white"/><path d="M600 0V750" stroke="white"/><path d="M720 0V750" stroke="white"/><path d="M840 0V750" stroke="white"/><path d="M960 0V750" stroke="white"/><path d="M1080 0V750" stroke="white"/>
+  </g>
+  <g transform="translate(190 150)">
+    <rect x="0" y="0" width="820" height="450" rx="34" fill="white" fill-opacity="0.045" stroke="white" stroke-opacity="0.14"/>
+    <path d="M110 315C210 180 315 390 420 250C515 125 630 210 720 110" stroke="url(#line)" stroke-width="10" stroke-linecap="round"/>
+    <g fill="#05060f" stroke="url(#line)" stroke-width="7">
+      <circle cx="110" cy="315" r="28"/><circle cx="260" cy="245" r="28"/><circle cx="420" cy="250" r="28"/><circle cx="580" cy="170" r="28"/><circle cx="720" cy="110" r="28"/>
+    </g>
+    <text x="64" y="92" fill="white" fill-opacity="0.92" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="700">AI Web Platform</text>
+    <text x="66" y="132" fill="white" fill-opacity="0.52" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" letter-spacing="3">AI SYSTEM DESIGN / BUSINESS LEVERAGE</text>
+  </g>
+</svg>

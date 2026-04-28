@@ -17,9 +17,9 @@ export function AiLabs() {
       <CosmicContainer className="relative z-10">
         <Reveal>
           <SectionHeading
-            eyebrow="AI Labs"
-            title="Pioneering AI agent development with the Eliza & OpenClaw frameworks"
-            description="Active open-source contributor to the two frameworks shaping how production-grade agents get built — translating upstream work into sophisticated automation systems that handle complex, mission-critical workloads."
+            eyebrow="Thought leadership"
+            title="Field notes from practical agentic engineering"
+            description="Writing and working in public around the questions clients actually need answered: where agents help, how workflows should be designed, and what it takes to run AI systems safely."
           />
         </Reveal>
 
@@ -83,15 +83,17 @@ function LabVisualization({ variant }: { variant: AiLab["variant"] }) {
   if (variant === "stack") {
     return (
       <div className="grid grid-cols-3 gap-2">
-        {["GPT-4o", "Claude 4.6", "Llama 3", "Gemini", "Mistral", "Eliza"].map((m) => (
-          <div
-            key={m}
-            className="flex items-center justify-center rounded-lg border border-[--border-soft] bg-white/[0.03] px-3 py-2 text-center font-mono text-[11px] text-[--ink-dim] transition-transform duration-300 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.35)]"
-          >
-            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-[--cyan] shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
-            {m}
-          </div>
-        ))}
+        {["GPT-4o", "Claude 4.6", "Llama 3", "Gemini", "Mistral", "Eliza"].map(
+          (m) => (
+            <div
+              key={m}
+              className="flex items-center justify-center rounded-lg border border-[--border-soft] bg-white/[0.03] px-3 py-2 text-center font-mono text-[11px] text-[--ink-dim] transition-transform duration-300 hover:-translate-y-0.5 hover:border-[rgba(56,189,248,0.35)]"
+            >
+              <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-[--cyan] shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+              {m}
+            </div>
+          ),
+        )}
       </div>
     );
   }
@@ -136,7 +138,8 @@ function LabVisualization({ variant }: { variant: AiLab["variant"] }) {
           background:
             "radial-gradient(circle at 30% 30%, rgba(124,92,255,0.4), transparent 60%), radial-gradient(circle at 70% 70%, rgba(56,189,248,0.3), transparent 60%), #0a0d20",
           border: "1px solid rgba(56,189,248,0.25)",
-          boxShadow: "0 0 80px rgba(56,189,248,0.15), inset 0 0 40px rgba(0,0,0,0.6)",
+          boxShadow:
+            "0 0 80px rgba(56,189,248,0.15), inset 0 0 40px rgba(0,0,0,0.6)",
         }}
       >
         <span
