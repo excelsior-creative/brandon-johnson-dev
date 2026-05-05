@@ -69,10 +69,16 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
     };
   }
 
-  const meta = (page as unknown as {
-    meta?: { title?: string; description?: string; image?: Media | string | null };
-    title?: string;
-  }).meta;
+  const meta = (
+    page as unknown as {
+      meta?: {
+        title?: string;
+        description?: string;
+        image?: Media | string | null;
+      };
+      title?: string;
+    }
+  ).meta;
   const metaImage = meta?.image as Media | string | undefined;
   const metaImageUrl =
     typeof metaImage === "string"
@@ -83,11 +89,8 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
     : `${SITE_URL}${metaImageUrl}`;
 
   const pageTitle =
-    meta?.title ||
-    (page as unknown as { title?: string }).title ||
-    decodedSlug;
-  const description =
-    meta?.description || `${pageTitle} — J. Brandon Johnson`;
+    meta?.title || (page as unknown as { title?: string }).title || decodedSlug;
+  const description = meta?.description || `${pageTitle} — J. Brandon Johnson`;
 
   return generatePageMetadata({
     title: pageTitle,

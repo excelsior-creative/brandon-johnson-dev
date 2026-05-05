@@ -41,7 +41,10 @@ export async function generateStaticParams() {
     .map((slug) => ({ slug }));
 }
 
-async function fetchPost(slug: string, draft: boolean): Promise<Post | undefined> {
+async function fetchPost(
+  slug: string,
+  draft: boolean,
+): Promise<Post | undefined> {
   const payload = await getPayload({ config });
   try {
     const { docs } = await payload.find({
@@ -57,7 +60,10 @@ async function fetchPost(slug: string, draft: boolean): Promise<Post | undefined
     });
     return docs[0] as Post | undefined;
   } catch (error) {
-    console.error(`Failed to fetch blog post "${slug}" during page render.`, error);
+    console.error(
+      `Failed to fetch blog post "${slug}" during page render.`,
+      error,
+    );
     return undefined;
   }
 }
@@ -79,15 +85,21 @@ export async function generateMetadata({
     };
   }
 
-  const meta = (post as unknown as { meta?: { title?: string; description?: string; image?: Media | string | null } }).meta;
+  const meta = (
+    post as unknown as {
+      meta?: {
+        title?: string;
+        description?: string;
+        image?: Media | string | null;
+      };
+    }
+  ).meta;
   const featuredImage = post.featuredImage as Media | undefined;
   const metaImage = meta?.image as Media | string | undefined;
   const metaImageUrl =
     typeof metaImage === "string"
       ? metaImage
-      : metaImage?.url ||
-        featuredImage?.url ||
-        DEFAULT_OG_IMAGE;
+      : metaImage?.url || featuredImage?.url || DEFAULT_OG_IMAGE;
   const ogImage = metaImageUrl?.startsWith("http")
     ? metaImageUrl
     : `${SITE_URL}${metaImageUrl}`;
@@ -109,7 +121,11 @@ export async function generateMetadata({
   });
 }
 
-export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
   const url = `/blog/${decodedSlug}`;
@@ -128,7 +144,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       { name: "Home", url: SITE_URL },
       { name: "Blog", url: `${SITE_URL}/blog` },
       { name: post.title, url: `${SITE_URL}/blog/${decodedSlug}` },
-    ])
+    ]),
   );
 
   return (
@@ -142,7 +158,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <Container>
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {post.title}
+            </h1>
             {post.excerpt && (
               <p className="text-xl text-muted-foreground">{post.excerpt}</p>
             )}

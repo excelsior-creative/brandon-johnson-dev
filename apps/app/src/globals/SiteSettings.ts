@@ -1,4 +1,5 @@
 import type { GlobalConfig } from "payload";
+import { revalidateFrontendGlobals } from "@/hooks/revalidateFrontendGlobals";
 
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
@@ -14,6 +15,9 @@ export const SiteSettings: GlobalConfig = {
 
       return `/next/preview?${params.toString()}`;
     },
+  },
+  hooks: {
+    afterChange: [revalidateFrontendGlobals],
   },
   access: {
     read: () => true,

@@ -14,7 +14,9 @@ export async function GET(req: NextRequest): Promise<Response> {
   const previewSecret = searchParams.get("previewSecret");
 
   if (previewSecret !== process.env.PREVIEW_SECRET) {
-    return new Response("You are not allowed to preview this page", { status: 403 });
+    return new Response("You are not allowed to preview this page", {
+      status: 403,
+    });
   }
 
   if (!path) {
@@ -22,9 +24,12 @@ export async function GET(req: NextRequest): Promise<Response> {
   }
 
   if (!path.startsWith("/")) {
-    return new Response("This endpoint can only be used for relative previews", {
-      status: 500,
-    });
+    return new Response(
+      "This endpoint can only be used for relative previews",
+      {
+        status: 500,
+      },
+    );
   }
 
   let user;
@@ -35,15 +40,22 @@ export async function GET(req: NextRequest): Promise<Response> {
       headers: req.headers,
     });
   } catch (error) {
-    payload.logger.error({ err: error }, "Error verifying token for live preview");
-    return new Response("You are not allowed to preview this page", { status: 403 });
+    payload.logger.error(
+      { err: error },
+      "Error verifying token for live preview",
+    );
+    return new Response("You are not allowed to preview this page", {
+      status: 403,
+    });
   }
 
   const draft = await draftMode();
 
   if (!user) {
     draft.disable();
-    return new Response("You are not allowed to preview this page", { status: 403 });
+    return new Response("You are not allowed to preview this page", {
+      status: 403,
+    });
   }
 
   draft.enable();

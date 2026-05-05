@@ -9,7 +9,7 @@ import { HomeCta } from "@/components/sections/HomeCta";
 import { generatePageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 
-export const revalidate = 60;
+export const revalidate = 86400;
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Brandon Johnson — Agentic Engineering & AI Systems Consulting",
