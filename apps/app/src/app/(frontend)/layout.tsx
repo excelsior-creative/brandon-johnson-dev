@@ -9,9 +9,7 @@ import { Providers } from "@/components/Providers";
 import { SearchProvider } from "@/components/SearchProvider";
 import { AdminBar } from "@/components/AdminBar";
 import { ScrollProgress } from "@/components/ScrollProgress";
-import { draftMode } from "next/headers";
-import { getPayload } from "payload";
-import config from "@payload-config";
+import { getCachedHeader } from "@/lib/public-cache";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,12 +31,13 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
-  const { isEnabled } = await draftMode();
-  const payload = await getPayload({ config });
-  const header = await payload.findGlobal({
-    slug: "header",
-  });
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const isEnabled = false;
+  const header = await getCachedHeader();
   const globalSchema = generateGlobalSchema();
 
   return (
@@ -48,7 +47,10 @@ export default async function Layout({ children }: { children: React.ReactNode }
       suppressHydrationWarning
     >
       <body className="font-sans bg-background text-foreground">
-        <div className="flex min-h-screen flex-col relative" data-theme="frontend">
+        <div
+          className="flex min-h-screen flex-col relative"
+          data-theme="frontend"
+        >
           <Providers>
             <SearchProvider>
               <ScrollProgress />

@@ -9,7 +9,7 @@ import { socialLinks } from "@/lib/content/navigation";
 import { AUTHOR_EMAIL, SITE_URL, generatePageMetadata } from "@/lib/metadata";
 import { generateBreadcrumbSchema } from "@/lib/structured-data";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Contact J. Brandon Johnson",

@@ -29,7 +29,7 @@ import {
   generateProfilePageSchema,
 } from "@/lib/structured-data";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export const metadata: Metadata = generatePageMetadata({
   title: "About — J. Brandon Johnson",
@@ -43,7 +43,7 @@ const profileSchema = combineSchemas(
   generateBreadcrumbSchema([
     { name: "Home", url: SITE_URL },
     { name: "About", url: `${SITE_URL}/about` },
-  ])
+  ]),
 );
 
 const stats = [
@@ -163,22 +163,22 @@ export default function AboutPage() {
                 <h1 className="font-display text-[clamp(42px,6vw,80px)] font-bold leading-[1.02] tracking-[-0.035em] text-[--ink]">
                   Hi, I&apos;m{" "}
                   <span className="gradient-accent-text">Brandon</span>.
-                  <br />
-                  I build things that think.
+                  <br />I build things that think.
                 </h1>
               </Reveal>
               <Reveal delay={200}>
                 <p className="max-w-xl text-lg leading-relaxed text-[--ink-dim]">
-                  Full-stack developer and solutions architect with 15+ years of shipping
-                  ambitious software. These days I&apos;m obsessed with the latest wave of
-                  AI software engineering — agents, frontier models, and the automation
-                  that rewires how we build.
+                  Full-stack developer and solutions architect with 15+ years of
+                  shipping ambitious software. These days I&apos;m obsessed with
+                  the latest wave of AI software engineering — agents, frontier
+                  models, and the automation that rewires how we build.
                 </p>
               </Reveal>
               <Reveal delay={320}>
                 <p className="max-w-xl text-base leading-relaxed text-[--ink-faint]">
-                  Also: a designer who sweats the pixels, a loving husband, and father of
-                  two boys who are, without question, the best part of the whole thing.
+                  Also: a designer who sweats the pixels, a loving husband, and
+                  father of two boys who are, without question, the best part of
+                  the whole thing.
                 </p>
               </Reveal>
               <Reveal delay={440}>
@@ -391,7 +391,8 @@ export default function AboutPage() {
                       <span
                         className="h-2 w-2 rounded-full bg-[--cyan]"
                         style={{
-                          boxShadow: "0 0 0 3px rgba(56,189,248,0.25), 0 0 16px rgba(56,189,248,0.6)",
+                          boxShadow:
+                            "0 0 0 3px rgba(56,189,248,0.25), 0 0 16px rgba(56,189,248,0.6)",
                         }}
                       />
                       <span className="font-mono text-xs uppercase tracking-[0.16em] text-[--cyan]">
@@ -434,11 +435,14 @@ export default function AboutPage() {
                 <Eyebrow>Let&apos;s build</Eyebrow>
                 <h2 className="font-display text-[clamp(30px,3.4vw,44px)] font-bold leading-[1.1] tracking-[-0.02em] text-[--ink]">
                   Got an ambitious idea?{" "}
-                  <span className="gradient-accent-text">Let&apos;s ship it.</span>
+                  <span className="gradient-accent-text">
+                    Let&apos;s ship it.
+                  </span>
                 </h2>
                 <p className="max-w-xl text-base text-[--ink-dim]">
-                  AI strategy, full-stack engineering, or just a conversation about
-                  where this is all going — I&apos;m always up for a good one.
+                  AI strategy, full-stack engineering, or just a conversation
+                  about where this is all going — I&apos;m always up for a good
+                  one.
                 </p>
                 <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
                   <GradientButton asChild variant="primary" size="lg">

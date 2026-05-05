@@ -9,7 +9,7 @@ import { generatePageMetadata, SITE_URL } from "@/lib/metadata";
 import { generateBreadcrumbSchema } from "@/lib/structured-data";
 import type { Metadata } from "next";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 86400;
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Blog",
@@ -63,11 +63,12 @@ export default async function BlogPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <p className="text-xl text-muted-foreground">No posts found yet. Check back soon!</p>
+            <p className="text-xl text-muted-foreground">
+              No posts found yet. Check back soon!
+            </p>
           </div>
         )}
       </Container>
     </div>
   );
 }
-
