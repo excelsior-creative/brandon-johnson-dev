@@ -1,30 +1,18 @@
 import React from "react";
-import { getPayload } from "payload";
-import config from "@/payload.config";
+import { getCachedRecentPosts } from "@/lib/public-cache";
 import Header from "./Header";
 import { PostCard } from "./PostCard";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
-export const BlogSection = async ({ 
+export const BlogSection = async ({
   title = "From the blog",
-  badge = "Latest News"
-}: { 
+  badge = "Latest News",
+}: {
   title?: string;
   badge?: string;
 } = {}) => {
-  const payload = await getPayload({ config });
-  
-  const { docs: posts } = await payload.find({
-    collection: "posts",
-    sort: "-publishedDate",
-    limit: 3,
-    where: {
-      _status: {
-        equals: "published",
-      },
-    },
-  });
+  const posts = await getCachedRecentPosts(3);
 
   if (posts.length === 0) return null;
 
@@ -36,13 +24,13 @@ export const BlogSection = async ({
           title={title}
           subtitle="Check out our latest articles, updates, and insights about modern web development."
         />
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {posts.map((post, index) => (
             <PostCard key={post.id} post={post} priority={index === 0} />
           ))}
         </div>
-        
+
         <div className="flex justify-center">
           <Button asChild variant="outline" size="lg">
             <Link href="/blog">View All Posts</Link>
