@@ -1,10 +1,6 @@
 import React from "react";
-import { draftMode } from "next/headers";
-import { getPayload } from "payload";
 import type { Metadata } from "next";
 
-import config from "@payload-config";
-import { LivePreviewListener } from "@/components/LivePreviewListener";
 import { PayloadRedirects } from "@/components/PayloadRedirects";
 import { RenderBlocks } from "@/blocks/RenderBlocks";
 import { RenderHero } from "@/heros/RenderHero";
@@ -13,6 +9,7 @@ import {
   SITE_URL,
   generatePageMetadata,
 } from "@/lib/metadata";
+import { getCachedPageBySlug, getCachedPageSlugs } from "@/lib/public-cache";
 import type { Media } from "@/payload-types";
 
 type Args = {
@@ -21,46 +18,16 @@ type Args = {
   }>;
 };
 
-async function fetchPage(slug: string, draft: boolean) {
-  const payload = await getPayload({ config });
-  const { docs } = await payload.find({
-    collection: "pages",
-    draft,
-    overrideAccess: draft,
-    limit: 1,
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
-  });
-  return docs[0];
-}
+export const revalidate = 86400;
 
 export async function generateStaticParams() {
-  const payload = await getPayload({ config });
-  const { docs } = await payload.find({
-    collection: "pages",
-    draft: false,
-    limit: 1000,
-    overrideAccess: false,
-    pagination: false,
-    select: {
-      slug: true,
-    },
-  });
-
-  return docs
-    .map((page) => page.slug)
-    .filter((slug) => Boolean(slug && slug !== "home"))
-    .map((slug) => ({ slug }));
+  return getCachedPageSlugs();
 }
 
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const { slug = "" } = await params;
   const decodedSlug = decodeURIComponent(slug);
-  const { isEnabled: draft } = await draftMode();
-  const page = await fetchPage(decodedSlug, draft);
+  const page = await getCachedPageBySlug(decodedSlug);
 
   if (!page) {
     return {
@@ -101,12 +68,11 @@ export async function generateMetadata({ params }: Args): Promise<Metadata> {
 }
 
 export default async function CMSPage({ params }: Args) {
-  const { isEnabled: draft } = await draftMode();
   const { slug = "" } = await params;
   const decodedSlug = decodeURIComponent(slug);
   const url = `/${decodedSlug}`;
 
-  const page = (await fetchPage(decodedSlug, draft)) as any;
+  const page = (await getCachedPageBySlug(decodedSlug)) as any;
 
   if (!page) {
     return <PayloadRedirects url={url} />;
@@ -114,7 +80,6 @@ export default async function CMSPage({ params }: Args) {
 
   return (
     <article>
-      {draft && <LivePreviewListener />}
       <PayloadRedirects disableNotFound url={url} />
       <RenderHero {...page.hero} />
       <RenderBlocks blocks={page.layout as any} />

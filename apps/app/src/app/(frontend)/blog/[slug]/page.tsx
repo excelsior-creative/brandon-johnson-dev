@@ -1,13 +1,9 @@
 import React from "react";
-import { getPayload } from "payload";
-import config from "@/payload.config";
-import { draftMode } from "next/headers";
 import { Container } from "@/components/Container";
 import Image from "next/image";
-import { Media, Post } from "@/payload-types";
+import { Media } from "@/payload-types";
 import { RichText } from "@/components/RichText";
 import { RenderBlocks } from "@/blocks/RenderBlocks";
-import { LivePreviewListener } from "@/components/LivePreviewListener";
 import { PayloadRedirects } from "@/components/PayloadRedirects";
 import {
   AUTHOR_NAME,
@@ -15,6 +11,7 @@ import {
   SITE_URL,
   generateArticleMetadata,
 } from "@/lib/metadata";
+import { getCachedPostBySlug, getCachedPostSlugs } from "@/lib/public-cache";
 import {
   combineSchemas,
   generateArticleSchema,
@@ -22,50 +19,10 @@ import {
 } from "@/lib/structured-data";
 import type { Metadata } from "next";
 
+export const revalidate = 86400;
+
 export async function generateStaticParams() {
-  const payload = await getPayload({ config });
-  const { docs } = await payload.find({
-    collection: "posts",
-    draft: false,
-    limit: 1000,
-    overrideAccess: false,
-    pagination: false,
-    select: {
-      slug: true,
-    },
-  });
-
-  return docs
-    .map((post) => post.slug)
-    .filter(Boolean)
-    .map((slug) => ({ slug }));
-}
-
-async function fetchPost(
-  slug: string,
-  draft: boolean,
-): Promise<Post | undefined> {
-  const payload = await getPayload({ config });
-  try {
-    const { docs } = await payload.find({
-      collection: "posts",
-      draft,
-      overrideAccess: draft,
-      where: {
-        slug: {
-          equals: slug,
-        },
-      },
-      limit: 1,
-    });
-    return docs[0] as Post | undefined;
-  } catch (error) {
-    console.error(
-      `Failed to fetch blog post "${slug}" during page render.`,
-      error,
-    );
-    return undefined;
-  }
+  return getCachedPostSlugs();
 }
 
 export async function generateMetadata({
@@ -75,8 +32,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
-  const { isEnabled: draft } = await draftMode();
-  const post = await fetchPost(decodedSlug, draft);
+  const post = await getCachedPostBySlug(decodedSlug);
 
   if (!post) {
     return {
@@ -129,8 +85,7 @@ export default async function PostPage({
   const { slug } = await params;
   const decodedSlug = decodeURIComponent(slug);
   const url = `/blog/${decodedSlug}`;
-  const { isEnabled: draft } = await draftMode();
-  const post = await fetchPost(decodedSlug, draft);
+  const post = await getCachedPostBySlug(decodedSlug);
 
   if (!post) {
     return <PayloadRedirects url={url} />;
@@ -153,7 +108,6 @@ export default async function PostPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      {draft && <LivePreviewListener />}
       <PayloadRedirects disableNotFound url={url} />
       <Container>
         <div className="max-w-3xl mx-auto">

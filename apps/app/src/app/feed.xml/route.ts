@@ -1,20 +1,10 @@
 import { SITE_NAME, SITE_URL, DEFAULT_DESCRIPTION } from "@/lib/metadata";
-import config from "@payload-config";
-import { getPayload } from "payload";
+import { getCachedRecentPosts } from "@/lib/public-cache";
+
+export const revalidate = 86400;
 
 export async function GET() {
-  const payload = await getPayload({ config });
-
-  const { docs: posts } = await payload.find({
-    collection: "posts",
-    limit: 20,
-    sort: "-publishedDate",
-    where: {
-      _status: {
-        equals: "published",
-      },
-    },
-  });
+  const posts = await getCachedRecentPosts(20);
 
   const rss = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -28,7 +18,7 @@ export async function GET() {
       const publishedDate = post.publishedDate
         ? new Date(post.publishedDate).toUTCString()
         : new Date(post.createdAt).toUTCString();
-      
+
       return `
     <item>
       <title><![CDATA[${post.title}]]></title>
@@ -49,4 +39,3 @@ export async function GET() {
     },
   });
 }
-

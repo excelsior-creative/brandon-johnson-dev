@@ -1,10 +1,8 @@
 import React from "react";
-import { getPayload } from "payload";
-import config from "@/payload.config";
 import { Container } from "@/components/Container";
 import { PostCard } from "@/components/PostCard";
 import Header from "@/components/Header";
-import { Post } from "@/payload-types";
+import { getCachedAllPosts } from "@/lib/public-cache";
 import { generatePageMetadata, SITE_URL } from "@/lib/metadata";
 import { generateBreadcrumbSchema } from "@/lib/structured-data";
 import type { Metadata } from "next";
@@ -19,23 +17,7 @@ export const metadata: Metadata = generatePageMetadata({
 });
 
 export default async function BlogPage() {
-  const payload = await getPayload({ config });
-  let posts: Post[] = [];
-
-  try {
-    const result = await payload.find({
-      collection: "posts",
-      sort: "-publishedDate",
-      where: {
-        _status: {
-          equals: "published",
-        },
-      },
-    });
-    posts = result.docs as Post[];
-  } catch (error) {
-    console.error("Failed to fetch blog posts during page render.", error);
-  }
+  const posts = await getCachedAllPosts();
 
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Home", url: SITE_URL },
