@@ -1,0 +1,175 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SectionHeading from "@/components/SectionHeading.astro";
+import {
+  capabilities,
+  labs,
+  projects,
+  technologies,
+  testimonials,
+  workExperience,
+} from "@/data/site";
+---
+
+<BaseLayout
+  title="Brandon Johnson - Agentic Engineering & AI Systems Consulting"
+  description="Brandon Johnson helps founders, agencies, and operators design practical AI systems, agentic workflows, automation infrastructure, and AI-native web platforms."
+>
+  <section class="hero" id="home">
+    <picture class="hero-media">
+      <source srcset="/images/hero-image.png" />
+      <img src="/images/hero-image.png" alt="" loading="eager" />
+    </picture>
+    <video class="hero-video" src="/video/hero-video.mp4" poster="/images/hero-image.png" muted loop autoplay playsinline></video>
+    <div class="cosmic-grid"></div>
+    <div class="container hero-content">
+      <span class="eyebrow"><span></span>Agentic engineering for modern operators</span>
+      <h1>
+        Practical AI systems.<br />
+        Built for <em>business leverage.</em>
+      </h1>
+      <p>
+        I help founders, agencies, and operators turn AI from hype into working systems:
+        agentic workflows, automation infrastructure, and AI-native web platforms that
+        reduce manual work.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#services">Explore Consulting</a>
+        <a class="button ghost" href="/contact">Say Hello</a>
+      </div>
+      <div class="stats">
+        <div><strong>Agentic</strong><span>Workflow Design</span></div>
+        <div><strong>15+</strong><span>Years Shipping</span></div>
+        <div><strong>AI-First</strong><span>Systems Consulting</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="logo-strip" aria-label="Technology experience">
+    <div class="logo-track">
+      {[...technologies, ...technologies].map((logo) => (
+        <img src={logo.src} alt={logo.title} loading="lazy" />
+      ))}
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="AI consulting services"
+        title="Practical AI systems for real business operations"
+        description="Strategy, architecture, and hands-on implementation for companies ready to use agents, automation, and AI-native web platforms as operating leverage."
+      />
+      <div class="card-grid four">
+        {capabilities.map((cap, index) => (
+          <article class="glass-card numbered">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{cap.title}</h3>
+            <p>{cap.description}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Operating background"
+        title="Experience shaped by production systems"
+        description="A mix of AI operations, web platforms, and earlier enterprise software work informs the reliability bar."
+      />
+      <div class="timeline">
+        {workExperience.map((item) => (
+          <article class="work-card">
+            <img src={item.image} alt="" loading="lazy" />
+            <div>
+              <span>{item.period}</span>
+              <h3>{item.role}</h3>
+              <strong>{item.company}</strong>
+              <p>{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Thought leadership"
+        title="Field notes from practical agentic engineering"
+        description="Writing and working in public around the questions clients actually need answered."
+      />
+      <div class="card-grid two">
+        {labs.map((lab) => (
+          <article class="lab-card">
+            <h3>{lab.title}</h3>
+            <p>{lab.description}</p>
+            <div class="lab-visual" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section projects-section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Project experience"
+        title="AI systems, automation, and platforms in practice"
+        description="Selected work reframed around business problems, system design, and operational value."
+      />
+      <div class="card-grid three">
+        {projects.map((project) => (
+          <article class="project-card">
+            <img src={project.image} alt="" loading="lazy" />
+            <div>
+              <h3>{project.title}</h3>
+              <p>{project.description}</p>
+              <ul>
+                {project.tags.map((tag) => <li>{tag}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section testimonials">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Testimonials"
+        title="Trusted by people across product, engineering, and operations"
+        description="Selected words from people who have worked directly with Brandon."
+      />
+      <div class="card-grid two">
+        {testimonials.map((testimonial) => (
+          <figure class="testimonial-card">
+            <div>
+              <img src={testimonial.src} alt="" loading="lazy" />
+              <figcaption>
+                <strong>{testimonial.name}</strong>
+                <span>{testimonial.designation}</span>
+              </figcaption>
+            </div>
+            <blockquote>"{testimonial.quote}"</blockquote>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container cta-panel">
+      <span class="eyebrow"><span></span>Ready when the workflow is</span>
+      <h2>Turn practical AI ideas into systems your team can actually run.</h2>
+      <a class="button primary" href="/contact">Start a Conversation</a>
+    </div>
+  </section>
+</BaseLayout>

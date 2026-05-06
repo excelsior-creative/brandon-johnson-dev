@@ -1,7 +1,7 @@
-.next
+dist
+.astro
 node_modules
 *.env*
-.turbo
 .DS_Store
 .vercel
 .env*.local
