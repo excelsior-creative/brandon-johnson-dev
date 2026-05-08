@@ -11,13 +11,14 @@ import { site } from "@/data/site";
     <nav class="desktop-nav" aria-label="Main navigation">
       {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
-    <a class="nav-cta" href="/contact">Let's Connect</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Theme">☾</button>
+    <a class="nav-cta" href="/contact">Contact</a>
     <button class="menu-button" type="button" data-menu-trigger aria-expanded="false" aria-controls="mobile-menu">
       Menu
     </button>
   </div>
   <nav id="mobile-menu" class="mobile-nav" data-menu data-open="false" aria-label="Mobile navigation">
     {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
-    <a href="/contact">Let's Connect</a>
+    <a href="/contact">Contact</a>
   </nav>
 </header>
