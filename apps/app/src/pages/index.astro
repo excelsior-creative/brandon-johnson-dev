@@ -37,7 +37,7 @@ import { aiAgents, projects, skills, technologies, testimonials, workExperience 
       <div class="hero-actions split-actions">
         <a class="button primary" href="/john-brandon-johnson-resume.pdf">View Resume</a>
         <a class="button ghost" href="/cover-letter.md">View Cover Letter</a>
-        <button class="button simple" type="button" data-hello-trigger><span>Say Hello</span><span aria-hidden="true">→</span></button>
+        <a class="button simple" href="/contact"><span>Contact me</span><span aria-hidden="true">→</span></a>
       </div>
       <div class="dashboard-frame">
         <div class="dashboard-glow"></div>
@@ -49,6 +49,10 @@ import { aiAgents, projects, skills, technologies, testimonials, workExperience 
   </section>
 
   <section class="logo-strip" aria-label="Technology experience">
+    <div class="container tech-intro">
+      <h2>Accelerating results with the latest tech</h2>
+      <p>My software has been having an impact on clients for over twenty years — and it just keeps getting better.</p>
+    </div>
     <div class="logo-track">
       {[...technologies, ...technologies].map((logo) => (
         <img src={logo.src} alt={logo.title} loading="lazy" />
@@ -60,8 +64,8 @@ import { aiAgents, projects, skills, technologies, testimonials, workExperience 
     <div class="container">
       <SectionHeading
         eyebrow="Skills"
-        title="Versatile Tech Professional"
-        description="From front-end engineering to full-stack development, data engineering, AI, and product management — a comprehensive technical perspective for every project."
+        title="Versatile tech professional"
+        description="From front-end engineering to full-stack development, data engineering, AI, and product management — I bring a comprehensive technical perspective to every project."
       />
       <div class="skills-grid">
         {skills.map((skill, index) => (
@@ -79,9 +83,9 @@ import { aiAgents, projects, skills, technologies, testimonials, workExperience 
   <section id="experience" class="section alt">
     <div class="container">
       <SectionHeading
-        eyebrow="Experience"
-        title="Experience shaped by production systems"
-        description="Software engineering, agency operations, AI systems, fintech, and public-sector analytics inform the reliability bar."
+        eyebrow="Track record"
+        title="Work experience"
+        description="Over 15 years of experience in software development and technical leadership."
       />
       <div class="timeline carousel-like">
         {workExperience.map((item) => (
@@ -103,8 +107,8 @@ import { aiAgents, projects, skills, technologies, testimonials, workExperience 
     <div class="container">
       <SectionHeading
         eyebrow="AI Agents"
-        title="Pioneering AI Agent Development with the Eliza Framework"
-        description="Expert in building sophisticated AI agents that automate complex tasks, from data processing to full system automation."
+        title="Pioneering AI agent development with the Eliza framework"
+        description="Expert in building sophisticated AI agents that automate complex tasks — from data processing to full system automation."
       />
       <div class="agent-grid">
         {aiAgents.map((agent, index) => (
@@ -121,9 +125,9 @@ import { aiAgents, projects, skills, technologies, testimonials, workExperience 
   <section id="projects" class="section projects-section">
     <div class="container">
       <SectionHeading
-        eyebrow="Projects"
-        title="Featured builds and operating systems"
-        description="Selected work across AI systems, automation, data platforms, web products, and technical operations."
+        eyebrow="Selected work"
+        title="Featured projects"
+        description="A showcase of enterprise-scale applications and platforms I've architected and delivered."
       />
       <div class="card-grid three">
         {projects.map((project) => (
@@ -143,9 +147,9 @@ import { aiAgents, projects, skills, technologies, testimonials, workExperience 
   <section id="testimonials" class="section testimonials">
     <div class="container">
       <SectionHeading
-        eyebrow="Testimonials"
-        title="Trusted by people across product, engineering, and operations"
-        description="Selected words from people who have worked directly with Brandon."
+        eyebrow="Collaborators"
+        title="Loved by people across the universe"
+        description="With boundless enthusiasm and contagious optimism, I bring transformative energy to every project. Passion for innovation and problem-solving creates an environment where challenges become opportunities."
       />
       <div class="card-grid two">
         {testimonials.map((testimonial) => (
@@ -164,11 +168,15 @@ import { aiAgents, projects, skills, technologies, testimonials, workExperience 
     </div>
   </section>
 
-  <section class="section articles-teaser">
+  <section class="section contact-cta" id="contact-cta">
     <div class="container cta-panel">
-      <span class="eyebrow"><span></span>Thought leadership</span>
-      <h2>Recent notes on agentic engineering, AI operations, and web systems.</h2>
-      <a class="button primary" href="/blog">Read the Articles</a>
+      <span class="eyebrow"><span></span>Contact</span>
+      <h2>Ready to connect?</h2>
+      <p>Contact me today to discuss your next project and learn how I can support your team.</p>
+      <div class="cta-actions">
+        <a class="button primary" href="/contact">Contact Me →</a>
+        <a class="button ghost" href="#projects">View My Work</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

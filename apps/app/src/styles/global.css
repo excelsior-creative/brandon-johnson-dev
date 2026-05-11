@@ -68,6 +68,7 @@ video {
 .nav-shell,
 .brand,
 .desktop-nav,
+.nav-actions,
 .footer-brand,
 .hero-actions,
 .socials {
@@ -1050,4 +1051,173 @@ textarea {
   color: rgba(255,255,255,.035);
   white-space: nowrap;
   pointer-events: none;
+}
+
+/* Full original-site parity refinements for EXCT-32 */
+body {
+  background:
+    radial-gradient(ellipse 900px 500px at 50% -8%, rgba(66, 100, 255, 0.12), transparent 62%),
+    #030407;
+}
+
+.nav-shell {
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) auto minmax(190px, 1fr);
+}
+
+.brand { justify-self: start; }
+.desktop-nav { justify-self: center; }
+.nav-actions { justify-self: end; gap: 10px; }
+.theme-toggle { justify-self: end; }
+.nav-cta { justify-self: end; }
+
+.original-hero h1 em {
+  background: linear-gradient(90deg, #38bdf8 0%, #8b5cf6 45%, #d946ef 76%, #f97316 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.tech-intro {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tech-intro h2 {
+  font-size: clamp(28px, 3.2vw, 42px);
+  letter-spacing: -0.04em;
+}
+
+.tech-intro p {
+  max-width: 650px;
+  margin: 14px auto 0;
+  color: var(--ink-dim);
+  line-height: 1.6;
+}
+
+.section-heading {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-heading .eyebrow {
+  margin-inline: auto;
+}
+
+.section-heading h2 {
+  letter-spacing: -0.055em;
+  text-transform: none;
+}
+
+.section-heading h2::first-letter {
+  text-transform: uppercase;
+}
+
+.section-heading p {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.work-card {
+  grid-template-columns: 1fr;
+  min-height: 430px;
+  background: radial-gradient(circle at 50% 0%, rgba(124, 92, 255, 0.1), transparent 46%), rgba(255,255,255,.028);
+}
+
+.work-card img {
+  height: 230px;
+  min-height: 230px;
+  filter: saturate(.9) contrast(1.08);
+}
+
+.work-card h3 {
+  font-size: 24px;
+  letter-spacing: -0.035em;
+}
+
+.project-card {
+  background: rgba(255,255,255,.026);
+  transition: transform .18s ease, border-color .18s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56,189,248,.24);
+}
+
+.project-card h3,
+.testimonial-card strong {
+  letter-spacing: -0.025em;
+}
+
+.testimonials .card-grid.two {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.testimonial-card {
+  min-height: 235px;
+}
+
+.cta-panel {
+  text-align: center;
+}
+
+.cta-panel .eyebrow { margin-inline: auto; }
+.cta-panel p {
+  max-width: 620px;
+  margin: 16px auto 0;
+  color: var(--ink-dim);
+  line-height: 1.65;
+}
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+.cta-actions .button { margin-top: 0; }
+
+.parity-footer-grid {
+  grid-template-columns: 2fr 1fr 1fr 1.1fr;
+}
+
+.icon-socials a {
+  min-width: 44px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  padding-bottom: 76px;
+}
+
+.footer-wordmark {
+  bottom: 18px;
+  z-index: 0;
+}
+
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1120px) {
+  .nav-shell {
+    display: flex;
+  }
+}
+
+@media (max-width: 980px) {
+  .testimonials .card-grid.two,
+  .parity-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .tech-intro { margin-bottom: 22px; }
+  .testimonials .card-grid.two { grid-template-columns: 1fr; }
+  .logo-track { gap: 40px; }
 }
