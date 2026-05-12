@@ -56,13 +56,94 @@ const imageUrl = absoluteUrl(image);
     </main>
     <Footer />
     <script>
-      const menu = document.querySelector("[data-menu]");
-      const trigger = document.querySelector("[data-menu-trigger]");
-      trigger?.addEventListener("click", () => {
-        const open = menu?.getAttribute("data-open") === "true";
-        menu?.setAttribute("data-open", String(!open));
-        trigger?.setAttribute("aria-expanded", String(!open));
-      });
+      const initSiteInteractions = () => {
+        const menu = document.querySelector("[data-menu]");
+        const trigger = document.querySelector("[data-menu-trigger]");
+        trigger?.addEventListener("click", () => {
+          const open = menu?.getAttribute("data-open") === "true";
+          menu?.setAttribute("data-open", String(!open));
+          trigger?.setAttribute("aria-expanded", String(!open));
+        });
+
+        const hero = document.querySelector("[data-hero]");
+        const heroBg = document.querySelector("[data-hero-bg]");
+        const heroContent = document.querySelector("[data-hero-content]");
+        const helloTrigger = document.querySelector("[data-hello-trigger]");
+        const helloIcon = document.querySelector("[data-hello-icon]");
+        const helloLabel = document.querySelector("[data-hello-label]");
+        const helloControls = document.querySelector("[data-hello-controls]");
+        const helloVideo = document.querySelector("[data-hello-video]");
+        const helloClose = document.querySelector("[data-hello-close]");
+        const helloMute = document.querySelector("[data-hello-mute]");
+
+        const closeHello = () => {
+          if (!(hero instanceof HTMLElement) || !(helloVideo instanceof HTMLVideoElement)) return;
+          helloVideo.pause();
+          helloVideo.currentTime = 0;
+          hero.removeAttribute("data-hello-playing");
+          if (helloControls instanceof HTMLElement) helloControls.hidden = true;
+          if (helloIcon) helloIcon.textContent = "▶";
+          if (helloLabel) helloLabel.textContent = "Say Hello";
+        };
+
+        const playHello = () => {
+          if (!(hero instanceof HTMLElement) || !(helloVideo instanceof HTMLVideoElement)) return;
+          if (hero.getAttribute("data-hello-playing") === "true") {
+            closeHello();
+            return;
+          }
+          hero.setAttribute("data-hello-playing", "true");
+          if (helloControls instanceof HTMLElement) helloControls.hidden = false;
+          if (helloIcon) helloIcon.textContent = "❚❚";
+          if (helloLabel) helloLabel.textContent = "Stop";
+          helloVideo.currentTime = 0;
+          helloVideo.muted = false;
+          helloVideo.play().catch(() => {
+            helloVideo.muted = true;
+            if (helloMute) helloMute.textContent = "Muted";
+            helloVideo.play().catch(() => closeHello());
+          });
+        };
+
+        helloTrigger?.addEventListener("click", playHello);
+        helloClose?.addEventListener("click", closeHello);
+        helloVideo?.addEventListener("ended", closeHello);
+        helloMute?.addEventListener("click", () => {
+          if (!(helloVideo instanceof HTMLVideoElement)) return;
+          helloVideo.muted = !helloVideo.muted;
+          if (helloMute) helloMute.textContent = helloVideo.muted ? "Muted" : "Sound";
+        });
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduceMotion && hero instanceof HTMLElement) {
+          let ticking = false;
+          const updateHero = () => {
+            const rect = hero.getBoundingClientRect();
+            const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+            if (heroBg instanceof HTMLElement) {
+              heroBg.style.transform = `translateY(${progress * 180}px) scale(${1 + progress * 0.15})`;
+            }
+            if (heroContent instanceof HTMLElement) {
+              heroContent.style.transform = `translateY(${-progress * 120}px) scale(${1 - progress * 0.04})`;
+              heroContent.style.opacity = String(Math.max(0, 1 - progress * 1.35));
+            }
+            ticking = false;
+          };
+          window.addEventListener("scroll", () => {
+            if (!ticking) {
+              requestAnimationFrame(updateHero);
+              ticking = true;
+            }
+          }, { passive: true });
+          updateHero();
+        }
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initSiteInteractions);
+      } else {
+        initSiteInteractions();
+      }
     </script>
   </body>
 </html>

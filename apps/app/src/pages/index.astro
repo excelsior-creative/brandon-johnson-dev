@@ -2,8 +2,8 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import {
+  aiLabs,
   capabilities,
-  labs,
   projects,
   technologies,
   testimonials,
@@ -12,40 +12,49 @@ import {
 ---
 
 <BaseLayout
-  title="Brandon Johnson - Agentic Engineering & AI Systems Consulting"
-  description="Brandon Johnson helps founders, agencies, and operators design practical AI systems, agentic workflows, automation infrastructure, and AI-native web platforms."
+  title="J. Brandon Johnson — AI Agent Orchestrator & Full Stack Developer"
+  description="Personal portfolio of J. Brandon Johnson: AI agent orchestrator, solutions architect, and full stack engineer building autonomous AI systems, automation platforms, and production software."
 >
-  <section class="hero" id="home">
-    <picture class="hero-media">
-      <source srcset="/images/hero-image.png" />
-      <img src="/images/hero-image.png" alt="" loading="eager" />
-    </picture>
-    <video class="hero-video" src="/video/hero-video.mp4" poster="/images/hero-image.png" muted loop autoplay playsinline></video>
+  <section class="hero parity-hero" id="home" data-hero>
+    <div class="hero-parallax-media" data-hero-bg>
+      <img class="hero-poster" src="/images/hero-image.png" alt="" aria-hidden="true" loading="eager" />
+      <video class="hero-video" src="/video/hero-video.mp4" poster="/images/hero-image.png" muted loop autoplay playsinline preload="auto"></video>
+    </div>
+    <video class="hello-full-video" data-hello-video src="/video/brandon-hello-video.mp4" playsinline preload="metadata"></video>
     <div class="cosmic-grid"></div>
-    <div class="container hero-content">
-      <span class="eyebrow"><span></span>Agentic engineering for modern operators</span>
+    <div class="starfield" aria-hidden="true"></div>
+    <div class="hero-bottom-fade"></div>
+    <div class="container hero-content" data-hero-content>
+      <span class="eyebrow"><span></span>AI Automation &amp; Software Engineering</span>
       <h1>
-        Practical AI systems.<br />
-        Built for <em>business leverage.</em>
+        Building the Future.<br />
+        Automating <em>Everything.</em>
       </h1>
       <p>
-        I help founders, agencies, and operators turn AI from hype into working systems:
-        agentic workflows, automation infrastructure, and AI-native web platforms that
-        reduce manual work.
+        I build AI agents, automation systems, and scalable software that turn
+        ideas into impact. 600+ agents, 10+ years shipping, one cinematic
+        command center.
       </p>
       <div class="hero-actions">
-        <a class="button primary" href="#services">Explore Consulting</a>
-        <a class="button ghost" href="/contact">Say Hello</a>
+        <a class="button primary" href="#work">Explore My Work <span aria-hidden="true">→</span></a>
+        <button class="button ghost" type="button" data-hello-trigger><span data-hello-icon>▶</span><span data-hello-label>Say Hello</span></button>
       </div>
-      <div class="stats">
-        <div><strong>Agentic</strong><span>Workflow Design</span></div>
-        <div><strong>15+</strong><span>Years Shipping</span></div>
-        <div><strong>AI-First</strong><span>Systems Consulting</span></div>
+      <div class="stats hero-stats">
+        <div><span class="stat-icon">🤖</span><strong>600+</strong><span>AI Agents Built</span></div>
+        <div><span class="stat-icon">⌘</span><strong>10+</strong><span>Years Building</span></div>
+        <div><span class="stat-icon">🚀</span><strong>AI-First</strong><span>Automation Focused</span></div>
       </div>
     </div>
+    <div class="hello-controls" data-hello-controls hidden>
+      <button type="button" class="video-mute" data-hello-mute>Sound</button>
+      <button type="button" class="video-close" data-hello-close aria-label="Stop hello video">×</button>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span>⌄</span>Scroll to explore</div>
   </section>
 
   <section class="logo-strip" aria-label="Technology experience">
+    <div class="edge-fade left"></div>
+    <div class="edge-fade right"></div>
     <div class="logo-track">
       {[...technologies, ...technologies].map((logo) => (
         <img src={logo.src} alt={logo.title} loading="lazy" />
@@ -53,17 +62,19 @@ import {
     </div>
   </section>
 
-  <section id="services" class="section">
+  <section id="about" class="section capabilities-section">
+    <div class="section-grid-glow"></div>
     <div class="container">
       <SectionHeading
-        eyebrow="AI consulting services"
-        title="Practical AI systems for real business operations"
-        description="Strategy, architecture, and hands-on implementation for companies ready to use agents, automation, and AI-native web platforms as operating leverage."
+        eyebrow="Capabilities"
+        title="Versatile Tech Professional"
+        description="From front-end engineering to full-stack development, data engineering, AI, and product management — a comprehensive technical perspective for every project."
       />
-      <div class="card-grid four">
+      <div class="card-grid four capability-grid">
         {capabilities.map((cap, index) => (
-          <article class="glass-card numbered">
-            <span>{String(index + 1).padStart(2, "0")}</span>
+          <article class="glass-card capability-card reveal-card" style={`--delay: ${index * 45}ms`}>
+            <span class="card-number">{String(index + 1).padStart(2, "0")}</span>
+            <div class="icon-chip">{cap.icon}</div>
             <h3>{cap.title}</h3>
             <p>{cap.description}</p>
           </article>
@@ -72,44 +83,47 @@ import {
     </div>
   </section>
 
-  <section class="section alt">
+  <section id="work" class="section timeline-section image-backed pushups-backed">
+    <div class="parallax-image" data-parallax="slow"><img src="/images/pushups.png" alt="" loading="lazy" /></div>
     <div class="container">
       <SectionHeading
-        eyebrow="Operating background"
-        title="Experience shaped by production systems"
-        description="A mix of AI operations, web platforms, and earlier enterprise software work informs the reliability bar."
+        eyebrow="Work Experience"
+        title="A decade plus of shipping"
+        description="Over 15 years of software development and technical leadership across aerospace, fintech, creative agencies, and public sector."
       />
-      <div class="timeline">
-        {workExperience.map((item) => (
-          <article class="work-card">
+      <div class="timeline-rail" aria-hidden="true"></div>
+      <div class="timeline cosmic-timeline">
+        {workExperience.map((item, index) => (
+          <a class:list={["timeline-card", index % 2 === 0 ? "above" : "below"]} href={item.link} target="_blank" rel="noreferrer noopener">
+            <span class="timeline-dot"></span>
             <img src={item.image} alt="" loading="lazy" />
-            <div>
-              <span>{item.period}</span>
-              <h3>{item.role}</h3>
-              <strong>{item.company}</strong>
-              <p>{item.description}</p>
-            </div>
-          </article>
+            <time>{item.period}</time>
+            <h3>{item.role}</h3>
+            <strong>{item.company}</strong>
+            <p>{item.description}</p>
+          </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section id="ai-labs" class="section ai-labs-section">
     <div class="container">
       <SectionHeading
-        eyebrow="Thought leadership"
-        title="Field notes from practical agentic engineering"
-        description="Writing and working in public around the questions clients actually need answered."
+        eyebrow="AI Labs"
+        title="Pioneering AI agent development with the Eliza & OpenClaw frameworks"
+        description="Active open-source contributor to the frameworks shaping how production-grade agents get built — translating upstream work into sophisticated automation systems that handle complex, mission-critical workloads."
       />
-      <div class="card-grid two">
-        {labs.map((lab) => (
-          <article class="lab-card">
+      <div class="card-grid two agent-grid">
+        {aiLabs.map((lab) => (
+          <article class:list={["agent-card", `variant-${lab.variant}`]}>
             <h3>{lab.title}</h3>
             <p>{lab.description}</p>
-            <div class="lab-visual" aria-hidden="true">
-              <span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span>
+            <div class="agent-visual" aria-hidden="true">
+              {lab.variant === "chat" && <><span>analyze the Q3 automation backlog</span><span>on it — spinning up 12 agents…</span><span>found 47 ticket candidates, 9 hot</span><span>ship a summary</span></>}
+              {lab.variant === "stack" && ["GPT-4o", "Claude 4.6", "Llama 3", "Gemini", "Mistral", "Eliza"].map((m) => <i>{m}</i>)}
+              {lab.variant === "grid" && Array.from({ length: 32 }).map((_, i) => <b style={`--i:${i}`}></b>)}
+              {lab.variant === "globe" && <div class="globe"><span></span><span></span></div>}
             </div>
           </article>
         ))}
@@ -117,12 +131,13 @@ import {
     </div>
   </section>
 
-  <section id="projects" class="section projects-section">
+  <section id="projects" class="section projects-section image-backed unicycle-backed">
+    <div class="parallax-image" data-parallax="slow"><img src="/images/unicycle.png" alt="" loading="lazy" /></div>
     <div class="container">
       <SectionHeading
-        eyebrow="Project experience"
-        title="AI systems, automation, and platforms in practice"
-        description="Selected work reframed around business problems, system design, and operational value."
+        eyebrow="Featured Projects"
+        title="Enterprise-scale applications, delivered"
+        description="A showcase of platforms and systems I've architected, shipped, and scaled — from fintech rails to trading bots to government cost tracking."
       />
       <div class="card-grid three">
         {projects.map((project) => (
@@ -131,9 +146,7 @@ import {
             <div>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
-              <ul>
-                {project.tags.map((tag) => <li>{tag}</li>)}
-              </ul>
+              <ul>{project.tags.map((tag) => <li>{tag}</li>)}</ul>
             </div>
           </article>
         ))}
@@ -141,35 +154,48 @@ import {
     </div>
   </section>
 
-  <section class="section testimonials">
+  <section id="testimonials" class="section testimonials marquee-testimonials">
     <div class="container">
       <SectionHeading
         eyebrow="Testimonials"
-        title="Trusted by people across product, engineering, and operations"
-        description="Selected words from people who have worked directly with Brandon."
+        title="Loved by people all over the universe"
+        description="With boundless enthusiasm and contagious optimism, I bring transformative energy to every project. Challenges become opportunities — success is inevitable."
       />
-      <div class="card-grid two">
-        {testimonials.map((testimonial) => (
-          <figure class="testimonial-card">
-            <div>
-              <img src={testimonial.src} alt="" loading="lazy" />
-              <figcaption>
-                <strong>{testimonial.name}</strong>
-                <span>{testimonial.designation}</span>
-              </figcaption>
-            </div>
-            <blockquote>"{testimonial.quote}"</blockquote>
-          </figure>
+    </div>
+    <div class="testimonial-window">
+      <div class="container testimonial-columns">
+        {[0, 1, 2].map((column) => (
+          <div class="testimonial-column" style={`--speed:${column === 0 ? 42 : column === 1 ? 56 : 48}s`}>
+            {[...testimonials.filter((_, i) => i % 3 === column), ...testimonials.filter((_, i) => i % 3 === column)].map((testimonial) => (
+              <figure class="testimonial-card">
+                <span class="quote-mark">“</span>
+                <div>
+                  <img src={testimonial.src} alt="" loading="lazy" />
+                  <figcaption>
+                    <strong>{testimonial.name}</strong>
+                    <span>{testimonial.designation}</span>
+                  </figcaption>
+                </div>
+                <blockquote>“{testimonial.quote}”</blockquote>
+              </figure>
+            ))}
+          </div>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="cta-section">
-    <div class="container cta-panel">
-      <span class="eyebrow"><span></span>Ready when the workflow is</span>
-      <h2>Turn practical AI ideas into systems your team can actually run.</h2>
-      <a class="button primary" href="/contact">Start a Conversation</a>
+  <section id="contact" class="section home-cta-section">
+    <div class="container cta-panel cinematic-cta">
+      <img src="/images/family.png" alt="" aria-hidden="true" loading="lazy" />
+      <div class="cta-overlay"></div>
+      <span class="eyebrow"><span></span>Ready to connect?</span>
+      <h2>Let's build something <em>cinematic</em> together.</h2>
+      <p>Whether you need an AI automation strategy, a full-stack lift, or just want to swap notes on agents — drop a line.</p>
+      <div class="cta-actions">
+        <a class="button primary" href="/contact">Start a conversation ↗</a>
+        <a class="button ghost" href="/about">About Me</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

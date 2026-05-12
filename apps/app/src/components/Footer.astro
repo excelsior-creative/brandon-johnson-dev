@@ -7,28 +7,35 @@ import { site } from "@/data/site";
     <section>
       <div class="footer-brand">
         <img src="/images/avatar.png" alt="" width="40" height="40" />
-        <strong>Brandon Johnson</strong>
+        <strong>J. Brandon Johnson</strong>
       </div>
       <p>
-        Software engineer, AI automation enthusiast, and full-stack builder.
-        Turning ideas into shipped systems since 2007.
+        Building the future. Automating everything. AI-first software engineer,
+        technical leader, and creator.
       </p>
-      <div class="socials">
-        {site.socials.map((link) => <a href={link.href} rel="noreferrer noopener" target="_blank">{link.label}</a>)}
-      </div>
     </section>
     <section>
       <h2>Navigate</h2>
       {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/about">About</a>
     </section>
     <section>
-      <h2>Elsewhere</h2>
-      <a href="/privacy">Privacy</a>
-      <a href="/terms">Terms</a>
+      <h2>More</h2>
+      <a href="/blog">Writing</a>
+      <a href="/contact">Contact</a>
+      <a href="/john-brandon-johnson-resume.pdf">Resume</a>
+      <a href="/cover-letter.md">Cover Letter</a>
+    </section>
+    <section>
+      <h2>Find me</h2>
+      <div class="socials">
+        {site.socials.map((link) => <a href={link.href} rel="noreferrer noopener" target="_blank">{link.label}</a>)}
+      </div>
     </section>
   </div>
+  <div class="footer-wordmark" aria-hidden="true">BRANDON</div>
   <div class="container footer-bottom">
-    <span>Copyright Brandon Johnson 2026. All rights reserved.</span>
-    <span>v.3 / astro static</span>
+    <span>© 2026 Brandon Johnson. All rights reserved.</span>
+    <span>v.2 / cosmic</span>
   </div>
 </footer>
