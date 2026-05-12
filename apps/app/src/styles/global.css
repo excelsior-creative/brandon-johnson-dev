@@ -83,7 +83,7 @@ button { font: inherit; }
 .cosmic-grid { z-index: -1; background: linear-gradient(180deg, rgba(5,6,15,.45) 0%, rgba(5,6,15,0) 30%, rgba(5,6,15,0) 55%, rgba(5,6,15,.85) 100%), radial-gradient(ellipse 900px 520px at 18% 70%, rgba(56,189,248,.14), transparent 60%), radial-gradient(ellipse 800px 500px at 85% 25%, rgba(124,92,255,.18), transparent 60%); }
 .starfield { z-index: -1; opacity: .7; background-image: radial-gradient(circle, rgba(255,255,255,.9) 1px, transparent 1px), radial-gradient(circle, rgba(56,189,248,.8) 1px, transparent 1px); background-size: 80px 80px, 137px 137px; background-position: 0 0, 28px 44px; animation: star-drift 34s linear infinite; }
 .hero-bottom-fade { z-index: -1; background: linear-gradient(180deg, rgba(5,6,15,0) 0%, rgba(5,6,15,.35) 55%, rgba(5,6,15,.92) 100%); pointer-events:none; }
-.hero-content { position: relative; z-index: 2; max-width: 760px; padding: 128px 0 72px; will-change: transform, opacity; }
+.hero-content { position: relative; z-index: 2; width: min(1120px, calc(100% - 32px)); max-width: 1120px; padding: 128px 0 72px; will-change: transform, opacity; }
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(56,189,248,.24); border-radius: 999px; background: rgba(56,189,248,.06); color: var(--cyan); padding: 8px 14px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .eyebrow span { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 3px rgba(56,189,248,.25), 0 0 18px rgba(56,189,248,.6); animation: pulse-dot 2.4s ease-in-out infinite; }
 h1, h2, h3 { margin: 0; line-height: 1.04; }
