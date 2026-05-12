@@ -63,53 +63,6 @@ const imageUrl = absoluteUrl(image);
         menu?.setAttribute("data-open", String(!open));
         trigger?.setAttribute("aria-expanded", String(!open));
       });
-
-      const initHelloVideo = () => {
-        const helloTriggers = document.querySelectorAll("[data-hello-trigger]");
-        const helloPopover = document.querySelector("[data-hello-popover]");
-        const helloVideo = document.querySelector("[data-hello-video]");
-        const helloClose = document.querySelector("[data-hello-close]");
-        const helloMute = document.querySelector("[data-hello-mute]");
-
-        const playHello = () => {
-          if (!(helloPopover instanceof HTMLElement) || !(helloVideo instanceof HTMLVideoElement)) return;
-          helloPopover.hidden = false;
-          helloPopover.setAttribute("data-open", "true");
-          helloVideo.currentTime = 0;
-          helloVideo.muted = false;
-          const playPromise = helloVideo.play();
-          if (playPromise) {
-            playPromise.catch(() => {
-              helloVideo.muted = true;
-              helloMute && (helloMute.textContent = "Muted");
-              helloVideo.play().catch(() => undefined);
-            });
-          }
-        };
-
-        const closeHello = () => {
-          if (!(helloPopover instanceof HTMLElement) || !(helloVideo instanceof HTMLVideoElement)) return;
-          helloVideo.pause();
-          helloVideo.currentTime = 0;
-          helloPopover.setAttribute("data-open", "false");
-          helloPopover.hidden = true;
-        };
-
-        helloTriggers.forEach((button) => button.addEventListener("click", playHello));
-        helloClose?.addEventListener("click", closeHello);
-        helloVideo?.addEventListener("ended", closeHello);
-        helloMute?.addEventListener("click", () => {
-          if (!(helloVideo instanceof HTMLVideoElement)) return;
-          helloVideo.muted = !helloVideo.muted;
-          helloMute.textContent = helloVideo.muted ? "Muted" : "Sound";
-        });
-      };
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initHelloVideo);
-      } else {
-        initHelloVideo();
-      }
     </script>
   </body>
 </html>
