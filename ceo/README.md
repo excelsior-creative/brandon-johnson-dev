@@ -1,7 +1,5 @@
-# CEO Folder Deprecated
+# Legacy CEO folder
 
-Use Paperclip.
+Paperclip is the source of truth for current Excelsior project direction, specs, approvals, routines, journals, and handoffs.
 
-Paperclip is the canonical operating system for Excelsior planning, specs, project direction, journals, and handoffs. This legacy `ceo/` folder is intentionally kept only as a redirect so older links and agent habits point back to Paperclip.
-
-Do not add new operating docs here. Put canonical work in Paperclip.
+This `ceo/` folder is retained only as a legacy redirect/archive surface. Do not add new operating docs, specs, queues, or journals here. Start from the root `README.md`, then resolve the current project/issue/routine state in Paperclip before making changes.
