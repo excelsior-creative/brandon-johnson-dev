@@ -206,6 +206,9 @@ em, .gradient-accent-text { font-style: normal; color: transparent; background: 
 .contact-list { display:grid; gap:18px; } .contact-list span { display:block; color:var(--ink-faint); font-size:12px; text-transform:uppercase; letter-spacing:.12em; } .contact-list strong { display:block; margin-top:8px; }
 .socials { flex-wrap:wrap; gap:10px; } .socials a { border:1px solid var(--border-mid); border-radius:999px; padding:9px 13px; color:var(--ink-dim); font-size:13px; }
 .contact-form { display:grid; gap:18px; } label { display:grid; gap:8px; color:var(--ink-dim); font-size:13px; } input, textarea { width:100%; border:1px solid var(--border-mid); border-radius:14px; background:rgba(0,0,0,.18); color:var(--ink); padding:13px 14px; font:inherit; }
+.contact-form button:disabled { cursor: wait; opacity: .65; }
+.contact-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form-status { min-height: 1.5em; margin: 0; color: var(--ink-dim); font-size: 13px; line-height: 1.5; }
 .article-shell { max-width:780px; } .article-shell h1 { margin-top:18px; font-size:clamp(38px,6vw,68px); } .article-image { width:100%; max-height:420px; object-fit:cover; border-radius:22px; margin:34px 0; background:var(--bg-3); } .back-link { color:var(--cyan); font-weight:700; } .prose { color:var(--ink-dim); line-height:1.75; } .prose h1, .prose h2, .prose h3 { color:var(--ink); } .prose a { color:var(--cyan); }
 
 @keyframes marquee { to { transform: translateX(-50%); } }
